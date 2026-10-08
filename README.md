@@ -4,9 +4,9 @@ Publication materials for *Motives and Ideology: Bischof's Zürich Model of Soci
 Motivation, Right-wing Authoritarianism and Social Dominance Orientation*.
 
 This repository contains the preregistration, study materials, analysis code
-and synthetic demonstration results. The preregistration will be deposited at
-PsychArchives, the service of the Leibniz Institute for Psychology (ZPID); its
-DOI will be added here. The website shows each version at
+and synthetic demonstration results. The preregistration was submitted to
+PsychArchives, the service of the Leibniz Institute for Psychology (ZPID), on
+8 October 2026. Its DOI will be added here when assigned. The website shows each version at
 <https://michaelzehetleitner.github.io/social-motives-ideology/>.
 
 ## Contents
