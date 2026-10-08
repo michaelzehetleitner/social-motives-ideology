@@ -1,0 +1,21 @@
+# targets project settings (read by targets::tar_make() from the project root).
+# TAR_PROJECT=smoke defaults to the smoke run profile; ZM_PROFILE overrides it.
+# The run profile can also be chosen by ZM_PROFILE (smoke|full),
+# the data source by ZM_DATA (synthetic|real); both are read inside _targets.R.
+main:
+  script: _targets.R
+  store: _targets
+# A separate store for presentation checks under the smoke profile, selected
+# with TAR_PROJECT=smoke; the full-profile store above is never overwritten.
+smoke:
+  script: _targets.R
+  store: _targets_smoke
+# The prior-recovery simulation (preregistration M3), its own pipeline with its
+# own stores: TAR_PROJECT=prior_recovery for the configured replicates,
+# TAR_PROJECT=prior_recovery_smoke for analysis_plan$prior_recovery$smoke_replicates.
+prior_recovery:
+  script: _targets_prior_recovery.R
+  store: _targets_prior_recovery
+prior_recovery_smoke:
+  script: _targets_prior_recovery.R
+  store: _targets_prior_recovery_smoke

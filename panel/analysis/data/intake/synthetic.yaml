@@ -1,0 +1,631 @@
+format: zm-prepared-intake-v2
+data_source: synthetic
+profile: smoke
+state: ready
+prepared_at_utc: '2026-10-08T17:34:17Z'
+input_sha256: aab1f82442521335c32c169c3d4ed340864118b94ada517d8ecb34ea043d8706
+n_input_rows: 776
+checks:
+  raw_schema: yes
+  no_test_rows: yes
+  unique_response_ids: yes
+  read_back: yes
+files:
+  data:
+    file: synthetic.csv
+    sha256: fca1016909e70f6b87f71eab335c1cd787ec17b986661b6e404762eb390fd20b
+    n_rows: 700
+    schema:
+    - name: respondent_id
+      type: integer
+    - name: UMS_int_1
+      type: numeric
+    - name: UMS_int_2
+      type: numeric
+    - name: UMS_int_3
+      type: numeric
+    - name: UMS_int_4
+      type: numeric
+    - name: UMS_int_5
+      type: numeric
+    - name: UMS_int_6
+      type: numeric
+    - name: UNT_1_r
+      type: numeric
+    - name: UNT_2
+      type: numeric
+    - name: UNT_3
+      type: numeric
+    - name: UNT_4_r
+      type: numeric
+    - name: UNT_5
+      type: numeric
+    - name: UNT_6
+      type: numeric
+    - name: DOPL_dom_1
+      type: numeric
+    - name: DOPL_dom_2
+      type: numeric
+    - name: DOPL_dom_3
+      type: numeric
+    - name: DOPL_dom_4
+      type: numeric
+    - name: DOPL_dom_5
+      type: numeric
+    - name: DOPL_dom_6
+      type: numeric
+    - name: DOPL_pre_1
+      type: numeric
+    - name: DOPL_pre_2
+      type: numeric
+    - name: DOPL_pre_3
+      type: numeric
+    - name: DOPL_pre_4
+      type: numeric
+    - name: DOPL_pre_5
+      type: numeric
+    - name: DOPL_pre_6
+      type: numeric
+    - name: UMS_ach_1
+      type: numeric
+    - name: UMS_ach_2
+      type: numeric
+    - name: UMS_ach_3
+      type: numeric
+    - name: UMS_ach_4
+      type: numeric
+    - name: UMS_ach_5
+      type: numeric
+    - name: UMS_ach_6
+      type: numeric
+    - name: ASC_aag_1
+      type: numeric
+    - name: ASC_aag_2
+      type: numeric
+    - name: ASC_aag_3_r
+      type: numeric
+    - name: ASC_aag_4_r
+      type: numeric
+    - name: ASC_aag_5_r
+      type: numeric
+    - name: ASC_aag_6
+      type: numeric
+    - name: ASC_asu_1
+      type: numeric
+    - name: ASC_asu_2
+      type: numeric
+    - name: ASC_asu_3_r
+      type: numeric
+    - name: ASC_asu_4
+      type: numeric
+    - name: ASC_asu_5_r
+      type: numeric
+    - name: ASC_asu_6_r
+      type: numeric
+    - name: ASC_con_1_r
+      type: numeric
+    - name: ASC_con_2
+      type: numeric
+    - name: ASC_con_3
+      type: numeric
+    - name: ASC_con_4
+      type: numeric
+    - name: ASC_con_5_r
+      type: numeric
+    - name: ASC_con_6_r
+      type: numeric
+    - name: ASC_con_7
+      type: numeric
+    - name: SDO_D_1
+      type: numeric
+    - name: SDO_D_2
+      type: numeric
+    - name: SDO_D_3
+      type: numeric
+    - name: SDO_D_4
+      type: numeric
+    - name: SDO_D_5_r
+      type: numeric
+    - name: SDO_D_6_r
+      type: numeric
+    - name: SDO_D_7_r
+      type: numeric
+    - name: SDO_D_8_r
+      type: numeric
+    - name: zm_security
+      type: numeric
+    - name: zm_arousal
+      type: numeric
+    - name: zm_power
+      type: numeric
+    - name: zm_prestige
+      type: numeric
+    - name: zm_achievement
+      type: numeric
+    - name: asc_agg
+      type: numeric
+    - name: asc_sub
+      type: numeric
+    - name: asc_conv
+      type: numeric
+    - name: sdo_dom
+      type: numeric
+    - name: demo_gender
+      type: numeric
+    - name: age_band
+      type: character
+      levels:
+      - 18–24
+      - 25–29
+      - 30–34
+      - 35–39
+      - 40–44
+      - 45–49
+      - 50–54
+      - 55–59
+      - 60–64
+      - 65–69
+      ordered: yes
+    - name: age_band_midpoint
+      type: numeric
+    - name: income_band
+      type: character
+      levels:
+      - <500
+      - 500–<630
+      - 630–<800
+      - 800–<1050
+      - 1050–<1400
+      - 1400–<2000
+      - 2000–<2800
+      - 2800+
+      ordered: yes
+    - name: income_band_value
+      type: numeric
+    - name: quota_group
+      type: character
+      levels:
+      - left_leaning
+      - conservative_leaning
+      - mixed
+      ordered: no
+    - name: attentioncheck_1
+      type: numeric
+    - name: attentioncheck_2
+      type: numeric
+    - name: pol_symp_spd
+      type: numeric
+    - name: pol_symp_cdu_csu
+      type: numeric
+    - name: pol_symp_greens
+      type: numeric
+    - name: pol_symp_fdp
+      type: numeric
+    - name: pol_symp_afd
+      type: numeric
+    - name: pol_symp_linke
+      type: numeric
+    - name: pol_party_vote
+      type: numeric
+  demographics:
+    file: synthetic_demographics.csv
+    sha256: d0f2d209e82de8a3a086a8fc4f2f1e9e336530dbffe6873e872b562d94957d6d
+    n_rows: 700
+    schema:
+    - name: age
+      type: numeric
+    - name: income
+      type: numeric
+    - name: education
+      type: character
+      levels:
+      - Schule beendet ohne Abschluss
+      - Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule
+        8. oder 9. Klasse
+      - Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen
+        Oberschule 10. Klasse
+      - Fachhochschulreife
+      - Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife)
+      - Bin noch Schüler/in
+      ordered: yes
+    - name: east_west
+      type: character
+      levels:
+      - west
+      - east
+      ordered: no
+    - name: duration
+      type: numeric
+  preparation:
+    file: synthetic_preparation.rds
+    sha256: 1652fe0a078cee9d196d21a8cf62b4405212c5ffbcad34539727b09c59be8ee8
+comments_file: /Users/michael/programming/abschlussarbeiten/repos/social-motives-ideology/panel/analysis/data/private/synthetic_comments.csv
+columns:
+- column: StartDate
+  decision: delete
+  reason: delete_always
+  note: .na.character
+- column: EndDate
+  decision: delete
+  reason: delete_always
+  note: .na.character
+- column: Status
+  decision: delete
+  reason: delete_always
+  note: .na.character
+- column: Progress
+  decision: delete
+  reason: delete_always
+  note: .na.character
+- column: Duration__in_seconds_
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: Finished
+  decision: delete
+  reason: delete_always
+  note: .na.character
+- column: RecordedDate
+  decision: delete
+  reason: delete_always
+  note: .na.character
+- column: ResponseId
+  decision: delete
+  reason: delete_always
+  note: .na.character
+- column: DistributionChannel
+  decision: delete
+  reason: delete_always
+  note: .na.character
+- column: UserLanguage
+  decision: delete
+  reason: delete_always
+  note: .na.character
+- column: Q_BallotBoxStuffing
+  decision: delete
+  reason: delete_always
+  note: .na.character
+- column: Last_Seen_Flow_Element_ID
+  decision: delete
+  reason: delete_always
+  note: .na.character
+- column: Last_Seen_Question_IDs
+  decision: delete
+  reason: delete_always
+  note: .na.character
+- column: info_teilnahme_2_1
+  decision: delete
+  reason: delete_always
+  note: .na.character
+- column: consent_check
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: demo_age
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: pol_symp_spd
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: pol_symp_cdu_csu
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: pol_symp_greens
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: pol_symp_fdp
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: pol_symp_afd
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: pol_symp_linke
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: UMS_ach_1
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: UMS_ach_2
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: UMS_ach_3
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: UMS_int_1
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: UMS_int_2
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: attentioncheck_1
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: UMS_ach_4
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: UMS_ach_5
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: UMS_ach_6
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: UMS_int_5
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: DOPL_pre_5
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: DOPL_pre_6
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: UMS_int_3
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: UMS_int_4
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: UMS_int_6
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: DOPL_dom_1
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: DOPL_dom_2
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: DOPL_dom_3
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: DOPL_dom_4
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: DOPL_dom_5
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: DOPL_dom_6
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: DOPL_pre_1
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: DOPL_pre_2
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: DOPL_pre_3
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: DOPL_pre_4
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: UNT_1_r
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: UNT_2
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: UNT_3
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: UNT_4_r
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: UNT_5
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: UNT_6
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: ASC_asu_1
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: ASC_asu_2
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: ASC_asu_3_r
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: ASC_asu_4
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: ASC_asu_5_r
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: ASC_asu_6_r
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: ASC_con_1_r
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: ASC_con_2
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: ASC_con_3
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: ASC_con_4
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: ASC_con_5_r
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: ASC_con_6_r
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: ASC_con_7
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: ASC_aag_1
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: ASC_aag_2
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: ASC_aag_3_r
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: ASC_aag_4_r
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: ASC_aag_5_r
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: ASC_aag_6
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: SDO_D_1
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: SDO_D_2
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: SDO_D_3
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: SDO_D_4
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: SDO_D_5_r
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: SDO_D_6_r
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: SDO_D_7_r
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: SDO_D_8_r
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: attentioncheck_2
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: pol_vote_would
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: pol_party_vote
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: pol_party_vote_801_TEXT
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: pol_left_right
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: demo_gender
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: demo_edu_school
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: demo_bundesland
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: demo_income_hh_net
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: demo_hh_members
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: Kommentarfeld
+  decision: keep
+  reason: keep
+  note: .na.character
+- column: bilendi_id
+  decision: delete
+  reason: delete_after_billing
+  note: .na.character
+- column: survey_status
+  decision: delete
+  reason: delete_always
+  note: .na.character
+- column: survey_status_detail
+  decision: delete
+  reason: delete_always
+  note: .na.character
+- column: possibly_left
+  decision: delete
+  reason: delete_always
+  note: .na.character
+- column: possibly_conservative
+  decision: delete
+  reason: delete_always
+  note: .na.character
+- column: quota_group
+  decision: keep
+  reason: keep
+  note: .na.character

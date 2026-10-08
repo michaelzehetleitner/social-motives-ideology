@@ -1,0 +1,25 @@
+project:
+  type: default
+
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    toc-location: right-body
+    number-sections: true
+    css: apa-captions.css
+    include-after-body: apa-captions.html
+    code-fold: true
+    code-summary: "Show report code"
+    embed-resources: true
+    theme: cosmo
+    fig-width: 9
+    fig-height: 6
+
+execute:
+  echo: false
+  warning: false
+  message: false
+  freeze: false
+
+lang: en

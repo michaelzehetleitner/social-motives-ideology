@@ -1,0 +1,349 @@
+{
+  "seed": 20260905,
+  "n_total": 776,
+  "exclusions": {
+    "consent_refused": 6,
+    "incomplete": 14,
+    "age_under_18": 4,
+    "quota_full": 26,
+    "attention_1_failed": 12,
+    "attention_2_failed": 8
+  },
+  "n_kept": 706,
+  "motive_correlations": {
+    "order": ["zm_security", "zm_arousal", "zm_achievement", "zm_power", "zm_prestige"],
+    "matrix": {
+      "values": [
+        [1, 0.25, 0.3, -0.05, 0.2],
+        [0.25, 1, 0.3, 0.2, 0.25],
+        [0.3, 0.3, 1, 0.3, 0.4],
+        [-0.05, 0.2, 0.3, 1, 0.45],
+        [0.2, 0.25, 0.4, 0.45, 1]
+      ],
+      "dimnames": [
+        ["zm_security", "zm_arousal", "zm_achievement", "zm_power", "zm_prestige"],
+        ["zm_security", "zm_arousal", "zm_achievement", "zm_power", "zm_prestige"]
+      ]
+    }
+  },
+  "covariates": {
+    "age": {
+      "mean": 47,
+      "sd": 16,
+      "min": 18,
+      "max": 69
+    },
+    "gender_divers_n": 6,
+    "gender_probs": {
+      "male": 0.49,
+      "female": 0.5,
+      "divers": 0.01
+    },
+    "income_band_probs": [0.02, 0.03, 0.05, 0.06, 0.07, 0.11, 0.13, 0.13, 0.15, 0.1, 0.09, 0.04, 0.02],
+    "hh_size_probs": [0.3, 0.38, 0.14, 0.11, 0.04, 0.02, 0.005, 0.005],
+    "education_probs": {
+      "1": 0.02,
+      "2": 0.18,
+      "3": 0.35,
+      "4": 0.13,
+      "5": 0.3,
+      "9": 0.02
+    },
+    "covariate_motive_correlations": {
+      "age_with": {
+        "zm_arousal": -0.15,
+        "zm_power": -0.1
+      },
+      "male_with": {
+        "zm_power": 0.2,
+        "zm_security": -0.15
+      }
+    }
+  },
+  "true_beta": {
+    "asc_conv": {
+      "zm_security": 0.2,
+      "zm_arousal": -0.2,
+      "zm_achievement": -0.15,
+      "zm_power": 0,
+      "zm_prestige": -0.15,
+      "age": 0.15,
+      "male": 0,
+      "income": 0
+    },
+    "asc_sub": {
+      "zm_security": 0,
+      "zm_arousal": -0.2,
+      "zm_achievement": -0.15,
+      "zm_power": 0,
+      "zm_prestige": 0,
+      "age": 0,
+      "male": 0,
+      "income": 0
+    },
+    "asc_agg": {
+      "zm_security": 0,
+      "zm_arousal": 0,
+      "zm_achievement": -0.12,
+      "zm_power": 0.25,
+      "zm_prestige": 0,
+      "age": 0,
+      "male": 0.2,
+      "income": 0
+    },
+    "sdo_dom": {
+      "zm_security": 0,
+      "zm_arousal": 0,
+      "zm_achievement": 0,
+      "zm_power": 0.25,
+      "zm_prestige": 0.15,
+      "age": 0,
+      "male": 0.35,
+      "income": 0
+    }
+  },
+  "null_proportion": {
+    "cells": 32,
+    "null_cells": 19,
+    "reference": "conservatism_climate_2 RQ1, BAS 95% intervals covering zero: 20 of 34"
+  },
+  "calibration_reference": {
+    "n_observations": 1334,
+    "n_outcomes": 2,
+    "n_predictors": 17,
+    "interval_level": 0.95,
+    "n_intervals_including_zero": 20,
+    "abs_posterior_mean_range_intervals_excluding_zero": [0.082, 0.291]
+  },
+  "outcome_residual_correlations": {
+    "order": ["asc_agg", "asc_sub", "asc_conv", "sdo_dom"],
+    "matrix": {
+      "values": [
+        [1, 0.35, 0.35, 0.35],
+        [0.35, 1, 0.45, 0.15],
+        [0.35, 0.45, 1, 0.15],
+        [0.35, 0.15, 0.15, 1]
+      ],
+      "dimnames": [
+        ["asc_agg", "asc_sub", "asc_conv", "sdo_dom"],
+        ["asc_agg", "asc_sub", "asc_conv", "sdo_dom"]
+      ]
+    }
+  },
+  "measurement": {
+    "loading": 0.65,
+    "scale_location": {
+      "zm_security": 4.6,
+      "zm_arousal": 3.8,
+      "zm_achievement": 4.3,
+      "zm_power": 2.7,
+      "zm_prestige": 3.6,
+      "asc_agg": 3,
+      "asc_sub": 2.9,
+      "asc_conv": 4.1,
+      "sdo_dom": 2.5
+    },
+    "spread": 1.05,
+    "reverse_keyed_stored_as_displayed": true
+  },
+  "politics": {
+    "scalometer_sd": 1.6,
+    "left_right_with_sdo": 0.35
+  },
+  "scenarios": {
+    "export": "trouble",
+    "clean": {
+      "description": "The base truth unchanged: no disconfirmation, no missing value, no cross-loading, no contaminated residual. This is the reference render and the truth the M3 simulation study is anchored to.\n"
+    },
+    "trouble": {
+      "description": "The base truth with a prestige contrast and three planted faults. Everything the base truth states and this scenario does not name — the exclusion counts including the 26 quota-full rows, the motive correlations, the measurement model, the quota derivation — is unchanged, so n_kept stays 706 and the AP1 table is the same as under `clean`.\n",
+      "true_beta_overrides": {
+        "asc_conv": {
+          "zm_prestige": -0.15
+        }
+      },
+      "missingness": {
+        "rows": "kept",
+        "distinct_rows": true,
+        "seed_offset": 91,
+        "cells": [
+          {
+            "column": "ASC_aag_1",
+            "n_missing": 3,
+            "affects": "asc_agg"
+          },
+          {
+            "column": "UMS_int_1",
+            "n_missing": 2,
+            "affects": "zm_security"
+          },
+          {
+            "column": "demo_age",
+            "n_missing": 2,
+            "affects": "age"
+          },
+          {
+            "column": "demo_income_hh_net",
+            "n_missing": 2,
+            "affects": "income"
+          },
+          {
+            "column": "demo_gender",
+            "n_missing": 1,
+            "affects": "gender"
+          }
+        ]
+      },
+      "cross_loadings": [
+        {
+          "item": "ASC_con_3",
+          "factor": "asc_sub",
+          "loading": 0.65
+        }
+      ],
+      "residual_contamination": {
+        "outcome": "asc_agg",
+        "share": 0.05,
+        "multiplier": 4,
+        "seed_offset": 37
+      },
+      "verdicts": {
+        "table2_cells": 20,
+        "confirmed": 8,
+        "disconfirmed": 0,
+        "exploratory_credible": 2,
+        "exploratory_not_credible": 2,
+        "sign_differentiating_motives": "zm_prestige",
+        "rq1b_planted": [
+          {
+            "predictor": "zm_prestige",
+            "outcome_x": "asc_conv",
+            "outcome_y": "sdo_dom",
+            "true_difference": -0.3,
+            "intended_credible": true
+          },
+          {
+            "predictor": "zm_prestige",
+            "outcome_x": "asc_agg",
+            "outcome_y": "asc_conv",
+            "true_difference": 0.15,
+            "intended_credible": true
+          },
+          {
+            "predictor": "zm_prestige",
+            "outcome_x": "asc_sub",
+            "outcome_y": "asc_conv",
+            "true_difference": 0.15,
+            "intended_credible": true
+          },
+          {
+            "predictor": "zm_prestige",
+            "outcome_x": "asc_agg",
+            "outcome_y": "sdo_dom",
+            "true_difference": -0.15,
+            "intended_credible": true
+          },
+          {
+            "predictor": "zm_prestige",
+            "outcome_x": "asc_sub",
+            "outcome_y": "sdo_dom",
+            "true_difference": -0.15,
+            "intended_credible": true
+          }
+        ]
+      }
+    }
+  },
+  "missingness": {
+    "rows": "kept",
+    "distinct_rows": true,
+    "seed_offset": 91,
+    "cells": [
+      {
+        "column": "ASC_aag_1",
+        "n_missing": 3,
+        "affects": "asc_agg"
+      },
+      {
+        "column": "UMS_int_1",
+        "n_missing": 2,
+        "affects": "zm_security"
+      },
+      {
+        "column": "demo_age",
+        "n_missing": 2,
+        "affects": "age"
+      },
+      {
+        "column": "demo_income_hh_net",
+        "n_missing": 2,
+        "affects": "income"
+      },
+      {
+        "column": "demo_gender",
+        "n_missing": 1,
+        "affects": "gender"
+      }
+    ]
+  },
+  "cross_loadings": [
+    {
+      "item": "ASC_con_3",
+      "factor": "asc_sub",
+      "loading": 0.65
+    }
+  ],
+  "residual_contamination": {
+    "outcome": "asc_agg",
+    "share": 0.05,
+    "multiplier": 4,
+    "seed_offset": 37
+  },
+  "verdicts": {
+    "table2_cells": 20,
+    "confirmed": 8,
+    "disconfirmed": 0,
+    "exploratory_credible": 2,
+    "exploratory_not_credible": 2,
+    "sign_differentiating_motives": "zm_prestige",
+    "rq1b_planted": [
+      {
+        "predictor": "zm_prestige",
+        "outcome_x": "asc_conv",
+        "outcome_y": "sdo_dom",
+        "true_difference": -0.3,
+        "intended_credible": true
+      },
+      {
+        "predictor": "zm_prestige",
+        "outcome_x": "asc_agg",
+        "outcome_y": "asc_conv",
+        "true_difference": 0.15,
+        "intended_credible": true
+      },
+      {
+        "predictor": "zm_prestige",
+        "outcome_x": "asc_sub",
+        "outcome_y": "asc_conv",
+        "true_difference": 0.15,
+        "intended_credible": true
+      },
+      {
+        "predictor": "zm_prestige",
+        "outcome_x": "asc_agg",
+        "outcome_y": "sdo_dom",
+        "true_difference": -0.15,
+        "intended_credible": true
+      },
+      {
+        "predictor": "zm_prestige",
+        "outcome_x": "asc_sub",
+        "outcome_y": "sdo_dom",
+        "true_difference": -0.15,
+        "intended_credible": true
+      }
+    ]
+  },
+  "scenario": "trouble",
+  "scenario_description": "The base truth with a prestige contrast and three planted faults. Everything the base truth states and this scenario does not name — the exclusion counts including the 26 quota-full rows, the motive correlations, the measurement model, the quota derivation — is unchanged, so n_kept stays 706 and the AP1 table is the same as under `clean`.\n"
+}

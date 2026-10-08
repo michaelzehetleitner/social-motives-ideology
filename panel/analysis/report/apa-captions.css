@@ -1,0 +1,123 @@
+/* APA 7 table and figure titles: bold number, then italic title on its own line. */
+.quarto-float-caption.apa-caption {
+  color: inherit;
+  font-style: normal;
+  margin-bottom: 0.65rem;
+  text-align: left !important;
+}
+
+/* Quarto centres float contents; make the caption span the float so APA's
+   flush-left title treatment is visible rather than centred with the table. */
+.quarto-float > figure > .quarto-float-caption.apa-caption {
+  align-self: stretch;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.quarto-float-caption.apa-caption .apa-caption-number {
+  display: block;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.quarto-float-caption.apa-caption .apa-caption-title {
+  display: block;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.35;
+  margin-top: 0.1rem;
+}
+
+/* The report tables and figures both carry their APA title above the display. */
+.quarto-float > figure > .quarto-float-caption.apa-caption:first-child {
+  margin-top: 0;
+}
+
+/* Pandoc adds Bootstrap's table-striped class to gt output even when the
+   table opts out of Bootstrap. Bootstrap paints stripes with an inset shadow,
+   so setting gt's background alone does not remove them. Scope the reset to
+   gt tables: prose, callouts and other report elements keep the report theme. */
+table.gt_table {
+  --bs-table-bg: #fff;
+  --bs-table-striped-bg: transparent;
+  --bs-table-hover-bg: transparent;
+  --bs-table-active-bg: transparent;
+  border: 0 !important;
+  border-collapse: collapse !important;
+}
+
+table.gt_table > :is(thead, tbody, tfoot) > tr > :is(th, td) {
+  --bs-table-accent-bg: transparent;
+  --bs-table-bg-type: transparent;
+  --bs-table-bg-state: transparent;
+  background-color: #fff !important;
+  box-shadow: none !important;
+  border: 0 !important;
+}
+
+/* The only rules are above and below the column headings and below the body.
+   Put the body rule on its final cells so no Bootstrap cell border can win
+   the collapsed-border comparison with the intended one-pixel black rule. */
+table.gt_table .gt_col_headings,
+table.gt_table > thead > tr.gt_col_headings > th {
+  border-top: 1px solid #000 !important;
+  border-bottom: 1px solid #000 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+}
+
+table.gt_table > tbody.gt_table_body {
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+}
+
+table.gt_table > tbody.gt_table_body > tr:last-child > :is(th, td) {
+  border-bottom: 1px solid #000 !important;
+}
+
+/* Notes belong to the table's left edge, including paragraphs emitted by gt's
+   Markdown formatter inside the source-note cell. */
+table.gt_table .gt_sourcenote,
+table.gt_table .gt_sourcenote p,
+table.gt_table .gt_footnote,
+table.gt_table .gt_footnote p {
+  text-align: left !important;
+}
+
+/* Reserve enough room for n (%) and M (SD); long education labels wrap in the
+   group column instead of squeezing the quantitative summary onto two lines. */
+#tbl-sample table.gt_table {
+  width: 100% !important;
+  table-layout: fixed;
+}
+
+#tbl-sample table.gt_table > thead > tr > th:nth-child(1) {
+  width: 22%;
+}
+
+#tbl-sample table.gt_table > thead > tr > th:nth-child(2) {
+  width: 58%;
+}
+
+#tbl-sample table.gt_table > thead > tr > th:nth-child(3) {
+  width: 20%;
+}
+
+/* The distribution column of the descriptive table: small dark-grey
+   histograms about one text line high. Quarto marks the embedded images as
+   fluid figure images, which would otherwise stretch them to the cell width. */
+#tbl-descriptives table.gt_table img {
+  height: 1.4em !important;
+  width: auto !important;
+  max-width: none !important;
+}
+
+/* The table of contents also opens the printed report. Quarto's print styles
+   hide both the sidebar copy and the body copy of the contents; the body copy
+   (toc-location: right-body) is shown again in print. */
+@media print {
+  #TOC-body {
+    display: block !important;
+  }
+}

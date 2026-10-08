@@ -1,0 +1,3251 @@
+---
+title: "Motives and Ideology: Bischof's Zürich Model of Social Motivation, Right-wing Authoritarianism and Social Dominance Orientation"
+subtitle: "Preregistration Analysis Pipeline: Methods and Results on Synthetic Data"
+date: today
+date-format: "YYYY-MM-DD"
+number-sections: true
+crossref:
+  custom:
+    - kind: float
+      key: suppltbl
+      reference-prefix: "Table S"
+      caption-prefix: "Table S"
+      space-before-numbering: false
+      latex-env: suppltbl
+    - kind: float
+      key: supplfig
+      reference-prefix: "Figure S"
+      caption-prefix: "Figure S"
+      space-before-numbering: false
+      latex-env: supplfig
+    - kind: float
+      key: appxtbl
+      reference-prefix: "Table A"
+      caption-prefix: "Table A"
+      space-before-numbering: false
+      latex-env: appxtbl
+    - kind: float
+      key: appxfig
+      reference-prefix: "Figure A"
+      caption-prefix: "Figure A"
+      space-before-numbering: false
+      latex-env: appxfig
+---
+
+::: {.report-contributors}
+[Michael Zehetleitner]{.report-author}^\*^ — <https://orcid.org/0000-0003-3363-2680>\
+[Chiara Castiglione]{.report-author}^\*^ — <https://orcid.org/0009-0009-5005-5054>\
+[Jana Drastik]{.report-author}^\*^ — <https://orcid.org/0009-0001-3055-4384>\
+[Delilah Matterstock]{.report-author}^\*^ — <https://orcid.org/0009-0004-0627-1802>\
+[Nicolas Prell]{.report-author}^\*^ — <https://orcid.org/0009-0006-3569-979X>
+
+^\*^ General Psychology, Catholic University Eichstätt-Ingolstadt, Germany
+:::
+
+[Preregistration (HTML)](../../preregistration/renders/preregistration.html) · [Analysis code and materials](https://github.com/michaelzehetleitner/social-motives-ideology)
+
+<!-- Add the assigned PsychArchives DOI and direct deposited PDF link here after registration. -->
+
+Preregistration (PsychArchives): DOI pending registration.
+
+```{r}
+#| label: load-imputation-processing
+#| output: asis
+#| echo: false
+analysis_root_status <- if (file.exists(file.path("config", "analysis_plan.yaml"))) "." else ".."
+source(file.path(analysis_root_status, "R", "report_saved_inputs.R"), local = knitr::knit_global())
+report_inputs <- read_report_inputs(
+  Sys.getenv("ZM_REPORT_INPUTS", file.path(analysis_root_status, "data", "derived", "report_inputs.rds")),
+  analysis_root_status)
+imputation_status_value <- read_report_input(imputation_reporting_data, report_inputs)
+source(file.path(analysis_root_status, "R", "ap3_imputation_validity.R"), local = knitr::knit_global())
+source(file.path(analysis_root_status, "R", "report_imputation.R"), local = knitr::knit_global())
+
+```
+
+```{r}
+#| label: load-results
+#| include: false
+library(dplyr)
+library(ggplot2)
+
+# Direct Quarto execution starts in the report directory; tar_quarto may set
+# the execution directory to the analysis root. Resolve either mode while
+# reading the same portable saved results in both modes.
+analysis_root <- if (file.exists(file.path("config", "analysis_plan.yaml"))) "." else ".."
+# The bundle contains the completed calculations and their original provenance.
+analysis_plan <- read_report_input(pipeline_config, report_inputs)
+data_source <- read_report_input(data_source_used, report_inputs)
+# The label of each section's first result paragraph: what follows the
+# preregistered question and rule is this run's result, named by its data.
+results_label <- if (identical(data_source, "synthetic")) "Synthetic results." else "Results."
+scale_summary_value <- read_report_input(scale_score_distributions, report_inputs)
+bayesian_correlations_value <- read_report_input(report_bayesian_correlations, report_inputs)
+coefs_primary_value <- read_report_input(report_primary_coefficients, report_inputs)
+rq2_value <- read_report_input(report_joint, report_inputs)
+joint_correlation_changes_value <- read_report_input(joint_correlation_changes, report_inputs)
+joint_asc_aggregation_value <- read_report_input(joint_asc_aggregation, report_inputs)
+deviations_value <- read_report_input(deviations_register, report_inputs)
+software_value <- read_report_input(supplement_software, report_inputs)
+# The commit and fingerprints of this build (R/report_supplement_software.R).
+provenance_value <- read_report_input(report_provenance, report_inputs)
+network_value <- read_report_input(report_network, report_inputs)
+# The report targets of the Results sections Sample, Measurement and RQ1: every
+# number and decision those sections print (R/report_results_*.R).
+# The target of the supplement section S1 (R/report_supplement_measurement.R);
+# the Measurement section reads its tables from it as well.
+s1_value <- read_report_input(supplement_measurement, report_inputs)
+# The target of S3 (R/report_supplement_prior_sensitivity.R).
+s3_value <- read_report_input(supplement_prior_sensitivity, report_inputs)
+# The target of S4 (R/report_supplement_model_checks.R).
+s4_value <- read_report_input(supplement_model_checks, report_inputs)
+# The target of S5 (R/report_supplement_network_detail.R).
+s5_value <- read_report_input(supplement_network_detail, report_inputs)
+# The targets of the appendix diagnostics and S6 (R/report_supplement_sampling_diagnostics.R,
+# R/report_supplement_explained_variance.R).
+diagnostics_value <- read_report_input(supplement_sampling_diagnostics, report_inputs)
+regression_r2_summaries_value <- read_report_input(regression_r2_summaries, report_inputs)
+s6_value <- read_report_input(supplement_explained_variance, report_inputs)
+report_flow_value <- read_report_input(report_participant_flow, report_inputs)
+report_sizes_value <- read_report_input(report_sample_sizes, report_inputs)
+report_sample_rows_value <- read_report_input(report_sample_characteristics, report_inputs)
+report_political_sample_value <- read_report_input(report_political_sample, report_inputs)
+report_reliability_value <- read_report_input(report_reliability_table, report_inputs)
+report_reliability_counts_value <- read_report_input(report_reliability_counts, report_inputs)
+report_associations_value <- read_report_input(report_association_table, report_inputs)
+# AP6 Coefficient Differences and Partial Correlations of the Motives (R/ap6_rq1_differences_partials.R)
+rq1_differences_value <- read_report_input(rq1_coefficient_differences, report_inputs)
+rq1_partials_value <- read_report_input(rq1_motive_partial_correlations, report_inputs)
+report_association_counts_value <- read_report_input(report_association_counts, report_inputs)
+report_credible_value <- read_report_input(report_credible_associations, report_inputs)
+report_prior_changes_value <- read_report_input(report_prior_width_changes, report_inputs)
+
+# ---- read only for the electronic supplement -------------------------------
+
+source(file.path(analysis_root, "R", "config.R"), local = knitr::knit_global())
+source(file.path(analysis_root, "R", "report_helpers.R"), local = knitr::knit_global())
+source(file.path(analysis_root, "R", "classify_importance_sampling.R"), local = knitr::knit_global())
+source(file.path(analysis_root, "R", "report_preregistration.R"), local = knitr::knit_global())
+source(file.path(analysis_root, "R", "report_bayesian_correlations.R"), local = knitr::knit_global())
+source(file.path(analysis_root, "R", "report_joint_additions.R"), local = knitr::knit_global())
+source(file.path(analysis_root, "R", "report_measurement_alternatives.R"), local = knitr::knit_global())
+source(file.path(analysis_root, "R", "report_supplement_completeness.R"), local = knitr::knit_global())
+# The preregistration is the one source of every sentence the report repeats
+# from it: rh_prereg_passage() reads the passage by its first words when the
+# report renders.
+# ZM_PREREG_PATH renders against another version of the file, e.g. the
+# committed one while the working copy is being edited.
+prereg_path <- Sys.getenv("ZM_PREREG_PATH", file.path(analysis_root, "..", "preregistration", "preregistration.qmd"))
+prereg <- rh_read_preregistration(prereg_path)
+# The prose looks the configured factor-analytic sets up through the report
+# helpers, which read them with ap4_factor_sets().
+source(file.path(analysis_root, "R", "ap4_factor_structure.R"), local = knitr::knit_global())
+source(file.path(analysis_root, "R", "ap10_inference.R"), local = knitr::knit_global())
+source(file.path(analysis_root, "R", "ap6_regressions.R"), local = knitr::knit_global())
+# The network tables show the bagged Bayes factors at the resolution of the
+# run through the report helpers, which read ap6_network_bf_bounds() from here.
+source(file.path(analysis_root, "R", "ap8_network_helpers.R"), local = knitr::knit_global())
+
+source(file.path(analysis_root, "R", "report_participation.R"), local = knitr::knit_global())
+source(file.path(analysis_root, "R", "report_participant_flow.R"), local = knitr::knit_global())
+source(file.path(analysis_root, "R", "report_item_distributions.R"), local = knitr::knit_global())
+source(file.path(analysis_root, "R", "simulate_testdata.R"), local = knitr::knit_global())
+source(file.path(analysis_root, "R", "report_synthetic_data.R"), local = knitr::knit_global())
+codebook_value <- read_report_input(codebook, report_inputs)
+labels <- rh_labels(codebook_value)
+diagnostics_additional_value <- diagnostics_value$additional
+synthetic_methods_value <- read_report_input(report_synthetic_methods, report_inputs)
+
+# ---- values used in the prose; every one of them is read above --------------
+# `report: published: true` in the analysis plan drops the pipeline target
+# names from the table notes; with false the notes keep them.
+rh_set_report_published(analysis_plan)
+options(zm.report_published = TRUE)
+ci_pct <- rh_fmt_pct(analysis_plan$regression$ci_level, 0, scale = "proportion")
+# One helper is the single source of the interval label.
+ci_label <- rh_ci_label(rh_cfg_ci_level(analysis_plan))
+# The synthetic preregistration data, for the Methods: the generating design as
+# the synthetic-data report summarises it (R/report_synthetic_data.R), from the
+# generating file and the latent scores the export was drawn from. Scale names
+# and their order come from the codebook.
+synthetic_methods <- if (is.null(synthetic_methods_value)) NULL else local({
+  truth <- synthetic_methods_value$truth
+  design <- synthetic_methods_value$design
+  inline <- function(keys) rh_label_inline(keys, labels)
+  series <- function(parts) {
+    if (length(parts) <= 2L) return(paste(parts, collapse = " and "))
+    paste0(paste(parts[-length(parts)], collapse = ", "), ", and ", parts[length(parts)])
+  }
+  excluded <- synthetic_methods_value$excluded
+  attention <- synthetic_methods_value$attention
+  n_kept <- synthetic_methods_value$n_kept
+  n_divers <- synthetic_methods_value$n_divers
+  motive_keys <- as.character(analysis_plan$regression$motives)
+  covariate_keys <- as.character(analysis_plan$regression$covariate_keys)
+  k <- synthetic_methods_value$n_motives
+  covariates <- design$covariates_nonzero
+  covariate_word <- c(age = "age", male = "men", income = "income")
+  covariate_parts <- vapply(unique(covariates$predictor), function(p) {
+    rows <- covariates[covariates$predictor == p, , drop = FALSE]
+    paste0(join_words_with_and(rh_fmt(rows$generating)), " for ", covariate_word[[p]], " on ",
+           join_words_with_and(inline(rows$outcome)))
+  }, character(1))
+  loading <- design$loading
+  spread <- as.numeric(truth$measurement$spread)
+  response <- design$response_range
+  cross_loading_text <- if (length(truth$cross_loadings) == 0L) "" else {
+    planted <- synthetic_methods_value$cross_loading
+    located <- planted$located
+    own <- planted$own
+    other <- planted$other
+    cross <- planted$loading
+    r <- planted$correlation
+    v <- planted$variance
+    v_text <- if (isTRUE(all.equal(cross, loading))) {
+      paste0("1 + ", rh_fmt(loading), "^2 + 2 \\cdot ", rh_fmt(loading), "^2\\, r")
+    } else {
+      paste0("1 + ", rh_fmt(cross), "^2 + 2 \\cdot ", rh_fmt(loading), " \\cdot ", rh_fmt(cross), "\\, r")
+    }
+    paste0(
+      "For one item, ", name_items_in_text(own, located$position, labels), ", a cross-loading was planted: ",
+      "it loads on both ", inline(own), " and ", inline(other), ",\n\n",
+      "$$\n\\text{item} = \\operatorname{round}\\Bigl(\\text{level} + ", rh_fmt(spread), "\\,",
+      "\\frac{", rh_fmt(loading), "\\,\\text{", inline(own), "} + ", rh_fmt(cross), "\\,\\text{", inline(other),
+      "} + \\sqrt{1 - ", rh_fmt(loading), "^2}\\, e}{\\sqrt{v}}\\Bigr), \\quad v = ", v_text, "\n$$\n\n",
+      "where $r$ = ", rh_fmt(r, 2, bounded = TRUE), " is the correlation of the two scores in the generated ",
+      "data. Dividing by $\\sqrt{v}$ gives the item the same spread as the others and a standardised loading of ",
+      rh_fmt(planted$standardised_loading, 2, bounded = TRUE), " on each factor.\n"
+    )
+  }
+  list(
+    n_categories = rh_fmt_count(synthetic_methods_value$n_categories),
+    n_records = rh_fmt_n(truth$n_total),
+    n_quota = rh_fmt_n(excluded[["quota_full"]]),
+    n_after_quota = rh_fmt_n(synthetic_methods_value$n_after_quota),
+    n_excluded_planned = rh_fmt_n(synthetic_methods_value$n_excluded_planned),
+    exclusions_planned = series(c(
+      paste(rh_fmt_n(excluded[["consent_refused"]]), "refused consent"),
+      paste(rh_fmt_n(excluded[["incomplete"]]), "did not finish"),
+      paste(rh_fmt_n(excluded[["age_under_18"]]), "were under", rh_fmt_n(analysis_plan$exclusions$min_age)),
+      paste(rh_fmt_n(attention), "failed an attention check")
+    )),
+    n_divers = rh_fmt_n(n_divers),
+    divers_min = rh_fmt_n(analysis_plan$exclusions$gender_divers_min_n),
+    n_analysis = rh_fmt_n(synthetic_methods_value$n_analysis),
+    n_motives = rh_fmt_count(k),
+    n_facets = rh_fmt_count(synthetic_methods_value$n_facets),
+    n_scales = rh_fmt_count(synthetic_methods_value$n_scales),
+    n_items = rh_fmt_n(synthetic_methods_value$n_items),
+    motive_r = paste(rh_fmt(design$motive_correlation_range[1], 2, bounded = TRUE), "to",
+                     rh_fmt(design$motive_correlation_range[2], 2, bounded = TRUE)),
+    residual_r = paste(rh_fmt(design$residual_correlation_range[1], 2, bounded = TRUE), "to",
+                       rh_fmt(design$residual_correlation_range[2], 2, bounded = TRUE)),
+    formula_motives = paste0("\\beta_{", seq_len(k), "}\\,\\text{", inline(motive_keys), "}", collapse = " + "),
+    formula_covariates = paste0("\\beta_{", k + seq_along(covariate_keys), "}\\,\\text{", covariate_keys, "}",
+                                collapse = " + "),
+    n_coefficients = rh_fmt_n(design$n_coefficients),
+    n_zero = rh_fmt_n(design$n_zero),
+    coefficients = series(c(
+      paste(rh_fmt(design$motive_nonzero_range[1]), "to", rh_fmt(design$motive_nonzero_range[2]),
+            "in absolute value for the motives"),
+      unname(covariate_parts)
+    )),
+    loading = rh_fmt(loading),
+    spread = rh_fmt(spread),
+    levels = paste(rh_fmt(synthetic_methods_value$location_range[1], 1), "to",
+                   rh_fmt(synthetic_methods_value$location_range[2], 1)),
+    response_min = rh_fmt_n(response[1]),
+    response_max = rh_fmt_n(response[2]),
+    cross_loading = cross_loading_text
+  )
+})
+outcome_keys <- as.character(analysis_plan$regression$outcomes)
+# Appendix and supplement sections are unnumbered and carry typed labels
+# (A1, A2 ...; S1, S2 ..., subsections S2.1 ...), so Quarto cannot
+# cross-reference them. A reference to one is a link whose label is read from
+# its heading in this file; an unknown section stops the render.
+report_section_labels <- read_report_section_labels(file.path(analysis_root, "report", "results_draft.qmd"))
+
+sec_link <- function(id) {
+  label <- unname(report_section_labels[id])
+  if (length(label) != 1L || is.na(label)) {
+    stop("No labelled appendix or supplement section has the id ", id, ".")
+  }
+  paste0("[Section ", label, "](#", id, ")")
+}
+
+# Sample
+n_started <- report_flow_value$n_started
+n_quota_full <- report_flow_value$n_quota_full
+n_admitted <- report_flow_value$n_admitted
+n_analysis <- report_flow_value$n_analysis
+n_excluded <- report_flow_value$n_excluded
+fieldwork <- analysis_plan$recruitment
+fieldwork_text <- paste0(
+  rh_fmt_date(fieldwork$fieldwork_start), " and ", rh_fmt_date(fieldwork$fieldwork_end)
+)
+model_n <- function(outcome) {
+  per_outcome <- report_sizes_value$n_regressions_by_outcome
+  counts <- rep(report_sizes_value$n_regressions, length(outcome))
+  counts[outcome == "network"] <- report_sizes_value$n_network
+  matched <- match(outcome, names(per_outcome))
+  counts[!is.na(matched)] <- unname(per_outcome[matched[!is.na(matched)]])
+  counts
+}
+# AP3 excludes unresolved values separately for the analyses requiring them.
+n_omitted_gender <- report_sizes_value$n_omitted_for_missing_gender
+# The network and joint model keep cases complete on their required variables.
+network_n <- report_sizes_value$n_network
+joint_n <- report_sizes_value$n_regressions
+# The sample sizes of the analyses, stated once here; the sections below do
+# not repeat them.
+sample_n_text <- if (report_flow_value$imputation$failed) {
+  per_outcome <- report_sizes_value$n_regressions_by_outcome
+  regression_sizes <- if (length(per_outcome)) paste0(
+    rh_pretty_names(names(per_outcome)), ": *N* = ",
+    vapply(per_outcome, rh_fmt_n, character(1)), collapse = "; ") else
+    paste0("each *N* = ", rh_fmt_n(joint_n))
+  paste0(" Respondents with unresolved values were excluded separately from analyses requiring those values. ",
+    "The RQ1 regression samples were ", regression_sizes, "; the joint regression used *N* = ",
+    rh_fmt_n(joint_n), " and the network *N* = ", rh_fmt_n(network_n),
+    ". Descriptive and measurement analyses used respondents with the required values available.")
+} else if (n_omitted_gender == 0) {
+  " Every analysis uses the analysis sample."
+} else if (network_n == n_analysis) {
+  paste0(
+    " Reliability, factor structure, descriptive statistics and the network use the analysis sample ",
+    "of *N* = ", rh_fmt_n(n_analysis), "; every regression of RQ1 and RQ2 uses *N* = ",
+    rh_fmt_n(joint_n), "."
+  )
+} else {
+  paste0(
+    " Reliability, factor structure and descriptive statistics use the analysis sample of *N* = ",
+    rh_fmt_n(n_analysis), ", the network *N* = ", rh_fmt_n(network_n),
+    " and every regression of RQ1 and RQ2 *N* = ", rh_fmt_n(joint_n), "."
+  )
+}
+# Participation (M4): the preregistration's sentence while the number of invited
+# panel members is unknown; the percentage when the configuration carries it.
+participation_text <- if (!report_flow_value$participation$available) {
+  paste0(rh_prereg_passage(prereg, "Participation rate is unknown"), " (M4)")
+} else {
+  rh_participation_text(n_started, analysis_plan, participation = report_flow_value$participation)
+}
+# The filled values (AP3).
+n_filled <- report_flow_value$imputation$n_filled
+filled_text <- describe_imputation_processing(imputation_status_value, facts = report_flow_value$imputation)
+if (n_filled > 0L) filled_text <- paste0(sub("\\.$", "", filled_text),
+  " (for details see Supplement).")
+# The criteria in the order of the exclusion log, each with its count from the
+# exclusion log.
+exclusion_text <- paste0(
+  tolower(rh_criterion_label(report_flow_value$steps$criterion, analysis_plan)),
+  " (", rh_fmt_n(report_flow_value$steps$n_excluded), ")",
+  collapse = ", "
+)
+edu_rank <- attr(report_sample_rows_value, "education_rank")
+edu_text <- paste0(edu_rank$level, " (", rh_fmt_pct(edu_rank$pct, 1, scale = "percent"), ")")
+
+# Measurement
+n_scales <- report_reliability_counts_value$n_scales
+n_alpha_only <- report_reliability_counts_value$n_alpha_reported
+n_omega_without_interval <- report_reliability_counts_value$n_omega_without_interval
+# The two fallback sentences print only when they have a scale to name.
+alpha_only_text <- if (n_alpha_only > 0) paste0(
+  "The ω model could not be estimated for ", rh_fmt_count(n_alpha_only),
+  if (n_alpha_only == 1) " scale" else " scales", ", for which α is reported in its place."
+) else ""
+omega_interval_text <- if (n_omega_without_interval > 0) paste0(
+  "For ", rh_fmt_count(n_omega_without_interval), if (n_alpha_only > 0) " further" else "",
+  if (n_omega_without_interval == 1) " scale" else " scales",
+  ", ω is reported without a bootstrap confidence interval."
+) else ""
+fmt_p <- function(p) {
+  if (is.na(p)) "—" else if (p < 0.001) "*p* < .001" else paste0("*p* = ", rh_fmt(p, 3, bounded = TRUE))
+}
+cfa_fit_text <- function(model) {
+  r <- s1_value$cfa_sets[s1_value$cfa_sets$model == model, , drop = FALSE]
+  if (nrow(r) == 0) return("fit results were unavailable")
+  if (!isTRUE(r$converged[1])) return("the model did not converge; its fit indices are not interpreted")
+  if (!isTRUE(r$admissible[1])) return("the converged solution was not admissible; its fit indices are not interpreted")
+  paste0(
+    "χ²(", rh_fmt_n(r$df[1]), ") = ", rh_fmt(r$chisq[1], 2), ", ", fmt_p(r$pvalue[1]),
+    ", CFI = ", rh_fmt(r$cfi[1], 3, bounded = TRUE),
+    # TLI can exceed one, so it keeps its leading zero (APA).
+    ", TLI = ", rh_fmt(r$tli[1], 3),
+    ", RMSEA = ", rh_fmt(r$rmsea[1], 3, bounded = TRUE),
+    " ", rh_fmt_ci(r$rmsea_lo[1], r$rmsea_hi[1], 3, bounded = TRUE),
+    ", SRMR = ", rh_fmt(r$srmr[1], 3, bounded = TRUE)
+  )
+}
+cfa_label <- function(model) {
+  r <- s1_value$cfa_sets[s1_value$cfa_sets$model == model, , drop = FALSE]
+  if (nrow(r) == 0) "n/a" else as.character(r$label[1])
+}
+cfa_models <- as.character(s1_value$cfa_sets$model)
+cfa_structure_models <- s1_value$cfa_structure_models
+cfa_combined_models <- s1_value$cfa_combined_models
+# "three factors for ASC, two for UMS-6 (...) and two for DoPL-6 (...)", ASC first
+cfa_structure_text <- local({
+  rows <- cfa_structure_models[order(cfa_structure_models$set != "asc"), , drop = FALSE]
+  set_labels <- vapply(analysis_plan$factor_analysis$sets, function(x) as.character(x$label), character(1))
+  names(set_labels) <- vapply(analysis_plan$factor_analysis$sets, function(x) as.character(x$key), character(1))
+  parts <- paste0(rh_fmt_count(rows$n_factors), c(" factors for ", rep(" for ", nrow(rows) - 1L)),
+                  unname(set_labels[as.character(rows$set)]))
+  if (length(parts) <= 1L) return(paste(parts, collapse = ""))
+  paste0(paste(parts[-length(parts)], collapse = ", "), " and ", parts[length(parts)])
+})
+
+cfa_summary_text <- function(rows, description) {
+  facts <- attr(rows, "report_summary")
+  first <- if (facts$all_valid && facts$n == 2L) {
+    paste0("Both ", description, " converged and were admissible.")
+  } else if (facts$all_valid && facts$n > 2L) {
+    paste0("All ", rh_fmt_count(facts$n), " ", description, " converged and were admissible.")
+  } else {
+    paste0(rh_fmt_count(facts$n_valid, capitalize = TRUE), " of the ",
+           rh_fmt_count(facts$n), " ", description,
+           " converged and were admissible.")
+  }
+  if (!facts$any_valid) return(first)
+  worst <- function(key, direction) {
+    x <- facts[[key]]
+    if (is.na(x)) return("unavailable")
+    rh_fmt(x, 3, bounded = key != "tli")
+  }
+  paste0(first, " Among these models, minimum CFI = ", worst("cfi", "minimum"),
+         ", minimum TLI = ", worst("tli", "minimum"),
+         ", maximum RMSEA = ", worst("rmsea", "maximum"),
+         " and maximum SRMR = ", worst("srmr", "maximum"), " (for details see Supplement).")
+}
+
+# Descriptive statistics: the correlations of the nine scale scores. The
+# estimates are posterior medians estimated assuming a correlation exists; the
+# Bayes factor sorts each pair into evidence for a correlation, evidence for no
+# correlation, or inconclusive. Their Monte Carlo precision is stated in the
+# note of the correlation table (describe_correlation_sampling()).
+correlation_results_text <- function(correlations) {
+  facts <- correlations$report
+  if (facts$n_available == 0L) return("The correlations were unavailable.")
+  pair_count <- function(n) paste(rh_fmt_count(n), if (n == 1L) "pair" else "pairs")
+  n_unavailable <- facts$n_unavailable
+  n_present <- facts$n_present
+  n_absent <- facts$n_absent
+  n_inconclusive <- facts$n_inconclusive
+  paste0(
+    "Of the ", rh_fmt_count(facts$n_available), " correlations, ",
+    rh_fmt_n(facts$n_positive),
+    " were credibly positive and ",
+    rh_fmt_n(facts$n_negative),
+    " credibly negative, ranging from ρ = ",
+    rh_fmt(facts$range[1], 2, bounded = TRUE), " to ρ = ",
+    rh_fmt(facts$range[2], 2, bounded = TRUE), ". ",
+    "The data gave evidence for a correlation for ", pair_count(n_present),
+    " and evidence for no correlation for ", pair_count(n_absent), "; for ",
+    pair_count(n_inconclusive), " the evidence was inconclusive.",
+    if (n_unavailable > 0L) paste0(" ", rh_fmt_count(n_unavailable, capitalize = TRUE),
+      if (n_unavailable == 1L) " correlation was unavailable." else " correlations were unavailable.") else ""
+  )
+}
+correlation_prior_text <- function(metadata) {
+  scale <- if (isTRUE(all.equal(metadata$rscale, 1 / 3))) {
+    "one third (the standard medium setting)"
+  } else rh_fmt(metadata$rscale, 4)
+  paste0("The prior for a nonzero correlation is a Beta(", paste(format(signif(metadata$prior_beta, 6), trim = TRUE, scientific = FALSE), collapse = ", "),
+         ") distribution rescaled to [", paste(rh_fmt(metadata$prior_support, 0), collapse = ", "),
+         "], with prior scale ", scale, ".")
+}
+correlation_metadata <- bayesian_correlations_value$metadata
+corr_summary_text <- correlation_results_text(bayesian_correlations_value)
+
+# Adjusted associations: the facts come from the RQ1 report targets; the
+# sentences below only word them.
+join_and <- function(x) {
+  if (length(x) <= 1) return(paste(x, collapse = ""))
+  paste0(paste(x[-length(x)], collapse = ", "), " and ", x[length(x)])
+}
+credible_text <- function(outcome) {
+  facet <- report_credible_value[report_credible_value$outcome_key %in% outcome, , drop = FALSE]
+  if (nrow(facet) == 0L || !isTRUE(facet$interpretable)) {
+    return("could not be interpreted because its model did not pass the validity gate; no associations are classified")
+  }
+  predictors <- facet$predictor[[1]]
+  signs <- facet$observed_sign[[1]]
+  if (length(predictors) == 0L) return("was not credibly associated with any of the five motives")
+  # APA: a statistic carried by a table or figure is not repeated in the prose.
+  # The estimate and its interval are in @tbl-associations and
+  # @fig-coefficients; the sentence keeps the finding and its direction.
+  items <- paste0(rh_label_inline(predictors, labels), " (",
+                  ifelse(signs == "+", "positively", "negatively"), ")")
+  paste0("was credibly associated with ", join_and(items))
+}
+n_unclassified_directional <- report_association_counts_value$n_directional_withheld
+
+# Per-cell prior robustness: AP6's language rule applied cell by cell rather
+# than as one aggregate count (report_prior_width_robustness()).
+n_prior_widths <- report_association_counts_value$n_prior_widths
+n_cells <- report_association_counts_value$n_cells
+n_prior_comparable <- report_association_counts_value$n_prior_comparable
+n_prior_dependent <- report_association_counts_value$n_prior_dependent
+prior_robust_text <- if (n_prior_comparable == 0L) {
+  paste0(
+    "The ", rh_fmt_count(n_prior_widths), " priors could not be compared for any cell, so no classification is ",
+    "described as the same under all of them"
+  )
+} else if (n_prior_comparable < n_cells) {
+  paste0(
+    "Prior dependence could be assessed for ", rh_fmt_count(n_prior_comparable),
+    " of the ", rh_fmt_count(n_cells), " cells: ",
+    rh_fmt_count(report_association_counts_value$n_prior_unchanged),
+    " retained the same interval-exclusion classification, and ",
+    rh_fmt_count(n_prior_dependent), " changed it. The remaining cells could not be compared"
+  )
+} else if (n_prior_dependent == 0L) {
+  paste0(
+    "Whether the interval excluded zero was the same for every coefficient under all ",
+    rh_fmt_count(n_prior_widths), " priors, so every classification is the same under all of them"
+  )
+} else {
+  paste0(
+    "The classification depends on the prior for ", rh_fmt_count(n_prior_dependent),
+    if (n_prior_dependent == 1L) " cell; " else " cells; ",
+    "the remaining classifications are the same under all ", rh_fmt_count(n_prior_widths), " priors"
+  )
+}
+
+# Coefficient-level factual answers from the prior-width sweep
+# (report_prior_width_changes()). Credibility and direction are kept separate:
+# a median can change sign while every interval continues to include zero, and
+# a credibility change never replaces the classification under the primary prior.
+width_phrase <- function(widths) {
+  values <- as.numeric(widths)
+  named <- rh_sweep_label(values, analysis_plan)
+  named[is.na(named)] <- rh_sweep_sd_label(values[is.na(named)], analysis_plan)
+  paste0("the ", join_and(named), if (length(named) == 1L) " prior" else " priors")
+}
+cell_phrase <- function(changes, i) {
+  paste0(rh_label_inline(changes$predictor[i], labels), " → ", rh_label_inline(changes$outcome_key[i], labels))
+}
+sweep_detail_interpretable <- n_prior_comparable == n_cells
+credibility_changes <- report_prior_changes_value[
+  report_prior_changes_value$interval_exclusion_stable %in% FALSE, , drop = FALSE]
+direction_changes <- report_prior_changes_value[
+  report_prior_changes_value$median_direction_stable %in% FALSE, , drop = FALSE]
+sweep_credibility_detail_text <- if (!sweep_detail_interpretable) {
+  "Coefficient-level credibility comparisons were unavailable because at least one planned fit was missing or did not pass the validity gate."
+} else if (nrow(credibility_changes) == 0L) {
+  NULL
+} else {
+  paste(vapply(seq_len(nrow(credibility_changes)), function(i) {
+    paste0("For ", cell_phrase(credibility_changes, i), ", the interval excluded zero under ",
+           width_phrase(credibility_changes$widths_excluding_zero[[i]]), " but included zero under ",
+           width_phrase(credibility_changes$widths_including_zero[[i]]), ".")
+  }, character(1)), collapse = " ")
+}
+sweep_direction_detail_text <- if (!sweep_detail_interpretable) {
+  "Coefficient-level direction comparisons were unavailable because at least one planned fit was missing or did not pass the validity gate."
+} else if (nrow(direction_changes) == 0L) {
+  "No coefficient's posterior median changed direction across the examined prior widths."
+} else {
+  paste(vapply(seq_len(nrow(direction_changes)), function(i) {
+    # Where every interval of the cell includes zero (or every one excludes
+    # it), the sentence says so: the sign change of the median is then not a
+    # change of the classification.
+    excluding <- direction_changes$widths_excluding_zero[[i]]
+    including <- direction_changes$widths_including_zero[[i]]
+    zero_clause <- if (length(excluding) == 0L && length(including) > 0L) {
+      ", while zero lay inside its credible interval under every prior"
+    } else if (length(including) == 0L && length(excluding) > 0L) {
+      ", while its credible interval excluded zero under every prior"
+    } else {
+      ""
+    }
+    paste0("For ", cell_phrase(direction_changes, i), ", the posterior median was positive under ",
+           width_phrase(direction_changes$widths_positive_median[[i]]), " and negative under ",
+           width_phrase(direction_changes$widths_negative_median[[i]]), zero_clause, ".")
+  }, character(1)), collapse = " ")
+}
+
+# Motivational organisation of authoritarian orientation (RQ2): the sentences
+# word the rows of the joint-regression report (the target report_joint). RQ2a
+# compares strength: the absolute coefficient of the
+# first-named outcome minus that of the second-named one, the signs compared
+# separately (preregistration, RQ2a).
+# The joint model names its four outcomes aggression, submission,
+# conventionalism and sdo_d; the sentences name them by their codebook label.
+rq2_facet_key <- c(aggression = "asc_agg", submission = "asc_sub", conventionalism = "asc_conv", sdo_d = "sdo_dom")
+rq2_facet <- stats::setNames(rh_label_inline(unname(rq2_facet_key), labels), names(rq2_facet_key))
+rq2_direction_text <- function(outcomes) {
+  rows <- rq2_value$credible_directions
+  parts <- unlist(lapply(outcomes, function(outcome) lapply(c("positive", "negative"), function(sign) {
+    motives <- rows$motive_key[rows$outcome %in% outcome & rows$sign %in% sign]
+    if (length(motives) == 0) return(NULL)
+    paste0(join_and(rh_label_inline(motives, labels)), if (length(motives) > 1) " were" else " was",
+           " credibly ", sign, "ly associated with ", rq2_facet[[outcome]])
+  })))
+  if (length(parts) == 0) return("No coefficient was credible in direction.")
+  rh_capitalise_first_letter(paste0(paste(parts, collapse = "; "), "; the other coefficients were unresolved in direction."))
+}
+# One sentence per pair of outcomes: the motives with a credible strength
+# difference, named by the outcome they are more strongly associated with, and
+# the motives whose two coefficients are credible in the same or in opposite
+# directions. No subtraction is spelled out; the tables give the numbers.
+rq2a_pair_text <- function(rows, first, second, lead) {
+  if (!rq2_value$gate_passed) return("")
+  motive_names <- function(keys) join_and(rh_label_inline(keys, labels))
+  verb <- function(keys) if (length(keys) > 1L) " were" else " was"
+  first_name <- rq2_facet[[first]]
+  second_name <- rq2_facet[[second]]
+  stronger_first <- rows$motive_key[grepl("^credibly stronger ", rows$classification)]
+  stronger_second <- rows$motive_key[grepl("^credibly weaker ", rows$classification)]
+  unresolved <- rows$motive_key[!grepl("^credibly ", rows$classification)]
+  strength <- if (length(stronger_first) + length(stronger_second) == 0L) {
+    "no difference in strength was credible"
+  } else {
+    paste0(
+      "the association was credibly stronger ",
+      join_and(c(
+        if (length(stronger_first)) paste0("with ", first_name, " for ", motive_names(stronger_first)),
+        if (length(stronger_second)) paste0("with ", second_name, " for ", motive_names(stronger_second))
+      )),
+      if (length(unresolved)) paste0(", and the difference in strength was unresolved for ", motive_names(unresolved)) else ""
+    )
+  }
+  same <- rows[rows$direction_comparison %in% "same direction", , drop = FALSE]
+  flips <- rows[rows$direction_comparison %in% "sign flip" &
+                  (rows$lower > 0 | rows$upper < 0), , drop = FALSE]
+  sign_of <- function(key, outcome) {
+    hit <- rq2_value$credible_directions$sign[rq2_value$credible_directions$motive_key %in% key &
+                                                rq2_value$credible_directions$outcome %in% outcome]
+    if (length(hit) == 1L) hit else NA_character_
+  }
+  direction <- c(
+    vapply(c("positive", "negative"), function(sign) {
+      keys <- same$motive_key[vapply(same$motive_key, sign_of, "", outcome = first) %in% sign]
+      if (length(keys) == 0L) return("")
+      paste0(motive_names(keys), verb(keys), " credibly ", sign, "ly associated with both")
+    }, ""),
+    vapply(flips$motive_key, function(key) {
+      paste0(rh_label_inline(key, labels), " was credibly ", sign_of(key, first), "ly associated with ",
+             first_name, " but ", sign_of(key, second), "ly with ", second_name, ", a sign flip")
+    }, "")
+  )
+  direction <- direction[nzchar(direction)]
+  paste0(
+    lead, strength, "; ",
+    if (length(direction)) join_and(direction) else "no motive had credible coefficients of the same or of opposite signs for both",
+    "."
+  )
+}
+rq2a_comparison_text <- function(comparison) {
+  if (!rq2_value$gate_passed) {
+    return("No strength difference or direction comparison is classified, because the joint model did not pass its validity gate.")
+  }
+  d <- rq2_value$differences
+  asc <- c("aggression", "submission", "conventionalism")
+  keep <- switch(comparison,
+    within = d$first_outcome %in% asc & d$second_outcome %in% asc,
+    components = d$first_outcome %in% asc & d$second_outcome %in% "sdo_d"
+  )
+  d <- d[keep, , drop = FALSE]
+  pairs <- unique(d[c("first_outcome", "second_outcome")])
+  facet_rank <- function(x) match(unname(rq2_facet_key[x]), outcome_keys)
+  pairs <- pairs[order(facet_rank(pairs$first_outcome), facet_rank(pairs$second_outcome)), , drop = FALSE]
+  texts <- vapply(seq_len(nrow(pairs)), function(i) {
+    rows <- d[d$first_outcome == pairs$first_outcome[i] & d$second_outcome == pairs$second_outcome[i], , drop = FALSE]
+    lead <- paste0(
+      "Between ", rq2_facet[[pairs$first_outcome[i]]], " and ", rq2_facet[[pairs$second_outcome[i]]], ", "
+    )
+    rq2a_pair_text(rows, pairs$first_outcome[i], pairs$second_outcome[i], lead)
+  }, "")
+  rh_capitalise_first_letter(paste(texts[nzchar(texts)], collapse = " "))
+}
+rq2_gate_text <- if (rq2_value$gate_passed) {
+  "The joint model passed the same validity gate as the four separate fits."
+} else {
+  paste0(
+    "The joint model did not pass the validity gate (status ",
+    rh_gate_status_label(rq2_value$gate_status), "), so interpretation of the joint-model estimates is withheld."
+  )
+}
+# RQ2b: whether the seven residual correlations are credible (AP10), with
+# their sizes within ASC, between the ASC facets and SDO-D, and for the ASC
+# total with SDO-D.
+rq2b_residual_text <- local({
+  result <- joint_correlation_changes_value
+  rows <- result$summaries
+  if (!check_joint_addition_interpretability(result, rows)) {
+    return("The residual correlations received no classification, because the joint fit did not pass its validity gate.")
+  }
+  pair_labels <- c(asc_total = "ASC total", labels)
+  facts <- result$report_residuals
+  credible <- facts$credible
+  total <- facts$total
+  with_sdo <- facts$with_sdo
+  within <- facts$within
+  span <- function(r) {
+    paste0("from ", rh_fmt(r[1], 2, bounded = TRUE), " to ", rh_fmt(r[2], 2, bounded = TRUE))
+  }
+  sizes <- paste0(
+    "within ASC they ranged ", span(facts$within_range), ", between the ASC facets and SDO-D ", span(facts$with_sdo_range),
+    ", and between the ASC total and SDO-D it was ", rh_fmt(rows$residual_median[total][1], 2, bounded = TRUE), "."
+  )
+  pairs <- " residual correlations between the authoritarian facets, including the ASC total, were credible"
+  if (facts$all_credible) return(paste0("All ", rh_fmt_count(facts$n), pairs, ": ", sizes))
+  open <- paste(rh_label_inline(rows$outcome_1[!credible], pair_labels), "–", rh_label_inline(rows$outcome_2[!credible], pair_labels))
+  paste0(rh_fmt_count(facts$n_credible, capitalize = TRUE), " of the ", rh_fmt_count(facts$n),
+         pairs, "; the interval included zero for ", join_and(open), ". ",
+         toupper(substr(sizes, 1, 1)), substring(sizes, 2))
+})
+
+# SRQ1, number of factors: per scale and item set, how many of the criteria of
+# @appxtbl-factor-criteria suggest the expected number of factors, fewer and
+# more. The preregistration names the readings expected, fewer, more and
+# conflicting and states no rule for how many criteria must agree, so a
+# reading is named only where every available criterion agrees; otherwise the
+# counts are printed.
+srq1_readings <- s1_value$factor_readings
+srq1_readings$label <- ifelse(srq1_readings$is_set,
+  rh_lowercase_first_letter(srq1_readings$label), rh_label_inline(srq1_readings$key, labels))
+
+srq1_factor_number_text <- local({
+  r <- srq1_readings
+  n_criteria <- s1_value$counts$factor_criteria
+  # "every single scale and the item sets A and B", or the names
+  agreed_names <- function(rows) {
+    scales <- rows[!rows$is_set, , drop = FALSE]
+    sets <- rows[rows$is_set, , drop = FALSE]
+    join_and(c(
+      if (nrow(scales) > 0L && nrow(scales) == s1_value$counts$factor_scales) "every single scale"
+      else if (nrow(scales) > 0L) join_and(scales$label),
+      if (nrow(sets) > 0L) paste0("the item set", if (nrow(sets) > 1L) "s " else " ", join_and(sets$label))
+    ))
+  }
+  unanimous <- function(reading, wording) {
+    rows <- r[r$reading == reading, , drop = FALSE]
+    if (nrow(rows) == 0L) return(NULL)
+    paste0("All ", rh_fmt_count(n_criteria), " criteria suggested ", wording, " for ", agreed_names(rows), ".")
+  }
+  # "for ASC, seven of nine criteria suggested the expected number of factors
+  # and two fewer"
+  mixed_rows <- r[r$reading == "mixed", , drop = FALSE]
+  mixed <- if (nrow(mixed_rows) == 0L) NULL else paste0(
+    "The criteria disagreed in ", rh_fmt_count(s1_value$counts$factor_mixed),
+    if (nrow(mixed_rows) == 1L) " case: " else " cases: ",
+    paste(vapply(seq_len(nrow(mixed_rows)), function(i) {
+      counts <- c(mixed_rows$n_at[i], mixed_rows$n_below[i], mixed_rows$n_above[i])
+      wording <- c("the expected number", "fewer", "more")
+      keep <- counts > 0L
+      parts <- paste(rh_fmt_count(counts[keep]), wording[keep])
+      paste0("for ", mixed_rows$label[i], ", ", rh_fmt_count(counts[keep][1]), " of ",
+             rh_fmt_count(mixed_rows$n_available[i]), " criteria suggested ", wording[keep][1],
+             if (length(parts) > 1L) paste0(" and ", join_and(parts[-1])) else "")
+    }, character(1)), collapse = "; "), "."
+  )
+  unavailable <- if (!any(r$reading == "unavailable")) NULL else paste0(
+    "No criterion was available for ", join_and(r$label[r$reading == "unavailable"]), ".")
+  paste(c(
+    unanimous("expected", "the expected number of factors"),
+    unanimous("fewer", "fewer factors than expected"),
+    unanimous("more", "more factors than expected"),
+    mixed, unavailable
+  ), collapse = " ")
+})
+# SRQ1, item correspondence: the values of the expected solution of each item
+# set of several scales (the rows of @appxtbl-efa-correspondence), stated as
+# values, with no judgement of a match attached. Loading clarity follows per
+# examined solution (srq1_loading_clarity_text).
+srq1_correspondence_text <- local({
+  overview <- s1_value$correspondence$overview
+  expected <- overview[overview$solution == "expected count", , drop = FALSE]
+  if (nrow(expected) == 0L) {
+    return("The correspondence of the expected solutions with the intended scales was unavailable")
+  }
+  value <- function(x) rh_fmt(x, 2, bounded = TRUE)
+  # Identical values are one sentence, not a list of repeats; where the sets
+  # differ, each is named with its values.
+  measures <- c(value(expected$adjusted_rand), value(expected$expected_pair_retention),
+                value(expected$empirical_pair_purity))
+  if (length(unique(measures)) == 1L) {
+    return(paste0(
+      "In the expected solution of each of the ", rh_fmt_count(s1_value$counts$expected_correspondence), " item sets, the adjusted Rand ",
+      "index, expected-pair retention and empirical-pair purity were all ", measures[[1]],
+      if (measures[[1]] == "1.00") ": every factor held the items of exactly one scale" else ""
+    ))
+  }
+  items <- vapply(seq_len(nrow(expected)), function(i) paste0(
+    expected$set_label[i], ", ", rh_fmt_count(expected$factors[i]), " factors: adjusted Rand index ",
+    value(expected$adjusted_rand[i]), ", expected-pair retention ", value(expected$expected_pair_retention[i]),
+    ", empirical-pair purity ", value(expected$empirical_pair_purity[i])
+  ), character(1))
+  paste0(
+    "In the expected solution of each item set, the correspondence between the intended scales and the ",
+    "estimated factors was as follows. ", paste(items, collapse = "; ")
+  )
+})
+
+# S1 measurement in full
+s1_answer_text <- local({
+  answer <- s1_value$answer
+  exceptions <- c(
+    if (!answer$reliability_complete) paste0(
+      "A reliability coefficient was unavailable for ",
+      join_and(rh_label_inline(answer$reliability_missing, labels)), "."
+    ),
+    if (!answer$cfa_complete) paste0(
+      "The single-scale confirmatory model was unavailable, nonconvergent, or inadmissible for ",
+      join_and(rh_label_inline(answer$cfa_missing, labels)), "."
+    )
+  )
+  if (length(exceptions) == 0L) "" else paste0(
+    sub("\\.$", "", paste(exceptions, collapse = " ")), " (for details see Supplement)."
+  )
+})
+
+
+# RQ1 stability: prior sensitivity (the sweep over the three priors) and power
+# scaling, each in its own subsection.
+sweep_widths_text <- join_and(rh_sweep_sd_label(analysis_plan$priors$slope_sd_sweep, analysis_plan))
+prior_width_text <- paste(c(
+  paste0(prior_robust_text, "."),
+  sweep_credibility_detail_text,
+  sweep_direction_detail_text
+), collapse = " ")
+power_scaling_text <- local({
+  answer <- s3_value$answer
+  fit_failure_text <- c(
+    if (length(answer$failed_fit_models) > 0L) paste0(
+      "The original fits for ", join_and(rh_label_inline(answer$failed_fit_models, labels)),
+      " failed the validity gate; their power-scaling diagnoses are not interpreted."
+    ),
+    if (length(answer$unavailable_fit_models) > 0L) paste0(
+      "Original-fit validity was unavailable for ", join_and(rh_label_inline(answer$unavailable_fit_models, labels)),
+      "; their power-scaling diagnoses are not interpreted."
+    )
+  )
+  failure_parts <- c(
+    if (length(answer$failed_models) > 0L) paste0(
+      "every prior block of the ", join_and(paste0(rh_label_inline(answer$failed_models, labels), " model"))
+    ),
+    if (nrow(answer$failed_blocks) > 0L) paste0(
+      rh_label_inline(answer$failed_blocks$outcome, labels), " (", answer$failed_blocks$block, ")"
+    )
+  )
+  failure_text <- if (length(failure_parts) == 0L) {
+    NULL
+  } else {
+    paste0("Power-scaling failed for ", join_and(failure_parts), ".")
+  }
+  n_unreliable <- answer$n_unreliable
+  reliability_text <- if (n_unreliable == 0L) NULL else paste0(
+    "Importance sampling was unreliable for ", rh_fmt_count(answer$n_unreliable_blocks),
+    " and unavailable for ", rh_fmt_count(answer$n_unavailable_blocks),
+    " outcome–prior-block combinations; their flags are not interpreted."
+  )
+  check <- "making the priors or the data slightly more or less influential (power scaling)"
+  conflict <- "a possible prior–data conflict"
+  powerscale_text <- if (!answer$any_successful) {
+    "No reliable power-scaling diagnosis was available"
+  } else if (answer$n_flagged == 0L) {
+    paste0(rh_capitalise_first_letter(check), " flagged no coefficient and no Bayesian R²")
+  } else {
+    paste0(
+      rh_capitalise_first_letter(check), " flagged ", rh_fmt_count(answer$n_flagged),
+      if (answer$n_flagged == 1L) " coefficient" else " distinct coefficients",
+      " for ", conflict
+    )
+  }
+  paste(c(fit_failure_text, failure_text, reliability_text, paste0(powerscale_text, " (for details see Supplement).")),
+        collapse = " ")
+})
+
+# RQ1 stability: the prior and posterior predictive checks, with the features
+# outside the simulated range named, and the refit allowing heavier tails.
+pp_feature_label <- c(
+  mean = "mean", sd = "standard deviation", skew = "skewness",
+  kurtosis = "excess kurtosis", min = "minimum", max = "maximum"
+)
+predictive_check_text <- local({
+  answer <- s4_value$answer
+  prior_text <- if (!answer$prior_any) {
+    "The prior predictive check of the observed response scales was unavailable."
+  } else if (answer$prior_all_span) {
+    ranges <- s4_value$prior_range
+    pct <- function(x) rh_fmt_pct(x, 1, scale = "proportion")
+    paste0(
+      "In the prior predictive check, between ", pct(ranges$primary_min), " and ",
+      pct(ranges$primary_max), " of the answers simulated under the primary prior fell outside the ",
+      "response range of ", rh_fmt_n(ranges$response_min), " to ", rh_fmt_n(ranges$response_max),
+      ", depending on the facet, and at most ", pct(ranges$gaussian_max),
+      " under the permissive prior (for details see Supplement)."
+    )
+  } else if (length(answer$prior_unavailable_outcomes) > 0L) {
+    paste0(
+      "The prior predictive check was unavailable for ",
+      join_and(unique(rh_label_inline(answer$prior_unavailable_outcomes, labels))), "."
+    )
+  } else {
+    paste0(
+      "In the prior predictive check, how far answers simulated from the priors alone covered the response ",
+      "scale varied across facets and fits."
+    )
+  }
+  simulated <- paste0("the range of ", ci_pct, " of the data sets simulated from the fitted model")
+  posterior_text <- if (!answer$pp_any) {
+    "The posterior predictive comparisons were unavailable."
+  } else if (answer$n_pp_unavailable > 0L) {
+    paste0(
+      "The posterior predictive comparisons were unavailable for ",
+      rh_fmt_count(answer$n_pp_unavailable),
+      if (answer$n_pp_unavailable == 1L) " statistic." else " statistics."
+    )
+  } else if (answer$n_pp_outside == 0L) {
+    paste0("In the posterior predictive check, every observed feature of the scores lay inside ", simulated, ".")
+  } else {
+    outside <- s4_value$section$outside
+    by_facet <- vapply(unique(outside$outcome), function(outcome) {
+      rows <- outside[outside$outcome == outcome, , drop = FALSE]
+      side <- if (all(rows$above)) "above" else if (!any(rows$above)) "below" else "outside"
+      paste0("the ", join_and(unname(pp_feature_label[rows$stat])), " of ",
+             rh_label_inline(outcome, labels), " (", side, " that range)")
+    }, character(1))
+    paste0(
+      "In the posterior predictive check, for ", rh_fmt_count(answer$n_pp_outside),
+      if (answer$n_pp_outside == 1L) " feature" else " features",
+      " of the scores the observed value lay outside ", simulated, ": ",
+      join_and(by_facet), "."
+    )
+  }
+  list(prior = prior_text, posterior = paste0(sub("\\.$", "", posterior_text), " (for details see Supplement)."))
+})
+heavier_tail_text <- local({
+  answer <- s4_value$answer
+  triggered <- answer$triggered
+  refitted <- answer$refitted
+  rule <- "the preregistered rule for heavier-than-normal tails"
+  refit <- "refitted allowing heavier tails, with Student-t errors"
+  text <- if (!answer$tail_any) {
+    "The heavier-tail diagnostic was unavailable"
+  } else if (length(answer$tail_unavailable_outcomes) > 0L) {
+    paste0(
+      "The heavier-tail diagnostic was unavailable for ",
+      join_and(unique(rh_label_inline(answer$tail_unavailable_outcomes, labels)))
+    )
+  } else if (length(triggered) == 0L) {
+    paste0("No facet met ", rule, ", so no model was ", refit)
+  } else if (all(triggered %in% refitted)) {
+    rh_capitalise_first_letter(paste0(
+      if (length(triggered) == 1L) "only " else "",
+      join_and(rh_label_inline(triggered, labels)), " met ", rule,
+      if (length(triggered) == 1L) " and was " else " and were ", refit
+    ))
+  } else {
+    paste0(
+      "The heavier-tail criterion was met without a completed Student-t refit for ",
+      join_and(rh_label_inline(setdiff(triggered, refitted), labels))
+    )
+  }
+  paste0(text, " (for details see Supplement).")
+})
+
+# The full-data network against the bagged one (Results, RQ3 stability, and
+# supplement S4)
+network_agreement_text <- local({
+  answer <- s5_value$answer
+  total <- answer$n_edges
+  changed <- answer$n_changed
+  if (!answer$comparison_available) {
+    "The comparison between bagged and full-data edge decisions was unavailable."
+  } else if (changed == 0L) {
+    paste0("The bagged and full-data decisions agreed for all ", rh_fmt_count(total), " edges.")
+  } else {
+    paste0(
+      "The bagged and full-data decisions agreed for ", rh_fmt_n(answer$n_agreed), " of ", rh_fmt_n(total),
+      " edges", if (answer$all_disagreements_inconclusive) ", and every disagreement became inconclusive after bagging." else "."
+    )
+  }
+})
+s5_answer_text <- local({
+  answer <- s5_value$answer
+  agreement_text <- network_agreement_text
+  stable_text <- if (answer$n_conclusive == 0L) {
+    "The bagged result contained no conclusive edge decision"
+  } else if (nrow(answer$unstable_edges) > 0L) {
+    paste0(
+      "Resample stability was unavailable for ",
+      join_and(rh_network_edge_label(answer$unstable_edges$node_i, answer$unstable_edges$node_j, labels,
+                                     inline = TRUE))
+    )
+  } else if (answer$n_majority == answer$n_conclusive) {
+    "Every conclusive bagged decision crossed its matching threshold in most resamples"
+  } else {
+    paste0(
+      rh_fmt_count(answer$n_majority),
+      " of ", rh_fmt_count(answer$n_conclusive),
+      " conclusive bagged decisions crossed their matching threshold in most resamples"
+    )
+  }
+  paste(agreement_text, paste0(stable_text, " (for details see Supplement)."))
+})
+
+# sampling diagnostics (appendix)
+diagnostics_answer_text <- local({
+  n_fits <- diagnostics_value$n_fits
+  failed <- diagnostics_value$failed
+  if (n_fits == 0L) {
+    "Sampling diagnostics were unavailable for the listed regression fits (for details see Supplement)."
+  } else if (nrow(failed) == 0L) {
+    paste0(
+      "All ", rh_fmt_count(n_fits),
+      " listed regression fits, including every prior-sweep fit, passed each diagnostic: ",
+      join_and(diagnostics_value$components),
+      " (for details see Supplement)."
+    )
+  } else {
+    failed_components <- vapply(failed$failed_components, function(components) {
+      if (length(components) == 0L) "validity-gate status" else join_and(components)
+    }, character(1))
+    failed_labels <- paste0(
+      rh_label_inline(failed$outcome, labels), " (",
+      rh_sweep_sd_label(failed$slope_sd, analysis_plan), ", ", failed$family, ": ",
+      failed_components, ")"
+    )
+    paste0(
+      rh_fmt_count(diagnostics_value$n_failed), " of ", rh_fmt_count(n_fits),
+      " listed regression fits did not pass the validity gate. Failed diagnostics by fit: ",
+      join_and(failed_labels), ". Every diagnostic not named for a fit passed there (for details see Supplement)."
+    )
+  }
+})
+
+diagnostic_extrema_text <- function(diagnostics) {
+  extreme <- function(key, direction) attr(diagnostics, "report_extrema")[[key]]
+  if (nrow(diagnostics) == 0L) return("")
+  paste0(
+    "Across the listed fits, maximum R̂ was ", rh_fmt(extreme("rhat_max", "maximum"), 3),
+    ", minimum bulk ESS was ", rh_fmt_n(extreme("ess_bulk_min", "minimum")),
+    ", minimum tail ESS was ", rh_fmt_n(extreme("ess_tail_min", "minimum")),
+    " and minimum BFMI was ", rh_fmt(extreme("bfmi_min", "minimum"), 2),
+    ". ",
+    if (extreme("n_divergent", "maximum") == 0 && extreme("n_treedepth_hits", "maximum") == 0)
+      "No fit had a divergent transition or a transition at the maximum tree depth." else paste0(
+      "The largest number of divergent transitions in one fit was ", rh_fmt_n(extreme("n_divergent", "maximum")),
+      ", and of transitions at the maximum tree depth ", rh_fmt_n(extreme("n_treedepth_hits", "maximum")), ".")
+  )
+}
+
+# S6 explained variance
+s6_answer_text <- local({
+  variance_text <- if (is.na(s6_value$least)) {
+    "Explained variance was unavailable for the primary models"
+  } else {
+    paste0(
+      "The ", rh_label_inline(s6_value$least, labels), " model explained the least variance, and the ",
+      rh_label_inline(s6_value$most, labels), " model the most",
+      if (length(s6_value$missing) > 0L) paste0(
+        "; explained variance was unavailable for ",
+        join_and(paste0(rh_label_inline(s6_value$missing, labels), " model"))
+      ) else ""
+    )
+  }
+  paste0(variance_text, " (posterior summaries in @appxtbl-r2).")
+})
+
+# Conditional dependencies
+network_bagged_value <- network_value$bagged
+network_decisions_value <- network_value$decisions
+net_counts <- network_value$counts
+# The retained sampler steps, the successful resamples and the edge prior of
+# the run: subsetting the bag drops its attributes, so they are read from the
+# bag itself. Together they set the largest Bayes factor the bagged network
+# can resolve (rh_network_bf()).
+network_n_sweeps <- attr(network_bagged_value, "n_sweeps")
+network_g_prior <- attr(network_bagged_value, "g_prior")
+# The preregistered decision rule, stated with its thresholds (AP10).
+bf_include_text <- rh_fmt(analysis_plan$network$bf_include, 0)
+bf_exclude_text <- local({
+  fraction <- rh_ratio_label(analysis_plan$network$bf_exclude)
+  if (is.na(fraction)) rh_fmt(analysis_plan$network$bf_exclude, 2) else fraction
+})
+# "two were present (A – B; C – D), two absent (E – F) and eight
+# inconclusive": the decisions of a set of edges, the present and the absent
+# edges named; with `signs`, each present edge with the sign of its weight
+# (a weight is named for present edges only).
+decisions_text <- function(edges, signs = FALSE) {
+  phrase <- function(decision, verb = FALSE) {
+    e <- edges[edges$decision %in% decision, , drop = FALSE]
+    n <- attr(edges, "decision_counts")[[decision]]
+    named <- rh_network_edge_label(e$node_i, e$node_j, labels, inline = TRUE)
+    if (signs && decision == "present" && n > 0L) {
+      named <- paste0(named, ", ", ifelse(e$weight_bagged > 0, "positive", "negative"))
+    }
+    paste0(
+      if (n == 0L) "none" else rh_fmt_count(n),
+      if (verb) (if (n == 1L) " was " else " were ") else " ",
+      decision,
+      if (n > 0L && decision != "inconclusive") paste0(" (", paste(named, collapse = "; "), ")") else ""
+    )
+  }
+  paste0(phrase("present", verb = TRUE), ", ", phrase("absent"), " and ", phrase("inconclusive"))
+}
+pair_key <- rh_network_pair_key
+# RQ3a: the number of edges between a motive and an authoritarian facet.
+n_motive_facet_edges <- network_value$n_motive_facet_edges
+autonomy_nodes <- network_decisions_value$autonomy_nodes
+security_nodes <- network_decisions_value$security_arousal_nodes
+autonomy_text <- join_and(rh_label_inline(autonomy_nodes, labels))
+security_text <- join_and(rh_label_inline(security_nodes, labels))
+# Main bridge tables: motives by facets, autonomy by security/arousal,
+# and ASC facets by SDO-D. All fitted edges remain in the network.
+network_motives <- intersect(as.character(analysis_plan$network$node_keys), as.character(analysis_plan$regression$motives))
+network_facets <- as.character(analysis_plan$regression$outcomes)
+network_asc_facets <- setdiff(network_facets, "sdo_dom")
+block_pairs <- function(edges) rh_network_pair_key(edges$node_i, edges$node_j)
+rq3a_edges <- network_value$blocks$motive_facet
+rq3a_present <- attr(rq3a_edges, "decision_counts")[["present"]]
+rq3a_text <- paste0(
+  "Of the ", rh_fmt_n(attr(rq3a_edges, "n_edges")), " edges between a motive and an authoritarian facet, ",
+  decisions_text(rq3a_edges, signs = TRUE), " (@tbl-network-motive-facet). ",
+  if (!isTRUE(network_decisions_value$feasible)) {
+    "The bagged network was unavailable, so no edge is classified."
+  } else if (rq3a_present == 0L) {
+    "No association bridges the motives and the authoritarian facets."
+  } else {
+    paste0("The ", if (rq3a_present == 1L) "present edge is the association" else "present edges are the associations",
+           " that bridge the motives and the authoritarian facets.")
+  }
+)
+# The precision of the large bagged Bayes factors, computed from the resamples
+# for the edges of one table.
+network_precision_note <- function(edges) {
+  rh_network_bf_precision_note(network_bagged_value, network_value$fits, block_pairs(edges), labels,
+                               precision = attr(edges, "bf_precision"))
+}
+network_matrix_note <- function(edges, marks = NULL) {
+  rule <- paste0(
+    "Each cell: the classification of the edge in the bagged network, with the signed edge weight (partial ",
+    "correlation) of a present edge in bold, and below it the bagged Bayes factor BF_bagged. Present at ",
+    "BF_bagged ≥ ", rh_fmt_bf(analysis_plan$network$bf_include), " (evidence for a direct association), absent at ",
+    "BF_bagged ≤ ", rh_fmt_bf(analysis_plan$network$bf_exclude), " (evidence for none), inconclusive otherwise."
+  )
+  parts <- c(
+    rule,
+    rh_network_bf_bound_note(edges$bf_bagged, network_n_sweeps, network_g_prior,
+                             attr(network_bagged_value, "n_success_fits"), bounds = attr(edges, "bf_bounds")),
+    network_precision_note(edges),
+    rh_network_resample_note(analysis_plan, attr(network_bagged_value, "n_success_fits"),
+                             attr(network_bagged_value, "n_fits"), attr(network_bagged_value, "feasible")),
+    marks
+  )
+  paste(parts[nzchar(parts)], collapse = " ")
+}
+
+# RQ3a: the edges of the autonomy motives with the four facets, and the same
+# pairs read beside RQ1, stored as the "autonomy_orientation" subset.
+rq3a_autonomy_edges <- network_value$blocks$autonomy_orientation
+rq3a_autonomy_decisions_text <- decisions_text(rq3a_autonomy_edges)
+# The motive–facet pairs credibly associated in RQ1 (the facts of
+# report_credible_associations, as the RQ1 sentences state them) and the
+# decision of their edge in the network.
+rq1_credible_pairs <- network_value$credible_pairs
+rq1_credible_pairs$edge <- rh_network_edge_label(rq1_credible_pairs$motive,
+  rq1_credible_pairs$facet, labels, inline = TRUE)
+
+rq3a_autonomy_credible <- rq1_credible_pairs[rq1_credible_pairs$motive %in% autonomy_nodes, , drop = FALSE]
+rq3a_autonomy_beside_text <- if (nrow(rq3a_autonomy_credible) == 0L) {
+  "No pair of an autonomy motive and a facet was credibly associated in the RQ1 regressions."
+} else {
+  group_phrase <- function(decision, wording) {
+    e <- rq3a_autonomy_credible$edge[rq3a_autonomy_credible$decision %in% decision]
+    n <- unname(network_value$autonomy_credible_counts[match(decision, c("present", "absent", "inconclusive", NA_character_))])
+    if (length(e) == 0L) return(NULL)
+    paste0(rh_fmt_count(n), if (length(e) == 1L) " shares " else " share ", wording,
+           " (", paste(e, collapse = "; "), ")")
+  }
+  parts <- c(
+    group_phrase("present", "a present edge"),
+    group_phrase("absent", "an absent edge"),
+    group_phrase("inconclusive", "an inconclusive edge"),
+    group_phrase(NA_character_, "an edge without a decision")
+  )
+  paste0(
+    "Of the ", rh_fmt_count(network_value$n_autonomy_credible),
+    " pairs of an autonomy motive and a facet credibly associated in the RQ1 regressions, ",
+    join_and(parts), "."
+  )
+}
+# A present edge of the twelve whose pair was not credible in RQ1 is named
+# as well; the sentence prints only when there is one.
+rq3a_autonomy_present_only <- rq3a_autonomy_edges[
+  rq3a_autonomy_edges$decision %in% "present" &
+    !pair_key(rq3a_autonomy_edges$node_i, rq3a_autonomy_edges$node_j) %in% pair_key(rq1_credible_pairs$motive, rq1_credible_pairs$facet),
+  , drop = FALSE]
+rq3a_autonomy_present_only_text <- if (nrow(rq3a_autonomy_present_only) == 0L) "" else paste0(
+  " ", rh_fmt_count(network_value$n_autonomy_present_only, capitalize = TRUE),
+  if (nrow(rq3a_autonomy_present_only) == 1L) " present edge belongs" else " present edges belong",
+  " to a pair that was not credibly associated in RQ1: ",
+  paste(rh_network_edge_label(rq3a_autonomy_present_only$node_i, rq3a_autonomy_present_only$node_j, labels, inline = TRUE),
+        collapse = "; "), "."
+)
+# The sign of each autonomy motive's RQ1 coefficient for each facet, shown in
+# the autonomy rows of the motive-by-facet table (RQ3a reads the twelve edges
+# beside RQ1).
+rq1_sign_line <- function(motive, facet) {
+  if (!motive %in% autonomy_nodes) return("")
+  row <- report_credible_value[report_credible_value$outcome_key %in% facet, , drop = FALSE]
+  if (nrow(row) != 1L || !isTRUE(row$interpretable)) return("RQ1 unavailable")
+  hit <- match(motive, as.character(row$predictor[[1]]))
+  if (is.na(hit)) return("RQ1 unresolved")
+  # a true minus sign, as everywhere in the report
+  paste("RQ1", sub("^-$", "−", as.character(row$observed_sign[[1]][[hit]])))
+}
+# RQ3a: the comparison with RQ1 is descriptive (preregistration, RQ3); what
+# besides the other facets differs between the two analyses, from the plan and
+# the sample sizes.
+rq3a_autonomy_caveat_text <- paste0(
+  "This reading beside RQ1 is descriptive: besides conditioning on the other authoritarian facets, the network ",
+  "leaves out ", join_and(sub("_z$", "", as.character(analysis_plan$regression$covariates))),
+  ", measures each association as a ",
+  "partial correlation of rank-based normal scores rather than as a regression coefficient",
+  if (network_n != joint_n) paste0(", and analyses ", rh_fmt_n(network_n), " cases against the regressions' ",
+                                   rh_fmt_n(joint_n)) else "",
+  ", so a difference cannot be attributed to the other facets alone."
+)
+# AP10: a motive credibly associated with a facet in RQ1 whose edge with that
+# facet is absent in the network is read as screened off by the remaining
+# scales; an inconclusive edge does not establish the absence.
+screened_off <- rq1_credible_pairs[rq1_credible_pairs$decision %in% "absent", , drop = FALSE]
+screened_off_text <- paste0(
+  "A motive credibly associated with a facet in RQ1 whose edge with that facet is classified as absent in the network ",
+  "is read as screened off by the remaining network variables, that is, as conditionally independent of that facet given them, and not as ",
+  "a contradiction between the analyses (AP10); ",
+  if (anyNA(rq1_credible_pairs$decision)) {
+    "the network carries no decision for at least one of these pairs, so this reading is withheld."
+  } else if (nrow(screened_off) == 0L) {
+    "no motive–facet pair is read this way."
+  } else {
+    paste0("this applies to ", join_and(screened_off$edge), ".")
+  }
+)
+
+# RQ3b: the classifications and, for present edges, the signs of the six
+# edges of the autonomy motives with the security motive (intimacy) and the
+# arousal motive (social neophilia), stored as the "autonomy_security_arousal" subset.
+rq3b_edges <- network_value$blocks$autonomy_security_arousal
+rq3b_decisions_text <- decisions_text(rq3b_edges)
+rq3b_decision_of <- function(motive, node) {
+  d <- rq3b_edges$decision[pair_key(rq3b_edges$node_i, rq3b_edges$node_j) == pair_key(motive, node)]
+  if (length(d) == 0L) NA_character_ else as.character(d[1])
+}
+rq3b_article <- function(decision) {
+  if (is.na(decision)) "an undecided" else if (decision == "present") "a present" else paste0("an ", decision)
+}
+# "power shares an inconclusive edge with both; ...; achievement shares a
+# present edge with security and an inconclusive edge with arousal", a clause
+# that continues the sentence before it.
+rq3b_motive_text <- paste0(paste(vapply(autonomy_nodes, function(motive) {
+  decisions <- vapply(security_nodes, function(node) rq3b_decision_of(motive, node), character(1))
+  if (length(unique(decisions)) == 1L) {
+    paste0(rh_label_inline(motive, labels), " shares ", rq3b_article(decisions[1]), " edge with both")
+  } else {
+    paste0(rh_label_inline(motive, labels), " shares ",
+           join_and(paste0(vapply(decisions, rq3b_article, character(1)), " edge with ",
+                           rh_label_inline(security_nodes, labels))))
+  }
+}, character(1)), collapse = "; "), ".")
+# RQ3b asks whether the autonomy motives are positively associated with the
+# arousal motive (social neophilia) and negatively with the security motive
+# (intimacy), as the Zürich model proposes (preregistration, RQ3b); the sign
+# of each present edge answers it.
+rq3b_asked_sign <- c(zm_arousal = "positive", zm_security = "negative")
+rq3b_sign_text <- local({
+  if (!isTRUE(network_decisions_value$feasible)) return("The bagged network was unavailable, so no sign answers RQ3b.")
+  present <- rq3b_edges[rq3b_edges$decision %in% "present", , drop = FALSE]
+  if (nrow(present) == 0L) {
+    return("None of these edges was present, so no sign answers RQ3b in this run.")
+  }
+  edge_sentences <- vapply(seq_len(nrow(present)), function(i) {
+    nodes <- c(present$node_i[[i]], present$node_j[[i]])
+    motive <- nodes[nodes %in% autonomy_nodes]
+    other <- nodes[nodes %in% security_nodes]
+    sign <- if (present$weight_bagged[[i]] > 0) "positive" else "negative"
+    asked <- unname(rq3b_asked_sign[other])
+    paste0(
+      "The present edge between ", rh_label_inline(motive, labels), " and ", rh_label_inline(other, labels),
+      " was ", sign, " (edge weight ", rh_fmt(present$weight_bagged[[i]], 2, bounded = TRUE), "), ",
+      if (identical(sign, asked)) "the direction RQ3b asks about." else paste0(
+        "the opposite of the ", asked, " association with ", rh_label_inline(other, labels), " that RQ3b asks about."
+      )
+    )
+  }, character(1))
+  without <- security_nodes[!vapply(security_nodes, function(node) {
+    any(present$node_i == node | present$node_j == node)
+  }, logical(1))]
+  paste(c(edge_sentences, if (length(without)) paste0(
+    "No edge of ", join_and(rh_label_inline(autonomy_nodes, labels)), " with ",
+    join_and(rh_label_inline(without, labels)), " was present."
+  )), collapse = " ")
+})
+
+# RQ3c: the three ASC–SDO-D edges, and where they differ from the
+# residual correlations of RQ2b, whose conditioning set differs.
+rq3c_edges <- network_value$blocks$asc_sdo
+rq3c_text <- paste0(
+  "Of the ", rh_fmt_count(attr(rq3c_edges, "n_edges")), " edges between an ASC facet and SDO-D, ",
+  decisions_text(rq3c_edges, signs = TRUE), " (@tbl-network-facets)."
+)
+rq3c_rq2b_text <- local({
+  if (!isTRUE(network_decisions_value$feasible) || !rq2_value$gate_passed) {
+    return("The edges cannot be set beside the residual correlations of RQ2b, because the bagged network or the joint model is unavailable.")
+  }
+  comparison <- network_value$residual_comparison
+  first <- comparison$first
+  second <- comparison$second
+  decision <- comparison$decision
+  residual_sign <- comparison$residual_sign
+  differs <- comparison$differs
+  if (!comparison$any_differs) {
+    return("For every ASC–SDO-D pair, the edge here and the interval of its residual correlation in RQ2b point the same way.")
+  }
+  pairs <- rh_network_edge_label(first[differs %in% TRUE], second[differs %in% TRUE], labels, inline = TRUE)
+  one <- length(pairs) == 1L
+  rh_capitalise_first_letter(paste0(
+    join_and(pairs), if (one) " has a residual correlation whose interval lies " else
+      " have residual correlations whose intervals lie ",
+    join_and(unique(residual_sign[differs %in% TRUE])), " in RQ2b but ",
+    if (all(decision[differs %in% TRUE] == "absent")) (if (one) "an absent edge" else "absent edges") else
+      (if (one) "a differently classified edge" else "differently classified edges"),
+    " here; because the two analyses hold different variables constant, these results do not contradict ",
+    "each other."
+  ))
+})
+
+
+likelihood_stability_text <- function(comparison, labels) {
+  if (!is.data.frame(comparison) || nrow(comparison) == 0L) return("The likelihood comparison was unavailable.")
+  facts <- attr(comparison, "report_summary")
+  if (!facts$any_attempted) return("")
+  paste0(
+    "Of the ", rh_fmt_count(facts$n_attempted), " coefficients with a Student-t refit, ",
+    rh_fmt_count(facts$n_valid), " had interpretable comparisons with the Gaussian fit. ",
+    if (facts$n_changed > 0L) rh_fmt_count(facts$n_changed, capitalize = TRUE) else "None", " changed whether the interval excludes zero",
+    if (facts$n_changed > 0L) paste0(" (", paste(unique(rh_label_inline(facts$changed_outcomes, labels)), collapse = ", "), ")") else "",
+    if (facts$n_sign_changed > 0L) paste0("; ", rh_fmt_count(facts$n_sign_changed), " changed the sign of the posterior median.")
+    else ", and none changed the sign of its posterior median."
+  )
+}
+
+network_sampling_text <- local({
+  succeeded <- attr(network_bagged_value, "n_success_fits")
+  attempted <- attr(network_bagged_value, "n_fits")
+  if (is.null(succeeded) || is.null(attempted) || !is.finite(attempted) || attempted == 0) {
+    return("The number of successful network resamples was unavailable.")
+  }
+  paste0(rh_fmt_n(succeeded), " of ", rh_fmt_n(attempted), " network resample fits succeeded (",
+         rh_fmt_pct(network_value$sampling_share, 1, scale = "proportion"), "); ",
+         rh_fmt_n(network_n_sweeps), " sweeps per fit were retained after burn-in.")
+})
+
+# ---- values used in the supplement prose ------------------------------------
+# S1 measurement
+factor_sets <- analysis_plan$factor_analysis$sets
+loading_cutoff <- analysis_plan$factor_analysis$loading_display_cutoff
+# SRQ1, loading clarity of every examined solution: the weakly loading items by
+# scale, each cross-loading item with the scales of the factor it leans
+# towards, and, where none cross-loads, the largest second loading
+# (describe_loading_clarity()).
+srq1_loading_clarity_text <- describe_loading_clarity(s1_value$correspondence, labels, loading_cutoff)
+n_scale_efas <- s1_value$counts$scale_efas
+n_sets <- s1_value$counts$sets
+n_count_indices <- s1_value$counts$count_indices
+vss_methods_text <- local({
+  criterion <- Filter(function(x) identical(as.character(x$key), "vss_complexity_1"),
+                      analysis_plan$factor_analysis$factor_number_criteria)
+  if (length(criterion) == 0L) return("")
+  paste0(as.character(criterion[[1]]$label),
+         " suggests the first maximum of its fit function across the candidate factor counts, ",
+         "up to ", rh_fmt_n(analysis_plan$factor_analysis$factor_number_methods$vss$maximum_factors),
+         " factors and capped at one fewer than the number of items.")
+})
+
+# S3 prior sensitivity
+sweep <- s3_value$sweep
+n_sweep_widths <- sweep$n_widths
+sweep_interpretable <- sweep$interpretable
+sweep_credibility_text <- if (!isTRUE(sweep_interpretable)) {
+  "credibility and sign stability cannot be interpreted because at least one planned fit is missing or did not pass the validity gate"
+} else if (sweep$n_interval_changes == 0L) {
+  "no cell of the prediction table changed whether its credible interval excludes zero"
+} else {
+  paste0(rh_fmt_n(sweep$n_interval_changes), " of the ", rh_fmt_n(sweep$n_cells),
+         " cells changed whether their credible interval excludes zero")
+}
+sweep_sign_text <- if (sweep$n_sign_changes == 0) {
+  "the posterior median kept its sign under every width"
+} else {
+  paste0(
+    "the posterior median changed its sign in ", rh_fmt_n(sweep$n_sign_changes), " of the ",
+    rh_fmt_n(sweep$n_cells), " cells, ",
+    if (sweep$n_sign_changes_credible == 0) {
+      "and that estimate was not credible under any of the widths"
+    } else {
+      paste0(rh_fmt_n(sweep$n_sign_changes_credible), " of them credible under at least one width")
+    }
+  )
+}
+powerscale <- s3_value$powerscale
+ps_block_text <- paste(rh_pretty_names(powerscale$blocks), collapse = ", ")
+n_ps_blocks <- powerscale$n_blocks
+
+# S4 model checks
+checks <- s4_value$section
+# AP6 attaches an action to the heavy-tail direction only, so the statistics
+# outside their band in the other direction are reported and not acted on.
+# The statistics in words, as the table of the posterior predictive checks names them.
+pp_stat_words <- c(mean = "mean", sd = "standard deviation", min = "minimum", max = "maximum",
+                   kurtosis = "excess kurtosis", skew = "skewness")
+pp_outside_text <- if (!s4_value$answer$pp_any) {
+  "The posterior-predictive comparisons were unavailable."
+} else if (nrow(checks$outside) == 0 && s4_value$answer$n_pp_unavailable > 0L) {
+  "Among the available comparisons, no observed posterior-predictive statistic fell outside its replicated band."
+} else if (nrow(checks$outside) == 0) {
+  "No observed posterior-predictive statistic fell outside its replicated band."
+} else {
+  paste0(
+    "The following observed statistics fell outside the range of ", ci_pct, " of the data sets simulated from ",
+    "the fitted model: ",
+    join_and(paste0(
+      "the ", ifelse(checks$outside$stat %in% names(pp_stat_words), unname(pp_stat_words[checks$outside$stat]),
+                     checks$outside$stat), " of ",
+      rh_label_inline(checks$outside$outcome, labels),
+      ifelse(checks$outside$above, " (above it)", " (below it)")
+    )), "."
+  )
+}
+if (s4_value$answer$pp_any && s4_value$answer$n_pp_unavailable > 0L) {
+  pp_outside_text <- paste0(pp_outside_text, " Comparisons were unavailable for ",
+                            rh_fmt_n(s4_value$answer$n_pp_unavailable), " statistics.")
+}
+
+# S4 the full-data network against the bagged one
+n_opposite <- s5_value$n_opposite
+opposite_text <- if (n_opposite == 0) {
+  "no edge is called present by one and absent by the other"
+} else {
+  paste0(rh_fmt_n(n_opposite), " edges are called present by one and absent by the other")
+}
+
+# S4 the edge prior: the same edges refitted at every value of the sweep
+edge_prior_text <- paste(rh_network_prior_label(attr(s5_value$prior_sweep, "priors")), collapse = ", ")
+edge_prior_prereg <- rh_network_prior_label(attr(s5_value$prior_sweep, "g_prior"))
+edge_prior_moving <- attr(s5_value$prior_sweep, "unstable_edges")
+edge_prior_moving_text <- if (nrow(edge_prior_moving) == 0) {
+  "no edge changes its classification across those values"
+} else {
+  paste0(
+    "the classification of ", rh_fmt_n(s5_value$n_prior_unstable),
+    if (nrow(edge_prior_moving) == 1) " edge depends on it: " else " edges depends on it: ",
+    paste(
+      rh_network_edge_label(edge_prior_moving$node_i, edge_prior_moving$node_j, labels, inline = TRUE),
+      collapse = "; "
+    )
+  )
+}
+
+
+# ---- Methods: reading the results, and what this run settles ---------------
+# The interval convention, stated once: the central interval and its tails.
+# The version of the R package that runs the pipeline.
+pipeline_package_version <- as.character(utils::packageVersion("targets"))
+reliability_ci_pct <- rh_fmt_pct(analysis_plan$reliability$interval_level, 0, scale = "proportion")
+# The settings of this run beside the preregistered ones, which are the full
+# settings of the analysis plan.
+run_settings_text <- local({
+  full <- analysis_plan$profiles$full
+  run <- c(analysis_plan$reliability$bootstrap_n, analysis_plan$regression$ess_target,
+           analysis_plan$network$B, analysis_plan$network$iter)
+  preregistered <- c(full$reliability_bootstrap_n, full$regression_ess_target, full$network_B, full$network_iter)
+  if (isTRUE(all(as.numeric(run) == as.numeric(preregistered)))) {
+    return(paste0(
+      "This run used the preregistered computational settings: ", rh_fmt_n(run[1]),
+      " bootstrap resamples for the interval of ω, an effective-sample-size target of ", rh_fmt_n(run[2]),
+      " for every regression coefficient, and ", rh_fmt_n(run[3]), " network resamples of ",
+      rh_fmt_n(run[4]), " iterations each."
+    ))
+  }
+  paste0(
+    "This run used reduced computational settings, so that the whole pipeline finishes in minutes: ",
+    rh_fmt_n(run[1]), " instead of the preregistered ", rh_fmt_n(preregistered[1]),
+    " bootstrap resamples for the interval of ω; an effective-sample-size target of ", rh_fmt_n(run[2]),
+    " instead of ", rh_fmt_n(preregistered[2]), " for every regression coefficient; and ",
+    rh_fmt_n(run[3]), " network resamples of ", rh_fmt_n(run[4]), " iterations each instead of ",
+    rh_fmt_n(preregistered[3]), " of ", rh_fmt_n(preregistered[4]),
+    "; and ", rh_fmt_n(analysis_plan$regression$iter_per_chain), " iterations per regression chain after ",
+    rh_fmt_n(analysis_plan$regression$warmup), " warm-up instead of the preregistered ",
+    rh_fmt_n(full$regression_iter_per_chain), " after ", rh_fmt_n(full$regression_warmup), " (AP6)",
+    ". The report on the empirical survey data will use the preregistered settings."
+  )
+})
+# Compare the saved calculation inputs and settings with available files.
+# Presentation edits retain the original numerical snapshot and its provenance.
+freshness_value <- check_report_input_freshness(report_inputs, analysis_root)
+freshness_text <- rh_freshness_text(freshness_value)
+# The gender levels and the reference group the regressions used.
+gender_text <- rh_gender_coding_text(counts = s3_value$model_card$gender_counts)
+# The gate of this run, where it differs from AP6: a box on the
+# synthetic run only; the empirical run applies the preregistered criterion.
+gate_ess_run <- as.numeric(analysis_plan$regression$ess_target)
+gate_ess_prereg <- as.numeric(analysis_plan$profiles$full$regression_ess_target)
+gate_box_text <- if (identical(data_source, "synthetic") && !isTRUE(gate_ess_run == gate_ess_prereg)) {
+  paste0(
+    "\n::: {.callout-note appearance=\"simple\" icon=false title=\"Validity gate of this synthetic run\"}\n",
+    "In this synthetic run, the validity gate required a bulk and tail effective sample size of at least ",
+    rh_fmt_n(gate_ess_run), " for every coefficient, so that the whole pipeline finishes in minutes. ",
+    "The run on the empirical survey data applies the preregistered ", rh_fmt_n(gate_ess_prereg), " (AP6).\n",
+    ":::"
+  )
+} else ""
+
+# RQ1: the differences worth naming are the credible ones in which at least one
+# of the two coefficients alone is not credible; a credible pair of credible
+# coefficients with opposite signs is credible by construction.
+rq1_difference_text <- local({
+  d <- rq1_differences_value
+  facts <- report_association_counts_value$differences
+  if (!facts$interpretable) return("The coefficient differences received no classification, because their fits did not pass the validity gate.")
+  predicted <- facts$predicted
+  opposite <- facts$opposite
+  added <- facts$added
+  # one clause per pair of motives, naming the facets it holds for
+  pair_key <- paste(added$motive_positive, added$motive_negative)
+  named <- vapply(unique(pair_key), function(k) {
+    rows <- added[pair_key == k, , drop = FALSE]
+    paste0(rh_label_inline(rows$motive_positive[1], labels), " exceeded ", rh_label_inline(rows$motive_negative[1], labels),
+           " for ", join_and(rh_label_inline(rows$outcome_key, labels)))
+  }, character(1))
+  paste0(
+    "Of the ", rh_fmt_count(facts$n), " differences between two motives with opposite predicted signs, ",
+    rh_fmt_count(facts$n_predicted), if (facts$n_predicted == 1L) " was" else " were", " credible in the predicted direction",
+    if (facts$n_opposite > 0L) paste0(" and ", rh_fmt_count(facts$n_opposite), " in the opposite direction") else "",
+    if (facts$n_added == 0L) "." else paste0(
+      ". In ", rh_fmt_count(facts$n_added), if (facts$n_added == 1L) " of them" else " of them",
+      ", at least one of the two coefficients alone was not credible: ", paste(named, collapse = "; "), "."
+    ),
+    " Every difference is in @appxtbl-rq1-differences."
+  )
+})
+# RQ1: the coefficients whose interval includes zero, read beside the credible
+# partial correlations of their motive (preregistration, RQ1).
+rq1_partial_text <- local({
+  facts <- report_association_counts_value$partials
+  if (!facts$interpretable) return("The partial correlations of the motives received no classification, because their model did not pass the validity gate.")
+  n_open_overlap <- facts$n_open_overlap
+  top <- facts$top
+  top_text <- paste0(rh_label_inline(top$motive_a, labels), " with ", rh_label_inline(top$motive_b, labels),
+                     " (", rh_fmt(top$median, 2, bounded = TRUE), ")")
+  paste0(
+    "Of the ", rh_fmt_count(facts$n_open), " coefficients whose interval included zero, ",
+    if (n_open_overlap == facts$n_open && facts$n_open > 1L) "all" else rh_fmt_count(n_open_overlap),
+    if (n_open_overlap == 1L) " belongs" else " belong",
+    " to a motive with a credible partial correlation with another motive",
+    if (nrow(top) > 0L) paste0("; the largest were ", join_and(top_text)) else "",
+    " (@appxtbl-rq1-partials)."
+  )
+})
+
+# ---- Discussion: what this run verified about the pipeline -----------------
+# The contingency rules this run exercised, from its own results.
+pipeline_check_text <- local({
+  ap1_hit <- report_flow_value$exclusion_hits
+  ap1_criteria <- names(ap1_hit)
+  all_fits_passed <- diagnostics_value$all_passed && network_value$all_fits_succeeded
+  # The cross-loading items of every examined solution, each with the scales
+  # of the factor it also loads on (the preregistration's count and secondary
+  # factor associations, SRQ1).
+  crossloading_items <- s1_value$crossloading_items
+  crossloading_text <- if (nrow(crossloading_items) == 0L) "" else paste0(
+    rh_fmt_count(s1_value$counts$crossloading_items), if (nrow(crossloading_items) == 1L) " item" else " items",
+    " with a second loading of ", rh_fmt(loading_cutoff, 2, bounded = TRUE), " or more (a cross-loading): ",
+    join_and(paste0(
+      rh_label_inline(crossloading_items$intended_scale, labels), " item ", crossloading_items$item_number,
+      ", on the factor of ",
+      rh_efa_factor_scales_label(crossloading_items$crossloading_scales, rep(NA_character_, nrow(crossloading_items)),
+                                 labels, inline = TRUE)
+    ))
+  )
+  exercised <- c(
+    if (all(ap1_hit)) "every exclusion criterion" else if (any(ap1_hit)) paste0(
+      "the exclusion criteria ", join_and(tolower(rh_criterion_label(ap1_criteria[ap1_hit], analysis_plan)))
+    ),
+    if (report_flow_value$n_excluded_gender_divers > 0) paste0(
+      "the rule for gender-diverse responses below the minimum of ",
+      rh_fmt_n(analysis_plan$exclusions$gender_divers_min_n)
+    ),
+    if (n_filled > 0) paste0("the fill of ", rh_fmt_count(n_filled), if (n_filled == 1L) " missing value" else " missing values"),
+    if (n_omitted_gender > 0) paste0(
+      "the omission of ", if (n_omitted_gender == 1L) "a case" else paste(rh_fmt_count(n_omitted_gender), "cases"),
+      " without gender from the regressions"
+    ),
+    if (length(s4_value$answer$refitted) > 0) paste0(
+      "the refit allowing heavier tails for ", join_and(rh_label_inline(s4_value$answer$refitted, labels))
+    ),
+    if (nzchar(crossloading_text)) paste0("the count of ", crossloading_text)
+  )
+  paste(c(
+    if (all_fits_passed) paste0(
+      "This run computed every statistical measure the preregistration names for the research questions: ",
+      "every regression fit of RQ1 and RQ2, the refit allowing heavier tails and all network resamples ",
+      "passed the validity gate."
+    ) else paste0(
+      "Not every fit of this run passed the validity gate (@sec-regression-diagnostics; ",
+      "for details see Supplement); the quantities of such a fit carry no classification."
+    ),
+    if (length(exercised) > 0) paste0(
+      "The problems planted in the synthetic preregistration data exercised ", join_and(exercised), "."
+    )
+  ), collapse = " ")
+})
+
+# ---- appendix and supplement: what each display shows, and whether it shows -
+# The appendix holds the results about the constructs, the supplement the
+# statistical checks. A table appears only where its values differ; where it
+# does not, one sentence carries its content, and every reference to it is
+# written only when the data print it.
+motive_scale_keys <- intersect(as.character(codebook_value$scales$scale_key), as.character(analysis_plan$regression$motives))
+orientation_scale_keys <- intersect(as.character(codebook_value$scales$scale_key), as.character(analysis_plan$regression$outcomes))
+# The item sets of several scales, by the group their scales belong to: the
+# membership tables of the appendix show one group each.
+efa_multi_sets <- Filter(function(set) isTRUE(set$efa) && length(unlist(set$scales)) > 1L, factor_sets)
+membership_groups <- list(
+  motives = Filter(function(set) all(unlist(set$scales) %in% motive_scale_keys), efa_multi_sets),
+  orientation = Filter(function(set) all(unlist(set$scales) %in% orientation_scale_keys), efa_multi_sets)
+)
+membership_shown <- vapply(membership_groups, function(sets) any(vapply(sets, function(set) {
+  m <- s1_value$correspondence$membership[[paste0(set$key, ":", set$expected_factors)]]
+  !is.null(m) && nrow(m) > 0L
+}, logical(1))), logical(1))
+cfa_correlations_shown <- c(
+  motives = nrow(rh_cfa_factor_correlation_pairs(s1_value$cfa_factor_correlations, motive_scale_keys)) > 0L,
+  orientation = nrow(rh_cfa_factor_correlation_pairs(s1_value$cfa_factor_correlations, orientation_scale_keys)) > 0L
+)
+appx_criteria_shown <- any(rh_factor_number_criteria_differs(s1_value$factor_number_criteria))
+appx_correspondence_shown <- any(rh_efa_correspondence_differs(s1_value$correspondence$overview))
+suppl_robustness_shown <- any(s4_value$likelihood_comparison$fitted_student %in% TRUE)
+refs <- function(ids) join_and(paste0("@", ids))
+
+# Main text, SRQ1: pointers to the appendix displays that exist.
+srq1_criteria_pointer <- if (appx_criteria_shown) paste0(
+  "@appxtbl-factor-criteria gives the number each criterion suggested for the scales and item sets on which ",
+  "they disagreed."
+) else ""
+srq1_correspondence_pointer <- if (appx_correspondence_shown) paste0(
+  "@appxtbl-efa-correspondence answers, for every solution whose item grouping differs from the intended scales, ",
+  "how closely the estimated factors match them."
+) else ""
+srq1_membership_pointer <- if (any(membership_shown)) paste0(
+  refs(paste0("appxtbl-efa-membership-", names(membership_groups)[membership_shown])),
+  if (sum(membership_shown) == 1L) " gives" else " give",
+  " every item's loadings in the expected solutions and name, for a cross-loading item, the scales of the ",
+  "factor it also loads on."
+) else ""
+srq1_cfa_pointer <- if (any(cfa_correlations_shown)) paste0(
+  "The latent correlations between their factors are in ",
+  refs(paste0("appxtbl-cfa-correlations-", names(cfa_correlations_shown)[cfa_correlations_shown])), "."
+) else ""
+
+# Appendix A1: the latent correlations of the smaller models, in one sentence.
+appx_cfa_agreement_text <- rh_cfa_factor_correlation_agreement_text(
+  s1_value$cfa_factor_correlations, list(motive_scale_keys, orientation_scale_keys), labels
+)
+appx_cfa_correlation_lead <- if (any(cfa_correlations_shown)) paste0(
+  refs(paste0("appxtbl-cfa-correlations-", names(cfa_correlations_shown)[cfa_correlations_shown])),
+  if (sum(cfa_correlations_shown) == 1L) " answers" else " answer",
+  " how strongly the scales are related once measurement error is taken into account: the latent correlations ",
+  "of the confirmatory models that hold several scales.",
+  if (nzchar(appx_cfa_agreement_text)) paste0(" ", appx_cfa_agreement_text) else ""
+) else "No confirmatory model holds two scales, so no latent correlation is reported."
+
+# Appendix A5: the sentences that carry the rows and tables left out.
+appx_criteria_lead <- rh_factor_number_criteria_text(s1_value$factor_number_criteria, labels,
+                                                     table_ref = "@appxtbl-factor-criteria")
+appx_correspondence_lead <- rh_efa_correspondence_text(s1_value$correspondence$overview,
+                                                       s1_value$factor_number_criteria,
+                                                       s1_value$correspondence$membership, labels,
+                                                       table_ref = "@appxtbl-efa-correspondence")
+appx_scale_clarity_lead <- rh_efa_scale_clarity_text(s1_value$correspondence$scales, labels, loading_cutoff,
+                                                     table_ref = "@appxtbl-efa-scale-clarity")
+appx_membership_lead <- if (any(membership_shown)) paste0(
+  refs(paste0("appxtbl-efa-membership-", names(membership_groups)[membership_shown])),
+  if (sum(membership_shown) == 1L) " answers" else " answer",
+  ", item by item, how strongly each item loads on the factor of its own scale in the expected solutions, ",
+  "with one factor per scale, and which items load on a second factor as well or on none clearly."
+) else "No expected solution of an item set with several scales is available, so no item membership is reported."
+appx_items_off_lead <- rh_efa_items_off_scale_text(
+  s1_value$efa_items_off_scale, basename(analysis_plan$data_files$result_files$efa_membership),
+  table_ref = "@appxtbl-efa-items-off-scale"
+)
+
+# Supplement: the sentences that carry the tables left out.
+suppl_reliability_lead <- rh_reliability_detail_text(s1_value$reliability, analysis_plan, labels,
+                                                     table_ref = "@suppltbl-reliability")
+cfa_fit_constant_text <- rh_cfa_fit_constant_text(s1_value$cfa_scales, cfa_structure_models, cfa_combined_models)
+cfa_messages <- rh_cfa_estimation_messages(s1_value$cfa_scales, s1_value$cfa_sets, labels)
+cfa_messages_text <- if (nrow(cfa_messages) == 0L) {
+  "No confirmatory model produced an estimation message."
+} else {
+  paste0(
+    "AP4 keeps every estimation message. ",
+    if (nrow(cfa_messages) == 1L) "One model produced a message" else
+      paste(rh_fmt_count(nrow(cfa_messages), capitalize = TRUE), "models produced a message"),
+    ", reproduced here as the software wrote it:\n\n",
+    paste0("- ", cfa_messages$label, ": `", gsub("`", "'", cfa_messages$message, fixed = TRUE), "`", collapse = "\n")
+  )
+}
+suppl_power_scaling_text <- local({
+  ps <- s3_value$priorsense
+  threshold <- powerscale$threshold
+  flagged <- powerscale$n_flagged
+  n_interpretable <- powerscale$n_interpretable
+  lead <- "Power scaling, which makes the priors or the data slightly more or less influential, "
+  if (is.na(powerscale$prior_max) && is.na(powerscale$lik_max)) {
+    return(paste0(lead, "provided no interpretable sensitivity estimates. Diagnostic values are in ",
+      basename(analysis_plan$data_files$result_files$prior_power_scaling), "."))
+  }
+  paste0(
+    lead,
+    if (flagged == 0L) paste0("flagged none of the ", rh_fmt_n(n_interpretable), " interpretable entries") else
+      paste0("flagged ", rh_fmt_n(flagged), " of the ", rh_fmt_n(n_interpretable), " interpretable entries (@suppltbl-priorsense)"),
+    " (largest prior sensitivity ", rh_fmt(powerscale$prior_max, 3, bounded = TRUE),
+    if (length(threshold) == 1L) paste0("; an entry is flagged from ", rh_fmt(threshold, 2, bounded = TRUE)) else "",
+    "). Every entry is in ", basename(analysis_plan$data_files$result_files$prior_power_scaling),
+    "."
+  )
+})
+tail_text <- rh_tail_text(s4_value$tails, s4_value$posterior_predictive, s4_value$student_coefs,
+                          analysis_plan, labels)
+robustness_lead <- local({
+  refitted <- unique(s4_value$likelihood_comparison$outcome[s4_value$likelihood_comparison$fitted_student %in% TRUE])
+  if (!suppl_robustness_shown) return("No refit allowing heavier tails ran, so no coefficient is compared.")
+  others <- setdiff(outcome_keys, refitted)
+  paste0(
+    "@suppltbl-student-robustness answers whether the coefficients of ", join_and(rh_label_inline(refitted, labels)),
+    " change when the model allows heavier tails: each coefficient of the Gaussian model beside the same ",
+    "coefficient of the refit.",
+    if (length(others)) paste0(" No refit ran for ", join_and(rh_label_inline(others, labels)), ".") else ""
+  )
+})
+student_r2_text <- describe_saved_student_r2(regression_r2_summaries_value, labels, table_ref = "@suppltbl-student-r2")
+diagnostics_constant_text <- rh_diagnostics_constant_text(diagnostics_value$diagnostics, analysis_plan, labels,
+                                                          diagnostics_additional_value)
+# The fits the diagnostics table lists, counted from the fits themselves.
+diagnostics_lead_text <- local({
+  additional <- diagnostics_additional_value
+  n_refits <- diagnostics_value$n_refits
+  has_joint <- diagnostics_value$has_joint
+  has_motives <- diagnostics_value$has_motives
+  parts <- c(
+    paste0("the ", rh_fmt_count(diagnostics_value$n_fits), " fits of RQ1 under the ",
+           rh_fmt_count(length(analysis_plan$priors$slope_sd_sweep)), " priors"),
+    if (n_refits == 1L) "the refit allowing heavier tails" else if (n_refits > 1L) {
+      paste0("the ", rh_fmt_count(n_refits), " refits allowing heavier tails")
+    },
+    if (has_motives) "the joint model of the five motives",
+    if (has_joint) "the joint model of RQ2"
+  )
+  paste0("@suppltbl-diagnostics answers whether every regression fit sampled reliably enough to be interpreted: ",
+         join_and(parts), ".")
+})
+# The gate of the joint model of the five motives, whose residual correlations
+# give the partial correlations of RQ1 (AP6).
+motive_gate_text <- local({
+  row <- diagnostics_additional_value[diagnostics_additional_value$kind %in% "motives", , drop = FALSE]
+  passed <- nrow(row) == 1L && row$gate_passed %in% TRUE && row$gate_status %in% c("ok", "retried_ok")
+  paste0("The joint model of the five motives, from which the partial correlations come, ",
+         if (passed) "passed the validity gate, its residual correlations included." else
+           "did not pass the validity gate; the partial correlations therefore received no classification.")
+})
+```
+
+# Introduction {#sec-introduction}
+
+This report verifies that the preregistered analysis pipeline works and that
+it produces the statistical measures required to answer the research questions
+of the preregistration:
+
+- RQ1 — Social motives and authoritarian facet associations: to estimate each
+  motive's association with each authoritarian facet, conditional on the other
+  motives and demographics.
+- RQ2 — Motivational organisation of authoritarian orientation: to compare the
+  strength and direction of each motive's associations across facets and
+  estimate the associations between facets and between ASC total and SDO-D
+  conditional on all social motives and demographics, compare them with their
+  joint-model zero-order associations, and compare each motive's association with the
+  equal-weight ASC total with its associations with the three ASC facets.
+- RQ3 — Conditional organisation of the motive–orientation system: to examine
+  which pairs remain associated conditional on every other variable in a
+  Bayesian network.
+- SRQ1 — Dimensionality and correspondence of item sets of authoritarian
+  orientation and social motives: to examine how many dimensions the item sets
+  suggest and how well the estimated item groupings correspond to the
+  theoretical grouping.
+
+This report presents results from synthetic preregistration data. It will be
+the basis for the report in the final manuscript. This approach has two
+consequences. First, the numbers in this report are not findings: they show
+that the preregistered analyses run and produce the measures the research
+questions need. Second, the present Methods and Discussion are shaped to the
+synthetic-data approach; the manuscript will not contain them. For the
+manuscript, the Results and the tables and figures of the appendix and
+supplement will be computed again from the survey responses.
+
+# Methods {#sec-methods}
+
+The analyses are those of the analysis plan of the preregistration (Zehetleitner et al., 2026);
+each research question below quotes its method from there. This section describes what belongs to
+this run alone: the synthetic data, the software, how to reproduce the results and the settings of
+this run.
+
+## Synthetic Preregistration Data {#sec-synthetic-data}
+
+The synthetic preregistration data are artificial survey responses generated
+from values set in advance. They have the same format as the empirical survey
+data: the questions, the `r synthetic_methods$n_categories` answer categories and
+the survey-flow fields of the survey export.
+
+There are `r synthetic_methods$n_records` synthesised participants; for
+`r synthetic_methods$n_quota` of them the quota was full. Of the remaining
+`r synthetic_methods$n_after_quota`, `r synthetic_methods$n_excluded_planned` are excluded as
+planned: `r synthetic_methods$exclusions_planned`. The `r synthetic_methods$n_divers` who gave a
+gender-diverse response are excluded too, because fewer than `r synthetic_methods$divers_min` did
+so; that leaves `r synthetic_methods$n_analysis` for the analyses.
+
+The `r synthetic_methods$n_motives` motive scores were drawn from a multivariate
+normal distribution with correlations from `r synthetic_methods$motive_r`; age,
+gender and income were drawn with small correlations to the motives. Each
+authoritarian facet depends on the motives and the demographics:
+
+$$
+\begin{aligned}
+\text{authoritarian facet} = {} & `r synthetic_methods$formula_motives` \\
+& + `r synthetic_methods$formula_covariates` + \varepsilon
+\end{aligned}
+$$
+
+The residuals $\varepsilon$ of the `r synthetic_methods$n_facets` facets
+correlate from `r synthetic_methods$residual_r`. Of the
+`r synthetic_methods$n_coefficients` coefficients $\beta$,
+`r synthetic_methods$n_zero` are zero; the others are
+`r synthetic_methods$coefficients`. The draws were adjusted so that these
+correlations and coefficients hold exactly.
+
+Each of the `r synthetic_methods$n_items` items reflects one of the
+`r synthetic_methods$n_scales` scores, the `r synthetic_methods$n_motives`
+motives and the `r synthetic_methods$n_facets` facets:
+
+$$
+\text{item} = \operatorname{round}\bigl(\text{level} + `r synthetic_methods$spread`\,(`r synthetic_methods$loading`\,\text{score} + \sqrt{1 - `r synthetic_methods$loading`^2}\, e)\bigr), \quad \text{limited to } `r synthetic_methods$response_min`\text{–}`r synthetic_methods$response_max`
+$$
+
+where level is the scale's typical position on the answer scale
+(`r synthetic_methods$levels`) and $e$ is standard normal noise. The factor
+structure is thus `r synthetic_methods$n_scales` correlated factors, with each
+item loading on exactly one, except the one described next.
+
+`r synthetic_methods$cross_loading`
+
+Problems were planted in the data to test the preregistered rules for handling
+such cases: respondents for every exclusion criterion except an age above `r analysis_plan$exclusions$max_age`, missing answers, a
+respondent without a gender entry, an item that also loads on a second scale,
+and a facet with heavy-tailed residuals.
+
+## Software {#sec-software}
+
+`r rh_software_text(software_value$fitted_versions, recorded = stats::setNames(correlation_metadata$package_version, correlation_metadata$package))`
+
+`r rh_provenance_text(provenance_value)`
+
+## Reproducing the Results {#sec-reproduction}
+
+The analysis is organised as a pipeline with the targets package (version
+`r pipeline_package_version`). The commands in the repository reproduce the report from saved results, refit the models using saved resampling results, or repeat all analyses and simulations from the prepared data. The renv package records the version of every R package
+in a lockfile, so the same package library can be restored. A Docker image
+fixes the operating system and the versions of R, CmdStan and Quarto and
+installs the locked packages, so the whole analysis runs from a fresh copy of
+the repository. The [Code Browser](https://michaelzehetleitner.github.io/social-motives-ideology/preregistration-v1/code-browser.html), generated from the code
+itself, shows the pipeline in three
+looks: every step in the order in which it runs; the documented settings and
+the code of each function a step calls; and the functions those call in turn.
+
+## Settings of This Run {#sec-run-settings}
+
+`r run_settings_text` `r freshness_text`
+
+`r gender_text`
+
+# Results {#sec-results}
+
+## Sample {#sec-sample}
+
+__`r results_label`__ `r if (identical(data_source, "synthetic")) "" else paste0("Fieldwork ran between ", fieldwork_text, ".")`
+`r rh_fmt_n(n_started)` `r if (identical(data_source, "synthetic")) "synthetic people" else "people"` started the survey; for
+`r rh_fmt_n(n_quota_full)` of them the political-leaning quota cell was already
+full, and the survey ended before the questionnaire. Of the remaining
+`r rh_fmt_n(n_admitted)`, `r rh_fmt_n(n_excluded)` were excluded for `r exclusion_text`, leaving an analysis sample of
+*N* = `r rh_fmt_n(n_analysis)` (@tbl-sample).
+`r if (n_omitted_gender > 0) paste0(rh_fmt_count(n_omitted_gender, capitalize = TRUE), if (n_omitted_gender == 1L) " case had missing gender and was excluded from every regression of RQ1 and RQ2." else " cases had missing gender and were excluded from every regression of RQ1 and RQ2.") else "No case had missing gender."`
+`r sample_n_text`
+`r participation_text`
+`r filled_text`
+
+@tbl-sample describes the analysis sample by gender, school education, region,
+quota group, age and income.
+
+```{r}
+#| label: tbl-sample
+#| tbl-cap: "Sample characteristics."
+# School education in English, after the GESIS translation of the European
+# Values Study 2017 categories; the German wording of the item is in the note.
+edu_labels_en <- c(
+  "Schule beendet ohne Abschluss" = "No school-leaving certificate",
+  "Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse" =
+    "Lower secondary certificate (Hauptschulabschluss, 8th/9th grade)",
+  "Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse" =
+    "Intermediate secondary certificate (Realschulabschluss/Mittlere Reife, 10th grade)",
+  "Fachhochschulreife" = "Entrance qualification for universities of applied sciences (Fachhochschulreife)",
+  "Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife)" =
+    "University entrance qualification (Abitur/Hochschulreife)",
+  "Bin noch Schüler/in" = "Still at school"
+)
+n_missing_education <- attr(report_sample_rows_value, "n_missing_education")
+sample_rows_value <- dplyr::filter(
+  dplyr::bind_rows(report_sample_rows_value, report_political_sample_value$sample_rows),
+  !(characteristic == "Party choice" & group == "Not asked"),
+  !(characteristic == "School education" & group == "(missing)")
+)
+sample_characteristics <- sample_rows_value$characteristic
+sample_groups <- sample_rows_value$group
+is_party_sympathy <- startsWith(sample_characteristics, "Party sympathy:")
+sample_groups[is_party_sympathy] <- sub("^Party sympathy: ?", "", sample_characteristics[is_party_sympathy])
+sample_characteristics[is_party_sympathy] <- "Party sympathy"
+party_labels_en <- c(
+  "Bündnis 90/Die Grünen" = "The Greens",
+  "Die Linke" = "The Left",
+  "Bündnis Sahra Wagenknecht (BSW)" = "Sahra Wagenknecht Alliance (BSW)"
+)
+is_party_row <- sample_characteristics %in% c("Party choice", "Party sympathy")
+translate_party_labels <- is_party_row & sample_groups %in% names(party_labels_en)
+sample_groups[translate_party_labels] <- unname(party_labels_en[sample_groups[translate_party_labels]])
+sample_groups[is.na(sample_rows_value$pct) & !is_party_sympathy] <- ""
+is_education <- sample_rows_value$characteristic == "School education"
+unlabelled <- setdiff(sample_groups[is_education], names(edu_labels_en))
+if (length(unlabelled) > 0L) {
+  stop("No English label for the school-education category: ", paste(unlabelled, collapse = "; "))
+}
+sample_groups[is_education] <- unname(edu_labels_en[sample_groups[is_education]])
+sample_rows <- tibble::tibble(
+  characteristic = rh_blank_repeated(sub("^Political[- ]leaning quota group$", "Quota group", sample_characteristics)),
+  group = gsub("_", "-", sample_groups, fixed = TRUE),
+  # Income in whole euros: a banded income carries no precision below them;
+  # age keeps one decimal.
+  value = local({
+    digits <- ifelse(
+      grepl("income", sample_rows_value$characteristic, ignore.case = TRUE), 0,
+      ifelse(sample_rows_value$characteristic %in% report_political_sample_value$numeric_rows$label, 2, 1)
+    )
+    ifelse(
+      !is.na(sample_rows_value$pct),
+      paste0(rh_fmt_n(sample_rows_value$n), " (",
+             rh_fmt_pct(sample_rows_value$pct, 1, scale = "percent"), ")"),
+      paste0(vapply(seq_along(digits), function(i) rh_fmt(sample_rows_value$mean[[i]], digits[[i]]), ""), " (",
+             vapply(seq_along(digits), function(i) rh_fmt(sample_rows_value$sd[[i]], digits[[i]]), ""), ")")
+    )
+  })
+)
+show_sample_histograms <- rh_use_gt("auto") && knitr::is_html_output()
+if (show_sample_histograms) sample_rows$histogram <- ""
+sample_labels <- c(characteristic = "Characteristic", group = "Group", value = "n (%) or M (SD)")
+if (show_sample_histograms) sample_labels <- c(sample_labels, histogram = "Distribution")
+sample_histogram_specs <- report_political_sample_value$histogram_specs
+sample_sympathy_specs <- sample_histogram_specs[startsWith(sample_histogram_specs$characteristic, "Party sympathy:"), ]
+sample_placement_spec <- sample_histogram_specs[sample_histogram_specs$variable == "pol_left_right", ]
+sample_placement_summary <- report_political_sample_value$numeric_rows[
+  report_political_sample_value$numeric_rows$variable == "pol_left_right", ]
+sample_table <- rh_table(
+  sample_rows,
+  col_labels = sample_labels,
+  source_note = paste0(
+    "Percentages refer to the analysis sample. Party choice was asked only after Yes to voting intention. ",
+    "School education was missing for ", rh_fmt_n(n_missing_education),
+    if (n_missing_education == 1L) " respondent. " else " respondents. ",
+    "Income is net income per household member, in EUR per month. ",
+    rh_prereg_passage(prereg, "Descriptive statistics for age, gender", span = FALSE),
+    " Party sympathy ranges from ", rh_fmt(sample_sympathy_specs$response_min[[1]], 0),
+    " to +", rh_fmt(sample_sympathy_specs$response_max[[1]], 0),
+    "; left–right placement ranges from ", rh_fmt(sample_placement_spec$response_min, 0),
+    " (left) to ", rh_fmt(sample_placement_spec$response_max, 0), " (right). ",
+    "Numeric summaries use observed responses; left–right placement has ",
+    rh_fmt_n(sample_placement_summary$n), " responses and ",
+    rh_fmt_n(sample_placement_summary$missing), " missing.",
+    if (show_sample_histograms) " Histogram heights are scaled within each row." else ""
+  )
+)
+if (show_sample_histograms) sample_table <- rh_add_histograms(
+  sample_table, NULL, sample_histogram_specs$variable,
+  rows = match(sample_histogram_specs$characteristic, sample_rows_value$characteristic),
+  response_range = Map(c, sample_histogram_specs$response_min, sample_histogram_specs$response_max),
+  bin_width = sample_histogram_specs$bin_width,
+  histogram_data = report_political_sample_value$histogram_data
+)
+sample_table
+```
+
+## Measurement {#sec-measurement}
+
+__Question.__ How consistently do the items of each scale vary together, and
+how well do the prespecified factor structures describe the item responses?
+
+__What decides.__ The preregistration attaches no decision: `r rh_prereg_passage(prereg, "Reliability and scale structure analyses are", "are not used for exclusions")` (AP4).
+
+### Internal Consistency
+
+__`r results_label`__ How consistently the items of each of the
+`r rh_fmt_count(n_scales)` scales vary together is shown in @tbl-reliability:
+McDonald's ω total with its `r reliability_ci_pct` bootstrap confidence
+interval, and Cronbach's α. Cronbach's α also stands with its bootstrap
+confidence interval. `r alpha_only_text` `r omega_interval_text`
+
+```{r}
+#| label: tbl-reliability
+#| tbl-cap: "Internal consistency of the nine scales."
+rel <- report_reliability_value
+# Each coefficient with its interval in one cell; the interval of α stands
+# beside it.
+rel_rows <- tibble::tibble(
+  scale = rh_label(rel$scale_key, labels),
+  k = rel$n_items,
+  omega = ifelse(rel$reported_coefficient == "omega",
+                 rh_fmt_est_ci(rel$omega, rel$reported_interval_lower, rel$reported_interval_upper, 2, bounded = TRUE),
+                 "—"),
+  alpha = rh_fmt_est_ci(rel$alpha, rel$alpha_interval_lower, rel$alpha_interval_upper, 2, bounded = TRUE),
+  interval = dplyr::case_when(
+    rel$reported_interval_source == "omega_bootstrap" ~ "bootstrap of ω",
+    rel$reported_interval_source == "unavailable_omega_bootstrap" ~ "ω interval unavailable",
+    rel$reported_interval_source == "alpha_fallback_omega_model_failed" ~ "α interval (ω model did not fit)",
+    TRUE ~ "unavailable"
+  )
+)
+if (length(unique(rel_rows$interval)) < 2L) rel_rows$interval <- NULL
+rh_table(
+  rel_rows,
+  col_labels = c(scale = "Scale", k = "Items", omega = paste0("ω [", reliability_ci_pct, " confidence interval]"),
+                 alpha = paste0("α [", reliability_ci_pct, " confidence interval]"),
+                 interval = "Reported interval")[names(rel_rows)],
+  source_note = paste0(
+    "ω = McDonald's omega total; α = Cronbach's alpha; each with its ", reliability_ci_pct,
+    " percentile bootstrap confidence interval.",
+    if (n_omega_without_interval > 0) paste0(" ω is reported without an interval when fewer than ",
+      rh_fmt_pct(analysis_plan$reliability$omega_interval_min_success, 0, scale = "proportion"),
+      " of its bootstrap estimates are finite, or its interval is unavailable. α retains its own interval.") else "",
+    if (n_alpha_only > 0) " An em dash marks an unavailable omega estimate; α is reported instead." else ""
+  )
+)
+```
+
+### Confirmatory Factor Analyses {#sec-cfa}
+
+Each of the `r rh_fmt_count(n_scales)` scales was first fitted as one factor.
+Eight of them are subscales of four published instruments; social neophilia,
+developed for this study, is the only scale without subscales.
+`r cfa_summary_text(s1_value$cfa_scales, "one-factor models")` Then the
+subscale structure proposed in the development papers was fitted:
+`r cfa_structure_text`.
+`r cfa_summary_text(cfa_structure_models, "models of the subscale structure")`
+The loadings and the latent correlations between the scales are in
+`r sec_link("sec-appendix-measurement")`.
+`r s1_answer_text`
+
+## Descriptive Statistics {#sec-descriptives}
+
+__Question.__ How are the nine scale scores distributed, and how strongly is
+each pair correlated before anything is held constant?
+
+__What decides.__ The preregistration attaches one decision, to the correlations: `r rh_prereg_passage(prereg, "For the zero-order correlations specified in", "and intermediate values as inconclusive")` (AP10).
+
+__`r results_label`__ @tbl-descriptives shows how the nine scale scores are distributed, and
+@fig-correlations how strongly each pair of scores is correlated and whether
+the data give evidence for or against a correlation.
+`r corr_summary_text`
+Credible intervals and Bayes factors for every pair are reported with the
+precision of the sampling (for details see Supplement).
+
+```{r}
+#| label: tbl-descriptives
+#| tbl-cap: "Distribution of the nine scale scores."
+desc_rows <- tibble::tibble(
+  scale = rh_label(scale_summary_value$scale_key, labels),
+  mean = rh_fmt(scale_summary_value$mean, 2),
+  sd = rh_fmt(scale_summary_value$sd, 2),
+  min = rh_fmt(scale_summary_value$min, 2),
+  max = rh_fmt(scale_summary_value$max, 2),
+  skew = rh_fmt(scale_summary_value$skew, 2),
+  kurtosis = rh_fmt(scale_summary_value$kurtosis, 2)
+)
+show_histograms <- rh_use_gt("auto") && knitr::is_html_output()
+if (show_histograms) desc_rows$histogram <- ""
+desc_labels <- c(scale = "Scale", mean = "M", sd = "SD", min = "Min", max = "Max",
+                 skew = "Skewness", kurtosis = "Excess kurtosis")
+if (show_histograms) desc_labels <- c(desc_labels, histogram = "Distribution")
+desc_table <- rh_table(
+  desc_rows,
+  col_labels = desc_labels,
+  source_note = paste0(
+    "Scores are unweighted item means on the ", rh_fmt_n(analysis_plan$scales$response_min),
+    "-to-", rh_fmt_n(analysis_plan$scales$response_max), " response scale.",
+    if (show_histograms) " Histograms use this common horizontal range, with heights scaled within each row." else ""
+  )
+)
+if (show_histograms) desc_table <- rh_add_histograms(
+  desc_table, NULL, scale_summary_value$scale_key,
+  response_range = c(analysis_plan$scales$response_min, analysis_plan$scales$response_max), histogram_data = attr(scale_summary_value, "histograms")
+)
+desc_table
+```
+
+```{r}
+#| label: fig-correlations
+#| fig-cap: "Correlations between the nine scale scores. Superscript † marks evidence for a correlation; superscript zero marks evidence for no correlation."
+plot_bayesian_correlation_heatmap(bayesian_correlations_value, labels)
+```
+
+## Bayesian Multiple Regressions (RQ1) {#sec-regressions}
+
+__Research question.__ `r rh_prereg_question(prereg, "RQ1")`
+
+__Statistical method.__ `r rh_prereg_under_heading(prereg, "RQ1", "Statistical Method")`
+
+`r rh_prereg_passage(prereg, "Age and income per household member enter the analyses in bands", to = "upper limit of the highest.")` (AP3)
+
+__Evidence measure.__ `r rh_prereg_under_heading(prereg, "RQ1", "Evidence Measure")`
+
+__What decides.__ `r rh_prereg_under_heading(prereg, "RQ1", "What Result Answers the Question?")`
+
+`r rh_prereg_passage(prereg, "For RQ1, @tbl-predicted-signs gives the expected signs")` (RQ1)
+
+```{r}
+#| label: tbl-predicted-signs
+#| tbl-cap: "Predicted direction of each motive–facet association."
+# The predicted signs are the configuration's (analysis_plan$predictions$table,
+# the block the decision code reads), which the tests compare cell by cell with
+# the preregistration's table; the note is the preregistration's sentence.
+pred_motives <- as.character(analysis_plan$regression$motives)
+pred_rows <- tibble::as_tibble(c(
+  list(motive = rh_label(pred_motives, labels)),
+  stats::setNames(lapply(outcome_keys, function(o) {
+    sign <- vapply(pred_motives, function(m) analysis_plan$predictions$table[[o]][[m]], character(1))
+    ifelse(sign == "-", "−", sign)
+  }), outcome_keys)
+))
+rh_table(
+  pred_rows,
+  col_labels = c(motive = "Motive", stats::setNames(rh_label(outcome_keys, labels), outcome_keys)),
+  source_note = rh_prereg_passage(prereg, "For prestige, ± indicates that either direction", span = FALSE)
+)
+```
+
+### Coefficients {#sec-regression-coefficients}
+
+__`r results_label`__ `r rh_label(outcome_keys[1], labels)` `r credible_text(outcome_keys[1])`.
+`r rh_label(outcome_keys[2], labels)` `r credible_text(outcome_keys[2])`.
+`r rh_label(outcome_keys[3], labels)` `r credible_text(outcome_keys[3])`.
+`r rh_label(outcome_keys[4], labels)` `r credible_text(outcome_keys[4])`.
+@fig-coefficients shows, for each facet, which motives'
+coefficients have a central `r ci_pct` credible interval that excludes zero, and @tbl-associations gives each
+coefficient with its uncertainty.
+`r s6_answer_text`
+
+`r rq1_difference_text` `r rq1_partial_text`
+
+
+`r if (n_unclassified_directional > 0) paste0("Classification was withheld for ", rh_fmt_count(n_unclassified_directional), " directional predictions because their models did not pass the validity gate.") else ""`
+
+
+```{r}
+#| label: fig-coefficients
+#| fig-cap: "Posterior medians and 95% credible intervals, one panel per outcome."
+rh_coef_plot(coefs_primary_value, analysis_plan = analysis_plan, labels = labels)
+```
+
+```{r}
+#| label: tbl-associations
+#| tbl-cap: "Posterior summary of the Bayesian multiple regressions."
+rh_prediction_cells_table(report_associations_value, labels = labels, analysis_plan = analysis_plan)
+```
+
+### Prior-Predictive Checks {#sec-prior-predictive}
+
+`r predictive_check_text$prior`
+
+### Prior and Likelihood Sensitivity {#sec-regression-stability}
+
+#### Prior-Width Comparison {#sec-prior-width}
+
+Each regression was fitted with the standard deviation of the slope prior set
+to `r sweep_widths_text`. `r prior_width_text` Every coefficient under
+each of the three priors is reported (for details see Supplement).
+
+
+#### Local Power Scaling {#sec-power-scaling}
+
+`r power_scaling_text`
+
+#### Posterior-Predictive Checks {#sec-predictive-checks}
+
+`r predictive_check_text$posterior`
+
+`r heavier_tail_text`
+`r likelihood_stability_text(s4_value$likelihood_comparison, labels)` The
+Gaussian model remains primary. The
+coefficients of both models are compared (for details see Supplement).
+
+### Validity Gate {#sec-regression-diagnostics}
+
+The following diagnostics summarise the primary Gaussian fits and their
+prior-width comparisons.
+`r diagnostic_extrema_text(diagnostics_value$diagnostics)`
+`r diagnostics_answer_text` R̂ measures the agreement between the chains,
+which is complete at a value of one, and the effective sample size (ESS) the
+number of independent draws the chains are worth.
+The diagnostics of the refit allowing heavier tails, of the joint
+model of the five motives and of the joint model of RQ2 are also reported
+(for details see Supplement).
+`r motive_gate_text`
+
+`r gate_box_text`
+
+
+## Bayesian Joint Regression (RQ2) {#sec-joint}
+
+__Statistical method.__ `r rh_prereg_under_heading(prereg, "RQ2", "Statistical Method")`
+
+__Evidence measures and interpretation.__ `r rh_prereg_under_heading(prereg, "RQ2", "Evidence Measures and Interpretation")`
+
+__`r results_label`__ `r rq2_gate_text`
+Its sampling diagnostics are reported beside those of the fits of RQ1
+(for details see Supplement).
+
+### Differences in Motive Associations Across the Facets (RQ2a) {#sec-joint-differences}
+
+__Research question.__ `r rh_prereg_question(prereg, "RQ2a")`
+
+__Statistical method.__ The method quoted in @sec-joint.
+
+__Evidence measures and interpretation.__ Those quoted in @sec-joint.
+
+__`r results_label`__ `r summarise_joint_facet_strength(rq2_value, labels, analysis_plan)`
+
+@tbl-rq2a-comparisons presents all six facet comparisons for each motive.
+Positive differences indicate a stronger association with the first-named facet;
+negative differences indicate a stronger association with the second.
+
+```{r}
+#| label: tbl-rq2a-comparisons
+#| tbl-cap: "Paired differences in absolute standardised motive associations across the six authoritarian facet pairs."
+build_joint_facet_strength_table(rq2_value, labels, analysis_plan)
+```
+
+### Remaining Associations Between the Facets (RQ2b) {#sec-joint-correlation-changes}
+
+__Research question.__ `r rh_prereg_question(prereg, "RQ2b")`
+
+__Statistical method.__ The method quoted in @sec-joint.
+
+__Evidence measures and interpretation.__ Those quoted in @sec-joint.
+
+__`r results_label`__ `r rq2b_residual_text`
+A residual correlation holds the motives and demographics constant, but not
+the remaining facets; an edge between an ASC facet and SDO-D in the network (RQ3c) holds
+the remaining facets and the motives constant, but not the demographics.
+
+@tbl-rq2b-residuals answers which facet pairs remain correlated once
+the motives and demographics are held constant, beside each pair's zero-order
+correlation implied by the joint model and the difference between the two; the comparison is specified in AP7. The seventh pair is ASC total
+and SDO-D. A positive difference means more positive, not necessarily stronger;
+these changes do not establish a causal explanation.
+
+`r describe_joint_correlation_changes(joint_correlation_changes_value, labels)`
+
+```{r}
+#| label: tbl-rq2b-residuals
+#| tbl-cap: "Residual and zero-order (from the joint model) correlations for the six facet pairs and ASC total–SDO-D, with paired signed differences."
+build_joint_correlation_changes_table(joint_correlation_changes_value, labels, analysis_plan)
+```
+
+### ASC Total Versus Its Facets (RQ2c) {#sec-asc-aggregation}
+
+__Research question.__ `r rh_prereg_question(prereg, "RQ2c")`
+
+__Statistical method.__ The method quoted in @sec-joint.
+
+__Evidence measures and interpretation.__ Those quoted in @sec-joint.
+
+__`r results_label`__ @tbl-asc-attenuation compares each facet with the ASC total for each motive.
+Positive differences indicate a stronger association with the facet; negative
+differences indicate a stronger association with the total. Signed total
+coefficients are in @tbl-asc-aggregate.
+
+`r summarise_joint_total_strength(joint_asc_aggregation_value, labels, analysis_plan)`
+
+```{r}
+#| label: tbl-asc-attenuation
+#| tbl-cap: "Paired differences in absolute standardised motive associations: each ASC facet minus the ASC total."
+build_joint_total_strength_table(joint_asc_aggregation_value, labels, analysis_plan)
+```
+
+```{r}
+#| label: tbl-asc-aggregate
+#| tbl-cap: "Supporting signed standardised associations of each motive with the equal-weight ASC total."
+build_joint_asc_aggregate_table(joint_asc_aggregation_value, labels, analysis_plan)
+```
+
+## Bayesian Network Analysis (RQ3) {#sec-network}
+
+__Research question.__ `r rh_prereg_question(prereg, "RQ3")`
+
+__Statistical method.__ `r rh_prereg_under_heading(prereg, "RQ3", "Statistical Method")`
+
+__Evidence measures.__ `r rh_prereg_under_heading(prereg, "RQ3", "Evidence Measures")`
+
+__What decides.__ `r rh_prereg_under_heading(prereg, "RQ3", "What Results Answer the Questions?")`
+
+### Associations That Remain Conditional on All Other Scores (RQ3) {#sec-network-edges}
+
+__`r results_label`__ Of the `r rh_fmt_n(network_value$counts_total)` possible edges,
+`r rh_fmt_count(net_counts[["present"]])` were classified as present,
+`r rh_fmt_count(net_counts[["absent"]])` absent and
+`r rh_fmt_count(net_counts[["inconclusive"]])` inconclusive (@fig-network).
+An edge is a direct association: the association between two
+scores that remains when the other seven are held constant; it is not a causal
+path. Present means evidence for a direct association, absent evidence for none,
+that is, for conditional independence, and inconclusive that the data do not
+decide between the two.
+The tables below organise the main results into three set comparisons:
+ social motives with authoritarian facets (RQ3a), autonomy motives with security
+and arousal (RQ3b), and ASC facets with SDO-D (RQ3c). Each cell gives the
+classification, the edge weight of a present edge, and its bagged Bayes factor.
+The variation across resamples for every edge is shown in
+@appxfig-network-stability. @fig-network shows the full network.
+
+```{r}
+#| label: fig-network
+#| fig-cap: "Network of conditional associations among the five social motives and the four authoritarian facets. Edge width illustrates the estimated weight."
+rh_network_plot(
+  network_value$matrices,
+  labels = labels,
+  groups = list(Motive = analysis_plan$regression$motives, `Authoritarian facet` = analysis_plan$regression$outcomes)
+)
+```
+
+### Associations Between Motives and Facets (RQ3a) {#sec-network-bridges}
+
+__Research question.__ `r rh_prereg_question(prereg, "RQ3a")`
+
+__Statistical method.__ The method quoted in @sec-network.
+
+__What decides.__ The rule quoted in @sec-network.
+
+__`r results_label`__ `r rq3a_text` @tbl-network-motive-facet answers which motive–facet pairs
+remain associated once all other scores are held constant, and with which
+sign. Its autonomy rows also show the corresponding RQ1 results for descriptive comparison.
+
+```{r}
+#| label: tbl-network-motive-facet
+#| tbl-cap: "Bagged network: classification, edge weight and bagged Bayes factor of every edge between a motive and an authoritarian facet."
+rh_network_matrix_table(
+  network_bagged_value, rows = network_motives, columns = network_facets, labels = labels,
+  row_title = "Motive", row_marks = stats::setNames(rep("a", length(autonomy_nodes)), autonomy_nodes),
+  cell_lines = rq1_sign_line,
+  note = network_matrix_note(rq3a_edges, marks = paste0(
+    "<sup>a</sup> Autonomy motive: the last line gives its coefficient for that facet in RQ1, ",
+    "credibly positive (+) or negative (−) or unresolved."
+  )),
+  target = "report_network"
+)
+```
+
+The autonomy–facet results are also read alongside their adjusted associations
+in RQ1. This comparison is descriptive rather than a separate research question.
+
+Of the
+`r rh_fmt_count(attr(rq3a_autonomy_edges, "n_edges"))` edges between `r autonomy_text` and the four
+facets, `r rq3a_autonomy_decisions_text`.
+`r rq3a_autonomy_beside_text``r rq3a_autonomy_present_only_text` `r screened_off_text`
+`r rq3a_autonomy_caveat_text`
+
+### Autonomy Motives With the Security and Arousal Motives (RQ3b) {#sec-network-architecture}
+
+__Research question.__ `r rh_prereg_question(prereg, "RQ3b")`
+
+__Statistical method.__ The method quoted in @sec-network.
+
+__What decides.__ The rule quoted in @sec-network.
+
+__`r results_label`__ Of the `r rh_fmt_count(attr(rq3b_edges, "n_edges"))` edges of
+`r autonomy_text` with `r security_text`, `r rq3b_decisions_text`;
+`r rq3b_motive_text`
+
+`r rq3b_sign_text` @tbl-network-motives shows these six comparisons
+conditional on all other scores.
+
+```{r}
+#| label: tbl-network-motives
+#| tbl-cap: "Bagged network: classification, edge weight and bagged Bayes factor of autonomy motives with security and arousal."
+rh_network_matrix_table(
+  network_bagged_value, rows = autonomy_nodes, columns = security_nodes,
+  labels = labels, row_title = "Autonomy motive",
+  note = network_matrix_note(rq3b_edges),
+  target = "report_network"
+)
+```
+
+### ASC Facets With SDO-D (RQ3c) {#sec-network-facets}
+
+__Research question.__ `r rh_prereg_question(prereg, "RQ3c")`
+
+__Statistical method.__ The method quoted in @sec-network.
+
+__What decides.__ The rule quoted in @sec-network.
+
+__`r results_label`__ These edges are conditional on the other two ASC facets and on the motives, but
+not on the demographics; the residual correlations of RQ2b are conditional on
+the motives and the demographics, but not on the other two ASC facets.
+
+`r rq3c_text` `r rq3c_rq2b_text` @tbl-network-facets shows which ASC facets
+remain associated with SDO-D once all other scores are held constant.
+
+```{r}
+#| label: tbl-network-facets
+#| tbl-cap: "Bagged network: classification, edge weight and bagged Bayes factor of ASC facets with SDO-D."
+rh_network_matrix_table(
+  network_bagged_value, rows = network_asc_facets, columns = "sdo_dom",
+  labels = labels, row_title = "ASC facet",
+  note = network_matrix_note(rq3c_edges),
+  target = "report_network"
+)
+```
+
+### Stability {#sec-network-stability}
+
+#### Resample Fits {#sec-network-diagnostics}
+
+`r network_sampling_text`
+
+#### Comparison With the Full-Data Network {#sec-network-comparison}
+
+The bagged network is the preregistered answer. The network fitted once to the
+whole sample, the full-data network, shows which edge decisions depend on this
+particular sample: an edge whose classification differs between the two has
+evidence that depends on which respondents happen to be in the sample. The
+comparison is descriptive and changes no classification.
+`r s5_answer_text`
+
+#### Edge-Prior Sensitivity {#sec-network-edge-prior}
+
+The full-data network was also refitted with the prior inclusion probability of
+every edge set to `r edge_prior_text` in turn; `r edge_prior_moving_text`
+(for details see Supplement). This comparison concerns the full-data fits,
+not the bagged network, whose preregistered classifications use
+`r edge_prior_prereg`.
+
+## Dimensionality and Item Correspondence (SRQ1) {#sec-dimensionality}
+
+__Research question.__ `r rh_prereg_question(prereg, "SRQ1")`
+
+__Statistical method.__ `r rh_prereg_under_heading(prereg, "SRQ1", "Statistical Method")`
+
+__Evidence measures.__ `r rh_prereg_under_heading(prereg, "SRQ1", "Evidence Measures")`
+
+__What decides.__ `r rh_prereg_under_heading(prereg, "SRQ1", "What Results Answer the Question?")`
+
+### Number of Factors {#sec-efa-factors}
+
+__`r results_label`__ `r srq1_factor_number_text`
+`r srq1_criteria_pointer`
+
+### Item Correspondence and Loading Clarity {#sec-efa-correspondence}
+
+Expected-pair retention below one indicates that a scale was split, and
+empirical-pair purity below one that scales were merged.
+`r srq1_correspondence_text` (details in
+`r sec_link("sec-appendix-efa")`).
+
+`r describe_alternative_factor_correspondence(s1_value$correspondence$overview)`
+`r srq1_correspondence_pointer`
+
+`r srq1_loading_clarity_text`
+`r srq1_membership_pointer`
+
+### Confirmatory Models of the Combined Item Sets {#sec-efa-cfa}
+
+Beside the exploratory analyses, the preregistration fits confirmatory models
+of the two largest item sets: all five social motives, with five factors, and
+SDO-D with the three ASC scales, with four factors.
+`r cfa_summary_text(cfa_combined_models, "confirmatory models of these item sets")`
+`r srq1_cfa_pointer`
+
+## Deviations From the Preregistration {#sec-deviations}
+
+::: {.callout-note appearance="simple" icon=false}
+Any deviation from the preregistered analysis is listed here
+(@tbl-deviations), with the date it was made and the reason.
+:::
+
+```{r}
+#| label: tbl-deviations
+#| tbl-cap: "Deviations from the preregistration."
+rh_deviations_table(deviations_value, target = "deviations_register")
+```
+
+# Discussion {#sec-discussion}
+
+`r pipeline_check_text`
+
+The social-neophilia scale is an unpublished scale developed for this study; no
+separate psychometric validation was conducted before the survey
+(preregistration, M13). This report describes its reliability and factor
+structure, which does not validate it.
+
+# References {#sec-references .unnumbered}
+
+Zehetleitner, M., Castiglione, C., Drastik, J., Matterstock, D., & Prell, N.
+(2026). *Motives and ideology: Bischof's Zürich model of social motivation,
+right-wing authoritarianism and social dominance orientation*
+[Preregistration]. PsychArchives.
+
+# Appendix {.unnumbered}
+
+The appendix follows the order of the Results; each section names
+the questions its tables and figures answer.
+It holds the results about the
+constructs, the estimates a reader uses to interpret an answer: how the items
+relate to their scales, and how the scales, the motives and the facets relate
+to each other. The statistical checks of these results, the fit of the models
+and the sampling, their dependence on the choices of the analysis, and the
+detail of the data handling, are in the electronic supplement.
+Data files that accompany the analysis code hold the complete
+numbers behind the tables of both parts.
+
+## A1 Measurement {#sec-appendix-measurement .unnumbered}
+
+__Question.__ How strongly does each item reflect its scale, and how strongly
+are the scales related once measurement error is taken into account?
+
+@appxtbl-cfa-loadings-motives and @appxtbl-cfa-loadings-orientation answer how
+strongly each item reflects its scale in every confirmatory model that holds it:
+the one-factor model of its scale and the multi-factor models of its item sets.
+
+::: {#appxtbl-cfa-loadings-motives}
+
+```{r}
+#| label: appx-cfa-loadings-motives
+rh_cfa_loadings_by_model_table(s1_value$cfa_loadings,
+                               basename(analysis_plan$data_files$result_files$cfa_loadings),
+                               scales = c("zm_security", "zm_achievement", "zm_power", "zm_prestige", "zm_arousal"),
+                               labels = labels, target = "supplement_measurement")
+```
+
+Standardised loadings of the motive items in every confirmatory model that holds them.
+:::
+
+::: {#appxtbl-cfa-loadings-orientation}
+
+```{r}
+#| label: appx-cfa-loadings-orientation
+rh_cfa_loadings_by_model_table(s1_value$cfa_loadings,
+                               basename(analysis_plan$data_files$result_files$cfa_loadings),
+                               scales = orientation_scale_keys, labels = labels,
+                               target = "supplement_measurement")
+```
+
+Standardised loadings of the items of authoritarian orientation in every confirmatory model that holds them.
+:::
+
+`r appx_cfa_correlation_lead`
+
+```{r}
+#| label: appx-cfa-correlations
+#| output: asis
+rh_float_show(
+  rh_cfa_factor_correlation_matrix_table(s1_value$cfa_factor_correlations, motive_scale_keys, labels,
+                                         row_title = "Motive", target = "supplement_measurement"),
+  id = "cfa-correlations-motives", prefix = "appxtbl",
+  caption = "Latent correlations between the five social motives."
+)
+rh_float_show(
+  rh_cfa_factor_correlation_matrix_table(s1_value$cfa_factor_correlations, orientation_scale_keys, labels,
+                                         row_title = "Authoritarian facet", target = "supplement_measurement"),
+  id = "cfa-correlations-orientation", prefix = "appxtbl",
+  caption = "Latent correlations between the four facets of authoritarian orientation."
+)
+```
+
+## A2 Bayesian Multiple Regressions (RQ1) {#sec-appendix-regressions .unnumbered}
+
+__Research question.__ `r rh_prereg_question(prereg, "RQ1")`
+
+@appxtbl-r2 answers how much of the variance of each facet the five motives,
+age, gender and income explain together, in the four regressions with the
+preregistered prior.
+
+::: {#appxtbl-r2}
+
+```{r}
+#| label: appx-r2
+rh_r2_table(s6_value$r2_primary, labels, analysis_plan = analysis_plan,
+            target = "supplement_explained_variance")
+```
+
+Explained variance of each facet in the regressions with the preregistered prior.
+:::
+
+@appxtbl-rq1-differences answers, for each pair of motives with opposite predicted signs, whether the coefficient of the motive predicted positive exceeded that of the motive predicted negative.
+
+::: {#appxtbl-rq1-differences}
+
+```{r}
+#| label: appx-rq1-differences
+d <- rq1_differences_value
+rh_table(
+  tibble::tibble(
+    outcome = rh_blank_repeated(rh_label(d$outcome_key, labels)),
+    pair = paste0(rh_label(d$motive_positive, labels), " minus ", rh_label_inline(d$motive_negative, labels)),
+    difference = rh_fmt_est_ci(d$median, d$lower, d$upper, 2, bold = d$credible & d$interpretable)
+  ),
+  col_labels = c(outcome = "Facet", pair = "Motive predicted positive minus motive predicted negative",
+                 difference = paste0("Difference [", ci_pct, " CrI]")),
+  source_note = paste0("Posterior median of the difference between the two standardised coefficients in the same regression, ",
+                       "formed in every posterior draw, with its central ", ci_pct, " credible interval. ",
+                       "Bold estimate: its interval excludes zero.")
+)
+```
+
+Differences between the coefficients of two motives with opposite predicted signs.
+:::
+
+@appxtbl-rq1-partials answers how strongly two motives overlap once the other three motives, age, gender and income are held constant.
+
+::: {#appxtbl-rq1-partials}
+
+```{r}
+#| label: appx-rq1-partials
+pc <- rq1_partials_value
+rh_table(
+  tibble::tibble(
+    pair = paste0(rh_label(pc$motive_a, labels), " and ", rh_label_inline(pc$motive_b, labels)),
+    partial = rh_fmt_est_ci(pc$median, pc$lower, pc$upper, 2, bounded = TRUE, bold = pc$credible & pc$interpretable)
+  ),
+  col_labels = c(pair = "Motives", partial = paste0("Partial correlation [", ci_pct, " CrI]")),
+  source_note = paste0("Posterior median of the partial correlation, conditional on the other three motives, age, gender ",
+                       "and income, from the joint model of the five motive scores, with its central ", ci_pct, " credible interval. ",
+                       "Bold estimate: its interval excludes zero.")
+)
+```
+
+Partial correlations of the five motives.
+:::
+
+## A3 Bayesian Network Analysis (RQ3) {#sec-appendix-network .unnumbered}
+
+__Research question.__ `r rh_prereg_question(prereg, "RQ3")`
+
+@appxfig-network-stability answers how much each edge's inclusion probability
+varies across the bootstrap resamples and where the full-data network falls,
+and @appxfig-network-side-by-side how the full-data network differs from the
+preregistered bagged network. The full-data network is the network fitted
+once to the whole sample.
+
+::: {#appxfig-network-stability}
+
+```{r}
+#| label: appx-network-stability
+#| fig-height: 10
+rh_network_stability_strips(s5_value$fits, s5_value$comparison, labels, boxplot_data = s5_value$boxplots)
+```
+
+Inclusion probability of every edge across the bootstrap resamples, with the value of the full-data network marked.
+:::
+
+::: {#appxfig-network-side-by-side}
+
+```{r}
+#| label: appx-network-side-by-side
+rh_network_side_by_side(
+  s5_value$matrices_full, s5_value$matrices, labels,
+  groups = list(Motive = analysis_plan$regression$motives, Outcome = analysis_plan$regression$outcomes)
+)
+```
+
+The full-data network and the bagged network side by side, drawn as the network of the Results.
+:::
+
+## A4 Exploratory Factor Analyses (SRQ1) {#sec-appendix-efa .unnumbered}
+
+__Research question.__ `r rh_prereg_question(prereg, "SRQ1")`
+
+`r appx_criteria_lead`
+
+```{r}
+#| label: appx-factor-criteria
+#| output: asis
+rh_float_show(
+  rh_factor_number_criteria_table(s1_value$factor_number_criteria, labels, target = "supplement_measurement"),
+  id = "factor-criteria", prefix = "appxtbl",
+  caption = "Number of factors each criterion suggests, for the scales and item sets on which the criteria disagree."
+)
+```
+
+`r appx_correspondence_lead`
+
+```{r}
+#| label: appx-efa-correspondence
+#| output: asis
+rh_float_show(
+  rh_efa_correspondence_overview_table(s1_value$correspondence$overview, loading_cutoff,
+                                       criteria = s1_value$factor_number_criteria,
+                                       membership = s1_value$correspondence$membership, labels = labels,
+                                       target = "supplement_measurement"),
+  id = "efa-correspondence", prefix = "appxtbl",
+  caption = "Correspondence between the intended scales and the estimated factors, for the solutions whose item grouping differs from the scales."
+)
+```
+
+`r appx_scale_clarity_lead`
+
+```{r}
+#| label: appx-efa-scale-clarity
+#| output: asis
+rh_float_show(
+  rh_efa_scale_clarity_table(s1_value$correspondence$scales, labels, loading_cutoff,
+                             target = "supplement_measurement"),
+  id = "efa-scale-clarity", prefix = "appxtbl",
+  caption = "Weakly loading items in the one-factor solution of each scale analysed on its own."
+)
+```
+
+`r appx_membership_lead`
+
+```{r}
+#| label: appx-efa-membership
+#| output: asis
+group_captions <- c(
+  motives = "Item membership of the motive items in the expected solutions of their item sets.",
+  orientation = "Item membership of the items of authoritarian orientation in the expected solutions of their item sets."
+)
+for (group in names(membership_groups)) {
+  rh_float_show(
+    rh_efa_membership_table(s1_value$correspondence$membership, membership_groups[[group]], labels, loading_cutoff,
+                            scale_order = if (group == "motives") motive_scale_keys else orientation_scale_keys,
+                            item_codes = unlist(codebook_value$scales$item_codes),
+                            target = "supplement_measurement"),
+    id = paste0("efa-membership-", group), prefix = "appxtbl", caption = group_captions[[group]]
+  )
+}
+```
+
+`r appx_items_off_lead`
+
+```{r}
+#| label: appx-efa-items-off-scale
+#| output: asis
+rh_float_show(
+  rh_efa_items_off_scale_table(s1_value$efa_items_off_scale, labels,
+                               basename(analysis_plan$data_files$result_files$efa_membership),
+                               target = "supplement_measurement"),
+  id = "efa-items-off-scale", prefix = "appxtbl",
+  caption = "Items assigned to a different factor than most items of their scale, in the solutions the criteria suggested."
+)
+```
+
+# Electronic Supplement {.unnumbered}
+
+The electronic supplement holds the statistical checks of the results: the fit
+of the models and the sampling, the dependence of the results on the choices of
+the analysis, and the detail of the data handling, in the order of the Results.
+Each section names the questions its tables and figures answer.
+
+## S1 Sample {#sec-supplement-sample .unnumbered}
+
+__Question.__ How did the started responses become the analysis sample, and
+which missing values were filled?
+
+@suppltbl-filled-cells shows which missing values were filled, and with
+which values.
+
+::: {#suppltbl-filled-cells}
+
+```{r}
+#| label: suppl-filled-cells
+rh_filled_cells_table(s1_value$filled_cells, analysis_plan, labels, target = "supplement_measurement")
+```
+
+Every filled cell, with the respondent, the variable and the model that filled it.
+:::
+
+@suppltbl-imputation-models shows whether the required imputation models passed
+the validity gate and how many numerical attempts were needed.
+
+::: {#suppltbl-imputation-models}
+
+```{r}
+#| label: suppl-imputation-models
+if (!report_flow_value$imputation$has_models) {
+  cat(if (n_filled == 0L) "No imputation model was required." else
+    "Model validity metadata are unavailable; AP3 imputation processing needs to be refreshed.")
+} else {
+  status_columns <- c("model", "kind", "n_missing", "status", "attempts", "parameter_count",
+    "ess_bulk_min", "ess_tail_min", "rhat_max", "n_divergent", "n_treedepth_hits", "bfmi_min", "note")
+  knitr::kable(imputation_status_value$model_status[status_columns])
+}
+```
+
+Imputation models and their final computational validity across all prediction parameters.
+:::
+
+## S2 Measurement {#sec-measurement-detail .unnumbered}
+
+__Question.__ How were the response options used, how were the reliability
+intervals obtained, and how well do the confirmatory models fit the item
+responses?
+
+The loadings and the latent correlations of the
+confirmatory models are in `r sec_link("sec-appendix-measurement")`; the
+unstandardised loadings with their standard errors are in the data file
+`r basename(analysis_plan$data_files$result_files$cfa_loadings)`.
+
+### S2.1 Item Distributions {.unnumbered}
+
+@suppltbl-item-distributions-motives and @suppltbl-item-distributions-orientation
+answer how the six response options were used for each item, the information
+on which the choice of the estimator for ordered categories rests. The response
+counts retain the original item
+coding after participant exclusions. Percentages use the nonmissing responses
+to each item as denominator. Response options selected by nobody are retained
+with a count of zero; an item
+with unanswered cells is marked, and its number of missing answers is in the
+table note.
+
+The sufficient summary statistics of the measurement models are provided as
+machine-readable files: the item-by-item polychoric
+correlation matrix in `r s1_value$summary_files[1]` and the item
+thresholds in `r s1_value$summary_files[2]`, beside the file of all
+pairwise standardised residuals, `r s1_value$residuals_file`. A
+secondary analysis can refit any of the confirmatory models from those two
+files alone.
+
+::: {#suppltbl-item-distributions-motives}
+
+```{r}
+#| label: suppl-item-distributions-motives
+rh_item_distribution_display(s1_value$item_distributions, codebook_value, motive_scale_keys, labels,
+                             target = "supplement_measurement")
+```
+
+Observed response distributions of the motive items.
+:::
+
+::: {#suppltbl-item-distributions-orientation}
+
+```{r}
+#| label: suppl-item-distributions-orientation
+rh_item_distribution_display(s1_value$item_distributions, codebook_value, orientation_scale_keys, labels,
+                             target = "supplement_measurement")
+```
+
+Observed response distributions of the items of authoritarian orientation.
+:::
+
+### S2.2 Reliability {.unnumbered}
+
+In @tbl-reliability, the
+interval of ω is the percentile bootstrap interval of ω wherever enough
+resamples succeeded and α's interval otherwise; where the ω model did not fit
+at all, α is the reported coefficient. `r suppl_reliability_lead`
+
+```{r}
+#| label: suppl-reliability
+#| output: asis
+rh_float_show(
+  rh_reliability_table(s1_value$reliability, labels, analysis_plan = analysis_plan,
+                       target = "supplement_measurement"),
+  id = "reliability", prefix = "suppltbl",
+  caption = "Reliability of the scales whose reliability needed the fallback or lost bootstrap resamples."
+)
+```
+
+### S2.3 Confirmatory Factor Models {.unnumbered}
+
+@suppltbl-cfa-fit answers how well each
+confirmatory model describes the responses to its items: the one-factor model
+of every scale, the subscale structures of the development papers, and the
+`r rh_fmt_count(s1_value$counts$cfa_combined)` models of the item sets that combine
+instruments (SRQ1). In every model with several factors, each intended scale is
+one factor, its items load on that factor only, and the factors correlate
+freely. `r cfa_fit_constant_text`
+
+::: {#suppltbl-cfa-fit}
+
+```{r}
+#| label: suppl-cfa-fit
+rh_cfa_fit_table(s1_value$cfa_scales, cfa_structure_models, cfa_combined_models, labels,
+                 messages_link = "Section S2.3", target = "supplement_measurement")
+```
+
+Fit of every confirmatory model.
+:::
+
+`r cfa_messages_text`
+
+### S2.4 Local Fit {.unnumbered}
+
+Global fit indices can conceal a misfit confined to a few item pairs, so
+@suppltbl-cfa-residuals gives the
+`r rh_fmt_count(analysis_plan$factor_analysis$cfa_reporting$ranked_residuals_n)`
+largest residual correlations of every model. All residual pairs of every model
+are in the data file `r s1_value$residuals_file`. The table answers which item
+pairs each model reproduces worst.
+
+::: {#suppltbl-cfa-residuals}
+
+```{r}
+#| label: suppl-cfa-residuals
+rh_cfa_largest_residuals_table(s1_value$cfa_largest_residuals, s1_value$residuals_file, labels,
+                               target = "supplement_measurement")
+```
+
+The largest residual correlations of every confirmatory model.
+:::
+
+### S2.5 Descriptive Statistics {#sec-supplement-descriptives .unnumbered}
+
+__Question.__ How strongly is each pair of the nine scale scores correlated
+before anything is held constant?
+
+@suppltbl-bayesian-correlations answers how strongly each pair of scale scores
+is correlated, with its credible interval, and what evidence the Bayes factor
+gives for or against a correlation.
+
+::: {#suppltbl-bayesian-correlations}
+
+```{r}
+#| label: suppl-bayesian-correlations
+build_bayesian_correlation_details(bayesian_correlations_value, labels)
+```
+
+Correlations between the nine scale scores, with their credible intervals and Bayes factors.
+:::
+
+## S3 Bayesian Multiple Regressions (RQ1) {#sec-supplement-regressions .unnumbered}
+
+__Research question.__ `r rh_prereg_question(prereg, "RQ1")`
+
+### S3.1 Prior-Predictive Checks {#sec-supplement-prior-predictive .unnumbered}
+
+Draws from the priors alone, back-transformed to the response scale with the
+fixed standardisation constants of each model's own sample, place a small share
+of the simulated responses outside the range the items admit; the share per
+facet, prior width and likelihood family is in @suppltbl-prior-predictive. The
+check runs on the actual design for every
+width of the sweep and for both likelihood families; simulated outcomes are
+never standardised again. @suppltbl-prior-predictive answers whether the priors,
+before the data are seen, imply answers within and around the response scale.
+`r rh_prior_pred_constant_text(s4_value$prior_predictive)`
+
+::: {#suppltbl-prior-predictive}
+
+```{r}
+#| label: suppl-prior-predictive
+rh_prior_pred_table(s4_value$prior_predictive, labels, analysis_plan = analysis_plan,
+                    target = "supplement_model_checks")
+```
+
+Prior predictive checks: percentiles of the answers simulated from the priors alone and the shares outside the response range, per facet and model.
+:::
+
+### S3.2 Prior and Likelihood Sensitivity {#sec-prior-sensitivity .unnumbered}
+
+
+#### Prior-Width Comparison {.unnumbered}
+
+The preregistration specifies the priors and the
+robustness procedures (AP6).
+
+@suppltbl-prior-sweep answers whether a coefficient's classification depends on
+the prior: every motive coefficient under each of the three priors.
+
+::: {#suppltbl-prior-sweep}
+
+```{r}
+#| label: suppl-prior-sweep
+rh_sensitivity_table(s3_value$sensitivity, labels, analysis_plan = analysis_plan,
+                     target = "supplement_prior_sensitivity")
+```
+
+Every motive coefficient under each of the three priors.
+:::
+
+Across the `r rh_fmt_count(n_sweep_widths)` widths of the sweep,
+`r sweep_credibility_text` (@suppltbl-prior-sweep).
+`r if (sweep_interpretable) paste0("For these fits, ", sweep_sign_text, ".") else "The table is retained for diagnosis; its stability classifications are not interpreted."`
+
+#### Local Power Scaling {.unnumbered}
+
+Power scaling ran for each of the
+`r rh_fmt_count(n_ps_blocks)` blocks of priors (`r ps_block_text`) on its own
+and once for all priors together. Importance sampling is labelled reliable when
+the largest Pareto k across the four perturbations is below
+$\min(0.7, 1 - 1/\log_{10}(S))$, where $S$ is the number of saved posterior draws;
+otherwise it is labelled unreliable. Missing diagnostics or draw counts are
+labelled unavailable. Sensitivity flags from unreliable or unavailable calculations
+are retained for transparency but are not interpreted.
+`r suppl_power_scaling_text` Neither
+check changes a classification of the Results section, and neither is used to
+select a preferred result after seeing the data; local insensitivity is not
+global robustness.
+
+```{r}
+#| label: suppl-priorsense
+#| output: asis
+rh_float_show(
+  rh_priorsense_table(s3_value$priorsense_flagged, labels,
+                      basename(analysis_plan$data_files$result_files$prior_power_scaling)),
+  id = "priorsense", prefix = "suppltbl",
+  caption = "The power-scaling entries flagged with a diagnosis, per block of priors."
+)
+```
+
+@supplfig-prior-posterior
+answers how far the data
+moved each motive coefficient away from its prior: the preregistered prior,
+`r rh_normal_prior(analysis_plan$priors$slope_sd_primary)`, beside the posterior, drawn as the
+normal density with the coefficient's posterior median and posterior standard
+deviation. The posterior under a flat prior, which would show the data alone, is
+not drawn: no flat-prior fit exists.
+
+::: {#supplfig-prior-posterior}
+
+```{r}
+#| label: suppl-prior-posterior
+#| fig-height: 8
+rh_prior_posterior_plot(s3_value$coefficients_primary, analysis_plan, labels,
+                        density_data = s3_value$prior_posterior_density)
+```
+
+Prior and posterior of each motive coefficient in the four regressions with the preregistered prior.
+:::
+
+#### Posterior-Predictive Checks {#sec-model-checks .unnumbered}
+
+@suppltbl-posterior-predictive sets the observed
+`r join_and(unname(pp_stat_words[setdiff(checks$stats, c("mean", "sd"))]))` of each
+facet against the band of the replicated data and gives the one-sided
+posterior predictive *p*-value of every statistic; the note of that table
+states the direction of that value, which for the minimum runs opposite to a
+heavy-tail reading. @supplfig-posterior-predictive shows the same fits as
+densities against the observed distribution. The displayed table focuses on
+skewness, excess kurtosis, minimum, and maximum. Predictive checks of the mean
+and standard deviation are retained in the accompanying data file
+(`r basename(analysis_plan$data_files$result_files$posterior_predictive_checks)`).
+It answers whether data simulated from each fitted model look like the observed
+facet scores.
+
+::: {#suppltbl-posterior-predictive}
+
+```{r}
+#| label: suppl-posterior-predictive
+rh_pp_stats_table(s4_value$posterior_predictive, labels, analysis_plan = analysis_plan,
+                  target = "supplement_model_checks")
+```
+
+Posterior predictive checks: each observed statistic against the range of the data sets simulated from the fitted model, with the one-sided posterior predictive p-value.
+:::
+
+::: {#supplfig-posterior-predictive}
+
+```{r}
+#| label: suppl-pp-plot
+rh_pp_plot(NULL, labels = labels, density_data = s4_value$predictive_density)
+```
+
+Posterior predictive distributions against the observed distribution of each facet.
+:::
+
+#### Refit With Heavier Tails {#sec-supplement-student .unnumbered}
+
+The Gaussian likelihood is the preregistered choice, and a Student-t refit is
+a descriptive complement that runs only for a facet whose tail statistic is
+more extreme than its replicated band on one side.
+`r tail_text` A refit
+never changes a verdict of the Results section.
+
+`r pp_outside_text` The preregistered refit addresses heavy tails only: it
+replaces the Gaussian likelihood by a Student-t one with a fixed
+degrees-of-freedom parameter, which widens the tails and does nothing about asymmetry or a
+bounded response range. A misfit in the skewness of a bounded, standardised
+Likert score is therefore reported here and not treated, because treating it
+would mean changing a preregistered likelihood after seeing the data.
+
+`r robustness_lead`
+
+```{r}
+#| label: suppl-student-robustness
+#| output: asis
+rh_float_show(
+  rh_robustness_table(s4_value$likelihood_comparison, labels, analysis_plan = analysis_plan,
+                      target = "supplement_model_checks"),
+  id = "student-robustness", prefix = "suppltbl",
+  caption = "The coefficients of the Gaussian model beside those of the refit allowing heavier tails."
+)
+```
+
+`r student_r2_text`
+
+```{r}
+#| label: suppl-student-r2
+#| output: asis
+rh_float_show(
+  build_saved_student_r2_table(regression_r2_summaries_value, analysis_plan, labels),
+  id = "student-r2", prefix = "suppltbl",
+  caption = "Explained variance of the refits allowing heavier tails beside that of the Gaussian model."
+)
+```
+
+### S3.3 Validity Gate {#sec-additional-diagnostics .unnumbered}
+
+`r diagnostics_lead_text` The
+preregistration states the diagnostic rules (AP6).
+`r diagnostics_constant_text`
+
+::: {#suppltbl-diagnostics}
+
+```{r}
+#| label: suppl-diagnostics
+rh_diagnostics_table(diagnostics_value$diagnostics, analysis_plan, labels,
+                     additional = diagnostics_additional_value, target = "supplement_sampling_diagnostics")
+```
+
+Sampling diagnostics of every regression fit.
+:::
+
+## S4 Bayesian Network Analysis (RQ3) {#sec-network-detail .unnumbered}
+
+__Research question.__ `r rh_prereg_question(prereg, "RQ3")`
+
+### S4.1 Full-Data and Bagged Network {#sec-supplement-network-stability .unnumbered}
+
+The edge decisions of the Results section come from the bagged posterior. This
+section sets the bagged network against
+the full-data network, the network fitted once to the whole
+sample, under the same settings, and reports how stable the decisions are
+across the resamples. The bagged network is the preregistered estimate; the
+comparison is descriptive and shows how much the resampling moves the
+decisions. `r network_agreement_text`
+
+@suppltbl-network-changed-edges lists the
+edges they disagree on; `r opposite_text`. @appxfig-network-stability shows, for every
+edge, how its inclusion probability varies across the bootstrap resamples;
+@supplfig-network-pip plots the two inclusion probabilities against each
+other, and @appxfig-network-side-by-side draws the two graphs side by side.
+@supplfig-network-pip answers how far bagging moves the inclusion probability of
+each edge: the dashed lines mark the inclusion probabilities at which an edge
+is present (`r rh_fmt(s5_value$comparison$thresholds$pip_include[1], 3, bounded = TRUE)`, a Bayes
+factor of `r rh_fmt_bf(analysis_plan$network$bf_include)`) and absent
+(`r rh_fmt(s5_value$comparison$thresholds$pip_exclude[1], 3, bounded = TRUE)`, a Bayes factor of
+`r rh_fmt_bf(analysis_plan$network$bf_exclude)`).
+
+::: {#supplfig-network-pip}
+
+```{r}
+#| label: suppl-network-pip
+rh_network_pip_scatter(s5_value$comparison, labels)
+```
+
+Inclusion probability of every edge in the full-data network against its inclusion probability in the bagged network.
+:::
+
+@suppltbl-network-changed-edges answers which edges change their decision
+between the full-data network and the bagged network, and how often a single
+resample reaches either threshold for them.
+
+::: {#suppltbl-network-changed-edges}
+
+```{r}
+#| label: suppl-network-changed-edges
+rh_network_changed_edges_table(s5_value$comparison, labels)
+```
+
+The edges whose decision differs between the full-data network and the bagged network.
+:::
+
+### S4.2 Edge-Prior Sensitivity {#sec-supplement-edge-prior .unnumbered}
+
+The classifications also depend on the prior probability that an edge belongs
+in the graph, because the rule compares posterior odds with prior odds. The
+network was therefore
+refitted on all rows of the network sample at each of `r edge_prior_text`,
+with the decision thresholds unchanged. Most edges keep their classification
+across the unbagged full-data refits, and
+`r edge_prior_moving_text`. Stability of the bagged classifications across
+edge priors is not evaluated by this comparison. This comparison is descriptive:
+the reported classifications are the bagged ones at `r edge_prior_prereg`.
+Every edge's result under each prior is reported in @suppltbl-network-prior-sweep.
+The table answers whether the decision of the full-data network depends on the
+assumed prior probability that an edge exists.
+
+::: {#suppltbl-network-prior-sweep}
+
+```{r}
+#| label: suppl-network-prior-sweep
+build_saved_network_prior_sweep_table(s5_value$prior_sweep, labels)
+```
+
+Decision of the full-data network for every edge under each prior inclusion probability.
+:::
+
+## S5 Exploratory Factor Analyses (SRQ1) {#sec-supplement-efa .unnumbered}
+
+__Research question.__ `r rh_prereg_question(prereg, "SRQ1")`
+
+Reliability and dimensionality answer different questions: omega and alpha
+describe how consistently a scale's items vary together, whereas the
+exploratory analyses ask how many dimensions the items suggest. Each of the
+`r rh_fmt_count(n_scale_efas)` scales is analysed on its own, and the
+`r rh_fmt_count(n_sets)` item sets of the analysis plan are analysed together:
+each names the scales analysed together, and the number of factors expected is
+the number of scales it holds. The number of factors each of the
+`r rh_fmt_count(n_count_indices)` criteria suggests,
+the correspondence between the estimated factors and the
+intended scales, the loading clarity and the item membership are in
+`r sec_link("sec-appendix-efa")`.
+
+The solutions use polychoric correlations, WLS extraction and the primary
+`r analysis_plan$factor_analysis$rotation_primary` rotation. Every item is
+assigned to the factor with its largest absolute loading. The complete
+loading matrices of every solution are in the data file
+`r basename(analysis_plan$data_files$result_files$efa_loadings)`, and the complete
+item membership of every solution in
+`r basename(analysis_plan$data_files$result_files$efa_membership)`.
+
+For every examined solution, the
+single-scale solutions included, @suppltbl-efa-variance gives the share of the
+item variance each factor accounts for and the running total. It answers how much of the item variance each solution
+and each of its factors accounts for.
+
+::: {#suppltbl-efa-variance}
+
+```{r}
+#| label: suppl-efa-variance
+rh_efa_set_variance_table(s1_value$efa_variance, s1_value$correspondence$membership, factor_sets,
+                          s1_value$factor_number_criteria, labels, target = "supplement_measurement")
+```
+
+Variance explained by every examined solution, in the primary rotation.
+:::

@@ -1,0 +1,11 @@
+# Renders always land in renders/ (git-ignored), never next to the source.
+# Render the preregistration; provenance/README stay plain markdown.
+project:
+  type: default
+  output-dir: renders
+  render:
+    - preregistration.qmd
+  resources:
+    - codebook_items.csv
+    - codebook_scales.csv
+    - codebook_factors.csv

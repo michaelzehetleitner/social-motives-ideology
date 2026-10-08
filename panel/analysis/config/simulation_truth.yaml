@@ -1,0 +1,260 @@
+# =============================================================================
+# simulation_truth.yaml — ground truth for the synthetic test data set
+# =============================================================================
+# The synthetic raw export in data/synthetic/ is generated from THIS file by
+# R/simulate_testdata.R. Everything the pipeline
+# is supposed to recover is stated here: which rows must be excluded and why,
+# which latent adjusted associations exist (and how large), which are absent.
+# These are not exact recovery targets for noisy, discretised scale averages.
+#
+# Effect sizes are standardised partial coefficients at the latent level.
+# Calibration reference: the conservatism_climate_2 RQ1 BAS models used 1,334
+# observations and 17 standardised predictors per outcome. Absolute posterior
+# means ranged from approximately 0.0004 to 0.291. The synthetic effects of
+# 0.10-0.25 are a selected working range, not the full observed range;
+# "moderate" here means 0.15-0.25, "small" 0.10-0.12, "null" exactly 0.
+# =============================================================================
+
+seed: 20260905
+n_total: 776
+
+# Rows that must leave the analysis sample (AP1), in the order the survey flow
+# produces them. 706 rows remain after all exclusions; 700 enter the shared file.
+exclusions:
+  consent_refused: 6        # consent_check = 2, no further data
+  incomplete: 14            # Finished = 0, Progress < 100, items missing after a random break-off point
+  age_under_18: 4           # demo_age 16 or 17, everything else complete (the survey's age branch is unreachable)
+  quota_full: 26            # survey_status = quota_full: exported as finished, age and the six scalometers answered, everything after them empty.
+                            # n_total includes these 26, so n_kept is 706. The count is a fixture-design choice:
+                            # adding rows redraws the whole seeded stream, so the count is one of the admissible
+                            # ones that keep two declared properties of the fixture —
+                            # female remains the largest gender group of the analysis sample (364 vs 336), i.e. the
+                            # treatment-contrast reference level the reports and the recovery check use, and the
+                            # realised pol_left_right / SDO-D correlation stays close to politics.left_right_with_sdo.
+  attention_1_failed: 12    # attentioncheck_1 != 3, flow status attention_failed, later items empty
+  attention_2_failed: 8     # attentioncheck_2 != 5, flow status attention_failed, later items empty
+n_kept: 706                 # = n_total - sum(exclusions)
+
+# Latent predictor structure (correlations among the five motives)
+motive_correlations:
+  order: [zm_security, zm_arousal, zm_achievement, zm_power, zm_prestige]
+  matrix:
+    - [1.00, 0.25, 0.30, -0.05, 0.20]
+    - [0.25, 1.00, 0.30,  0.20, 0.25]
+    - [0.30, 0.30, 1.00,  0.30, 0.40]
+    - [-0.05, 0.20, 0.30, 1.00, 0.45]
+    - [0.20, 0.25, 0.40,  0.45, 1.00]
+
+# Covariate generation
+covariates:
+  age: { mean: 47, sd: 16, min: 18, max: 69 }
+  gender_divers_n: 6        # valid participants; fewer than exclusions$gender_divers_min_n, so AP1 excludes them
+  gender_probs: { male: 0.49, female: 0.50, divers: 0.01 }   # divers count is forced to covariates.gender_divers_n
+  income_band_probs: [0.02, 0.03, 0.05, 0.06, 0.07, 0.11, 0.13, 0.13, 0.15, 0.10, 0.09, 0.04, 0.02]
+  hh_size_probs: [0.30, 0.38, 0.14, 0.11, 0.04, 0.02, 0.005, 0.005]
+  education_probs: { 1: 0.02, 2: 0.18, 3: 0.35, 4: 0.13, 5: 0.30, 9: 0.02 }
+  covariate_motive_correlations:            # small realistic dependencies
+    age_with: { zm_arousal: -0.15, zm_power: -0.10 }
+    male_with: { zm_power: 0.20, zm_security: -0.15 }
+
+# True adjusted associations (standardised partial coefficients, latent level).
+# Test sparsity was chosen to resemble the non-credible-association proportion
+# in conservatism_climate_2: there 20 of 34 standardised partial
+# coefficients (59%) had a 95% interval covering zero. This is a test-design
+# choice, not evidence that 59% of population coefficients are exactly zero.
+# Here 19 of 32 cells are exactly zero and 13 carry an effect.
+# Cell status relative to preregistration Table 3:
+#   directional+effect -> 8 nonzero latent effects, all in the predicted direction
+#   directional+null   -> 8 exactly zero latent effects
+#   either-direction+effect -> 2 nonzero prestige effects (asc_conv, sdo_dom)
+#   either-direction+null   -> 2 exactly zero prestige effects (asc_sub, asc_agg)
+# These are properties of the generating coefficients, not fitted verdicts.
+#   covariates: only age -> asc_conv, male -> asc_agg, male -> sdo_dom are non-zero
+true_beta:
+  asc_conv: { zm_security: 0.20, zm_arousal: -0.20, zm_achievement: -0.15, zm_power: 0.00, zm_prestige: 0.15, age: 0.15, male: 0.00, income: 0.00 }
+  asc_sub:  { zm_security: 0.00, zm_arousal: -0.20, zm_achievement: -0.15, zm_power: 0.00, zm_prestige: 0.00, age: 0.00, male: 0.00, income: 0.00 }
+  asc_agg:  { zm_security: 0.00, zm_arousal: 0.00, zm_achievement: -0.12, zm_power: 0.25, zm_prestige: 0.00, age: 0.00, male: 0.20, income: 0.00 }
+  sdo_dom:  { zm_security: 0.00, zm_arousal: 0.00, zm_achievement: 0.00, zm_power: 0.25, zm_prestige: 0.15, age: 0.00, male: 0.35, income: 0.00 }
+null_proportion:
+  cells: 32
+  null_cells: 19
+  reference: "conservatism_climate_2 RQ1, BAS 95% intervals covering zero: 20 of 34"
+
+# The calibration reference as data, read by the synthetic-data report
+# (synthetic-report.qmd, R/report_synthetic_data.R). The earlier study is the
+# conservatism study "Climate, Morals, and Politics" (preregistration
+# https://doi.org/10.23668/psycharchives.16196; its data are unpublished); its
+# RQ1 analysis fitted Bayesian model-averaged regressions (BAS) of two outcomes
+# on 17 standardised predictors. The values come from its saved summaries
+# (conservatism_climate_2, rq1_bas_models_lst and rq1_bas_summaries_lst): an
+# interval with an end at exactly 0.000 counts as including
+# zero, and the range is that of the absolute model-averaged posterior means of
+# the coefficients whose interval excluded zero. No generator reads this block.
+calibration_reference:
+  n_observations: 1334
+  n_outcomes: 2
+  n_predictors: 17
+  interval_level: 0.95
+  n_intervals_including_zero: 20
+  abs_posterior_mean_range_intervals_excluding_zero: [0.082, 0.291]
+
+# Residual correlations among outcomes (conditional dependencies the network
+# should pick up beyond the motive paths)
+outcome_residual_correlations:
+  order: [asc_agg, asc_sub, asc_conv, sdo_dom]
+  matrix:
+    - [1.00, 0.35, 0.35, 0.35]
+    - [0.35, 1.00, 0.45, 0.15]
+    - [0.35, 0.45, 1.00, 0.15]
+    - [0.35, 0.15, 0.15, 1.00]
+
+# Measurement model: each item = loading * latent + sqrt(1 - loading^2) * noise,
+# then shifted by the scale's location and cut into 1..6. Target omega ~ .80.
+measurement:
+  loading: 0.65
+  scale_location:            # mean position on the 1..6 scale before discretisation
+    zm_security: 4.6
+    zm_arousal: 3.8
+    zm_achievement: 4.3
+    zm_power: 2.7
+    zm_prestige: 3.6
+    asc_agg: 3.0
+    asc_sub: 2.9
+    asc_conv: 4.1
+    sdo_dom: 2.5
+  spread: 1.05               # SD on the 1..6 scale before discretisation
+  reverse_keyed_stored_as_displayed: true   # reverse-keyed items stored as 7 - x, like the live survey
+
+# Quota derivation replicated from the survey flow (M4): a party is liked if
+# its scalometer > 0; possibly_left / possibly_conservative flags; quota_group.
+politics:
+  scalometer_sd: 1.6
+  left_right_with_sdo: 0.35   # correlation of pol_left_right with the SDO-D latent
+
+# =============================================================================
+# Scenarios
+# =============================================================================
+# Everything above is the ONE base truth. A scenario states only how it
+# deviates. `clean` deviates in nothing, so the clean export is the base truth.
+# `trouble` plants the faults
+# that the test bed otherwise lacks, so that the contingencies of the plan have
+# something to fire on.
+#
+# WHICH TRUTH EACH INSTRUMENT READS — this matters and is easy to get wrong:
+#   * scripts/make_synthetic_data.R writes the `scenarios.export` scenario
+#     (--scenario=clean|trouble) into data/synthetic/, and the whole targets
+#     pipeline runs on that export.
+#   * the prior-recovery simulation (R/prior_recovery.R, the outcome-blind M3
+#     study) reads the BASE `true_beta` above and never resolves a scenario.
+#     Its working_range scenario therefore stays the clean truth, and the M3
+#     numbers in the preregistration stay anchored whatever the export
+#     scenario is.
+#     (A pure sign flip would leave them unchanged anyway — every quantity the
+#     study records is sign-symmetric — but the anchoring is explicit, not
+#     incidental.)
+scenarios:
+  export: trouble             # the scenario data/synthetic/ is generated from
+
+  clean:
+    description: >
+      The base truth unchanged: no disconfirmation, no missing value, no
+      cross-loading, no contaminated residual. This is the reference render
+      and the truth the M3 simulation study is anchored to.
+
+  trouble:
+    description: >
+      The base truth with a prestige contrast and three planted faults. Everything the base truth
+      states and this scenario does not name — the exclusion counts including
+      the 26 quota-full rows, the motive correlations, the measurement model,
+      the quota derivation — is unchanged, so n_kept stays 706 and the AP1
+      table is the same as under `clean`.
+
+    # (a) A planted contrast. Preregistration Table 3 allows either
+    # direction (±) for prestige, so this negative coefficient does not
+    # contradict a directional prediction. Prestige has opposite generating
+    # signs for conventionalism and SDO-D; whether their fitted intervals
+    # exclude zero remains an empirical result. This is the only scenario
+    # change that touches true_beta.
+    true_beta_overrides:
+      asc_conv: { zm_prestige: -0.15 }
+
+    # (b) A small missingness pattern on MODELLED variables at the scale level,
+    # blanked after the export is assembled and outside the break-off logic, so
+    # AP1 keeps every affected row (missing age is retained by AP1 criterion 3;
+    # missing gender is no exclusion criterion at all). One missing item makes
+    # its whole scale score missing (AP3 scores a scale as a row mean with
+    # na.rm = FALSE), which is how a single blanked item reaches the model.
+    # Consequences the run must show: the AP3 fill writes a value into every
+    # blanked cell before the scale scores, so no model sees a gap and the
+    # network keeps every row; the one missing gender is never filled, is
+    # omitted from all four gender-adjusted regressions (n 706 -> 705) and is
+    # reported as an export fault.
+    missingness:
+      rows: kept                # affected rows are drawn among the AP1-kept rows
+      distinct_rows: true       # no respondent carries two blanked cells
+      seed_offset: 91           # own draw at the end of the generator, so the
+                                # clean export is unaffected by it
+      cells:                    # `n_missing`, not `n`: YAML 1.1 reads a bare `n` key as false
+        - { column: ASC_aag_1,          n_missing: 3, affects: asc_agg  }
+        - { column: UMS_int_1,          n_missing: 2, affects: zm_security }
+        - { column: demo_age,           n_missing: 2, affects: age      }
+        - { column: demo_income_hh_net, n_missing: 2, affects: income   }
+        - { column: demo_gender,        n_missing: 1, affects: gender   }
+
+    # (c) A cross-loading. ASC_con_3 (conventionalism) additionally loads on the
+    # authoritarian-submission latent. The two loadings are the generating
+    # loadings; the item is then rescaled to unit variance, so its realised
+    # standardised loadings are 0.65 / sqrt(v) and 0.65 / sqrt(v) with
+    # v = 1 + 0.65^2 + 2 * 0.65 * 0.65 * cor(asc_conv, asc_sub) — about .47 on
+    # each latent. In the four-factor oblimin solution of the generated export
+    # (polychoric correlations, factor correlation about .49) the item loads
+    # .48 on conventionalism and .45 on submission: above the .40 cross-loading
+    # threshold of analysis_plan.yaml, with the item still on its own factor.
+    # Every other item keeps loading 0.65 on exactly one factor.
+    cross_loadings:           # `factor`, not `on`: YAML 1.1 reads a bare `on` key as true
+      - { item: ASC_con_3, factor: asc_sub, loading: 0.65 }
+
+    # (d) A contaminated residual, so the AP6 excess-kurtosis trigger fires in
+    # the direction it is written for (observed excess kurtosis above the upper
+    # bound of its posterior-predictive band) and the Student-t refit runs. The
+    # contamination is applied to the standard-normal draw the asc_agg residual
+    # is built from, before the exact-covariance rotation, and asc_agg is the
+    # first column of outcome_residual_correlations.order; the rotation is
+    # triangular, so the declared residual correlations and the exact recovery
+    # of true_beta survive it unchanged.
+    # The share is 0.05 because a six-point item clamped to 1..6 truncates most
+    # of the planted tail: at 0.03 x 4 the excess kurtosis of the z-scored
+    # asc_agg scale score is 0.366, and the 97.5 % point of that statistic under a Gaussian model at n = 702
+    # is 0.391, so the kurtosis trigger would sit just INSIDE its replicated
+    # band and only the `max` statistic would fire. At 0.05 x 4 the observed
+    # excess kurtosis is 0.795, well outside the band, while the fixture keeps
+    # every declared property: no response category holds more than 40 % of the
+    # scale's responses (0.388) and omega stays in the .72 .. .90 band (0.780).
+    # A larger multiplier reaches the kurtosis faster but breaks the category
+    # share (0.03 x 6 gives 0.406). Numbers measured on the generated export.
+    residual_contamination:
+      outcome: asc_agg
+      share: 0.05               # share of cases whose residual draw is inflated
+      multiplier: 4
+      seed_offset: 37           # own draw for the mask; the main stream is untouched
+
+    # The verdict labels summarise the latent design only: directional
+    # nonzero effects agree with their signs; directional nulls carry no
+    # effect; ± cells have two nonzero and two null effects. They do not
+    # predict interval exclusions in a finite fitted sample. The prestige
+    # sign flip leaves these counts unchanged relative to the clean design.
+    verdicts:
+      table2_cells: 20
+      confirmed: 8             # directional nonzero effects with matching signs
+      disconfirmed: 0
+      exploratory_credible: 2  # ± cells: asc_conv ~ zm_prestige, sdo_dom ~ zm_prestige
+      exploratory_not_credible: 2 # ± cells: asc_sub ~ zm_prestige, asc_agg ~ zm_prestige
+      sign_differentiating_motives: [zm_prestige]
+      # RQ1b (preregistered exploratory): the pair differences the flip plants.
+      # No sign is predicted for a pair, so the intention is credibility only.
+      rq1b_planted:
+        - { predictor: zm_prestige, outcome_x: asc_conv, outcome_y: sdo_dom, true_difference: -0.30, intended_credible: true }
+        - { predictor: zm_prestige, outcome_x: asc_agg,  outcome_y: asc_conv, true_difference: 0.15, intended_credible: true }
+        - { predictor: zm_prestige, outcome_x: asc_sub,  outcome_y: asc_conv, true_difference: 0.15, intended_credible: true }
+        - { predictor: zm_prestige, outcome_x: asc_agg,  outcome_y: sdo_dom,  true_difference: -0.15, intended_credible: true }
+        - { predictor: zm_prestige, outcome_x: asc_sub,  outcome_y: sdo_dom,  true_difference: -0.15, intended_credible: true }

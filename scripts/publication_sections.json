@@ -1,0 +1,105 @@
+[
+  {
+    "preregistration": "rq1-draft",
+    "code": [
+      "route-analyses-regressions",
+      "route-results-regressions"
+    ]
+  },
+  {
+    "preregistration": "rq2-draft",
+    "code": [
+      "route-analyses-joint-model",
+      "route-results-joint-model"
+    ]
+  },
+  {
+    "preregistration": "rq3-draft",
+    "code": [
+      "route-analyses-network",
+      "route-results-network"
+    ]
+  },
+  {
+    "preregistration": "srq1-draft",
+    "code": [
+      "route-analyses-srq1-efa",
+      "route-results-srq1-efa"
+    ]
+  },
+  {
+    "preregistration": "ap1-participant-exclusions",
+    "code": [
+      "route-data-intake"
+    ]
+  },
+  {
+    "preregistration": "ap3-data-preprocessing",
+    "code": [
+      "route-data-intake",
+      "route-data-data-files"
+    ]
+  },
+  {
+    "preregistration": "ap4-reliability-and-scale-structure",
+    "code": [
+      "route-description-reliability",
+      "route-analyses-cfa"
+    ]
+  },
+  {
+    "preregistration": "ap5-descriptive-statistics",
+    "code": [
+      "route-description-descriptives"
+    ]
+  },
+  {
+    "preregistration": "ap6-regression-analyses-rq1",
+    "code": [
+      "route-analyses-regressions",
+      "route-supplement-s3-prior-sensitivity",
+      "route-supplement-s4-model-checks"
+    ]
+  },
+  {
+    "preregistration": "ap7-network-analysis-rq3",
+    "code": [
+      "route-analyses-network",
+      "route-results-network"
+    ]
+  },
+  {
+    "preregistration": "joint-analysis-draft",
+    "code": [
+      "route-analyses-joint-model",
+      "route-results-joint-model"
+    ]
+  },
+  {
+    "preregistration": "srq1-dimensionality-and-item-correspondence",
+    "code": [
+      "route-analyses-srq1-efa",
+      "route-results-srq1-efa"
+    ]
+  },
+  {
+    "preregistration": "ap10-inference-criteria",
+    "code": [
+      "route-results-regressions",
+      "route-results-network",
+      "route-results-joint-model"
+    ]
+  },
+  {
+    "preregistration": "ap11-other-information",
+    "code": [
+      "route-supplement-software"
+    ]
+  },
+  {
+    "preregistration": "deviations-policy",
+    "code": [
+      "route-reporting-deviations"
+    ]
+  }
+]

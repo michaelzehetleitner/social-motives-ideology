@@ -1,0 +1,720 @@
+# =============================================================================
+# analysis_plan.yaml — ZM panel study (ZM-ASC-SDO), analysis-plan configuration
+# =============================================================================
+# Read this file alongside the model and estimand card in the technical report.
+# It contains four kinds of information:
+# - Configured values passed to calculations or validated as supported settings,
+#   e.g. regression.motives, slope_sd_primary, family and student_t.nu_fixed.
+# Every list of scales below is a set: its order, and the label of every scale,
+# come from codebook_scales.csv (`order`, `label`, `short_label`); zm_config()
+# puts each list into that order.
+# - Descriptive mirrors of rules implemented in R, e.g. inference.*_rule and
+#   point_estimate. Editing their text does not change a calculation.
+# - Fixed implementation choices, identified beside the relevant settings or
+#   comments, e.g. always fitting the joint model beside the four regressions.
+# - Source pointers (`prereg:` and source comments), which locate the rationale
+#   in ../preregistration/preregistration.qmd; they do not select executable code.
+# The R function named beside a mirror or fixed choice is the calculation to
+# inspect. A recorded value is not proof of a scientific choice's merit.
+# =============================================================================
+
+meta:
+  study: "The Zürcher Model of Social Motivation, Right-wing Authoritarianism and Social Dominance Orientation"
+  wave: panel
+  snapshot_date: "2026-09-05"
+  preregistration: "../preregistration/preregistration.qmd"
+  codebook_dir: "../preregistration"        # codebook_items.csv, codebook_scales.csv, codebook_factors.csv
+
+# -----------------------------------------------------------------------------
+# Fieldwork window (M4). The Results section states the dates of data
+# collection; JARS Table 1 asks for them and the report reads them from here
+# rather than from a sentence typed into the manuscript.
+# -----------------------------------------------------------------------------
+recruitment:
+  prereg: M4
+  fieldwork_start: "2026-06-19"
+  fieldwork_end: "2026-06-24"
+
+# -----------------------------------------------------------------------------
+# Report rendering. `published: true` suppresses the pipeline target names in
+# the table source notes, for the published supplement; with false the notes
+# name the target each table comes from.
+# -----------------------------------------------------------------------------
+report:
+  published: false
+
+# -----------------------------------------------------------------------------
+# Run profiles. `full` is the preregistered specification. `smoke` shrinks the
+# expensive settings so the whole pipeline runs in minutes, to check that it
+# runs. Select with env var ZM_PROFILE=smoke|full (default: full).
+# -----------------------------------------------------------------------------
+profiles:
+  full:
+    reliability_bootstrap_n: 1000
+    regression_iter_per_chain: 6000     # post-warmup draws per chain; raised until ESS target met
+    regression_warmup: 2000
+    regression_ess_target: 10000
+    network_B: 600
+    network_iter: 50000
+  smoke:
+    reliability_bootstrap_n: 60         # execution check; full profile retains 1000 interval resamples
+    regression_iter_per_chain: 1000
+    regression_warmup: 500
+    regression_ess_target: 2000         # engineering run, not final inference
+    network_B: 60                       # test bag; full profile remains 600
+    network_iter: 3000
+  presentation:                         # layout checks of the reports only; minutes; never inference
+    reliability_bootstrap_n: 20
+    regression_iter_per_chain: 300
+    regression_warmup: 300
+    regression_ess_target: 200
+    network_B: 12
+    network_iter: 1000
+
+# -----------------------------------------------------------------------------
+# AP1 — Participant exclusions
+# -----------------------------------------------------------------------------
+exclusions:
+  prereg: AP1
+  consent_required_value: 1               # consent_check == 1 ("Ja, ich willige ein")
+  min_age: 18                             # exclude known demo_age < 18; missing age proceeds to AP3
+  max_age: 69                             # exclude known demo_age > 69
+  attention_check_1_correct: 3            # "Stimme eher nicht zu"
+  attention_check_2_correct: 5            # "Stimme zu"
+  survey_status_complete: "complete"      # embedded-data flow status of billed completes
+  survey_status_quota_full: "quota_full"  # turned away at a full quota cell before the questionnaire (M4); they leave before the AP1 criteria
+  gender_divers_min_n: 30                 # a divers group of 30 or more is kept in the analyses and the shared file; a smaller one in neither
+  test_rows_removed_upstream: true        # Status != "Survey Preview"/"Survey Test" is still asserted defensively
+
+# -----------------------------------------------------------------------------
+# AP3 — Preprocessing: scales, covariates, standardisation, missing data
+# -----------------------------------------------------------------------------
+scales:
+  prereg: AP3
+  score: "row mean after reverse-scoring (7 - x on the 1..6 scale)"
+  response_min: 1
+  response_max: 6
+
+covariates:
+  age:
+    z_col: age_z
+    label: Age band
+    z_col_all: age_z_all
+    z_col_known_gender: age_z_known_gender
+  income:
+    z_col: income_z
+    label: Income band per household member
+    z_col_all: income_z_all
+    z_col_known_gender: income_z_known_gender
+
+standardisation:
+  prereg: AP3/AP6
+  # covariates_z is not written here: zm_config() derives it from
+  # covariates above (every metric covariate is standardised; gender is
+  # a factor and has no standardised column).
+  z_reference: "each model's own analysis sample: the four regressions and the joint model on the respondents with known gender, the network on every retained respondent"
+
+income:
+  prereg: AP3
+  definition: "income (net household income per household member; AP3) = band_representative(demo_income_hh_net) / hh_size"
+  band_representative:                    # euro per month; midpoint of each band
+    1: 250       # unter 500
+    2: 625       # 500 bis unter 750
+    3: 875       # 750 bis unter 1000
+    4: 1125      # 1000 bis unter 1250
+    5: 1375      # 1250 bis unter 1500
+    6: 1750      # 1500 bis unter 2000
+    7: 2250      # 2000 bis unter 2500
+    8: 2750      # 2500 bis unter 3000
+    9: 3500      # 3000 bis unter 4000
+    10: 4500     # 4000 bis unter 5000
+    11: 6250     # 5000 bis unter 7500
+    12: 8750     # 7500 bis unter 10000
+    13: 12500    # 10000 und mehr  (open band: 1.25 x lower bound; recommendation)
+  hh_size_top_value: 8                    # "8 Personen und mehr" -> 8
+
+# Age and income per household member enter the analyses in bands. The bands
+# are formed after the AP3 fill, which works on exact age, household size and
+# the 13 household-income bands; the AP5 descriptives use the exact values.
+age_bands:
+  prereg: AP3
+  # Completed years. A band runs from its first year to the year before the
+  # next band's first year; the last band ends at last_year. A filled age below
+  # the first year or above last_year belongs to the nearest band.
+  first_years: [18, 25, 30, 35, 40, 45, 50, 55, 60, 65]
+  last_year: 69
+  labels: ["18–24", "25–29", "30–34", "35–39", "40–44", "45–49", "50–54", "55–59", "60–64", "65–69"]
+  representative: midpoint                # (first year + last year) / 2
+
+income_bands_per_member:
+  prereg: AP3
+  # Euro per month, income per household member (income above). The bands are
+  # right-open: a band holds its lower limit and the values below its upper
+  # limit. The first and the last limit are the outer limits of the lowest and
+  # the highest band; they enter only the representatives, so the lowest band
+  # holds every value below 500 and the highest every value from 2800 up.
+  limits: [357, 500, 630, 800, 1050, 1400, 2000, 2800, 12500]
+  labels: ["<500", "500–<630", "630–<800", "800–<1050", "1050–<1400", "1400–<2000", "2000–<2800", "2800+"]
+  representative: geometric_mean          # sqrt(lower limit * upper limit)
+
+gender:
+  prereg: AP3/AP6
+  coding: factor
+  contrasts: treatment
+  levels_after_ap1: "the levels present in the analysis sample; divers only when the group reaches exclusions$gender_divers_min_n"
+  rationale: "Gender relates to the dominance motive and to SDO-D, i.e. it is a confounder for the power -> SDO-D prediction; dropping it is not justified."
+
+east_west:
+  prereg: AP3
+  east: [11, 12, 13, 14, 15, 16]          # Berlin, Brandenburg, Mecklenburg-Vorpommern, Sachsen, Sachsen-Anhalt, Thüringen
+  west: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  rationale: "Destatis convention 'neue Länder einschließlich Berlin'"
+
+free_text_comment:
+  prereg: AP3
+  handling: "retained in the internal analysis file; excluded from the scientific-use file; manual de-anonymisation review (names, places, employers) before any other release"
+
+missing_data:
+  prereg: AP3 (Missing-Data Processing)
+  standardise_within_model: true          # z-scores computed on each model's own analysis sample; constants fixed across its sensitivity and Student-t fits
+  # The fill (AP3): every missing value is filled ONCE,
+  # outside the models, before the scale scores, so that every model sees the
+  # same table. Items: one ordinal item model per scale that has a gap.
+  # Demographics: one regression each, in the order below, each using the
+  # demographics filled before it. Gender is never filled. Nothing here is a
+  # switch that selects an alternative rule; these are the values the AP3 FILL
+  # cards print (R/parameter_cards.R, pc_ap3_fill_route_card() and
+  # pc_ap3_fill_model_card()). The formulas are
+  # written out literally in the fitting functions in R/ap3_fill.R; the strings
+  # here mirror them for the card. The nine scale scores enter the demographic
+  # formulas in the order of the `order` column of codebook_scales.csv.
+  fill:
+    rule: "one fill before the scale scores; one value per empty cell, the same table for every model"
+    stage: before_scale_scores
+    items:
+      formula: "answer ~ 1 + (1 | item) + (1 | respondent_id)"
+      family: cumulative(logit)
+      per: scale                          # one fit per scale with at least one gap
+      value: "posterior median of the expected answer (fractional allowed)"
+      priors:                             # widths; the fill builds the distributions from them
+        intercept_sd: 1.5
+        sd_sd: 1
+    demographics:
+      order: [demo_age, demo_hh_members, demo_income_hh_net]
+      # ap3_select_demographic_imputation_predictors() applies the preregistered
+      # rule: gender is a predictor of all three models only when it is observed
+      # for every retained participant, and is omitted from all three otherwise.
+      # It is never itself filled.
+      predictors: "the nine scale scores, gender (only when observed for every retained participant), and the demographics filled earlier"
+      demo_age:
+        formula: "demo_age ~ zm_security + zm_arousal + zm_power + zm_prestige + zm_achievement + asc_agg + asc_sub + asc_conv + sdo_dom + gender (only when observed for every retained participant)"
+        family: gaussian
+        value: "posterior median of the expected value"
+        priors:
+          intercept_mean: 45
+          intercept_sd: 20
+          b_sd: 5
+          sigma_sd: 15
+      demo_hh_members:
+        formula: "demo_hh_members ~ zm_security + zm_arousal + zm_power + zm_prestige + zm_achievement + asc_agg + asc_sub + asc_conv + sdo_dom + gender (only when observed for every retained participant) + demo_age"
+        family: poisson
+        range: [1, 8]                     # household-size question: 1 .. "8 Personen und mehr"
+        value: "posterior median of the expected count, rounded, kept within 1..8"
+        priors:
+          intercept_sd: 1.5
+          b_sd: 0.5
+      demo_income_hh_net:
+        formula: "demo_income_hh_net ~ zm_security + zm_arousal + zm_power + zm_prestige + zm_achievement + asc_agg + asc_sub + asc_conv + sdo_dom + gender (only when observed for every retained participant) + demo_age + demo_hh_members"
+        family: cumulative(logit)
+        bands: 13                         # the income question's 13 bands, as an ordered outcome
+        value: "median band of the posterior predictive draws"
+        priors:
+          intercept_sd: 1.5
+          b_sd: 0.5
+    interval: 0.95                        # posterior predictive, per filled cell, report only
+    gender: "never filled; rows without gender are omitted from the four regressions and the joint model only"
+    shared_file: "keeps the gaps"
+    drop:                                 # dropped from all analyses instead of filled
+      items_per_scale_more_than: 2
+      demographics_missing_at_least: 2
+
+# -----------------------------------------------------------------------------
+# AP4 — Reliability and scale structure (descriptive only)
+# -----------------------------------------------------------------------------
+reliability:
+  interval_level: 0.95                  # participant-bootstrap percentile interval
+  prereg: AP4
+  bootstrap_n: 1000                     # overridden by profile
+  bootstrap_seed: 1                     # RNG seed set before each scale's participant resampling; every scale starts from this same seed, so scales with the same number of participants draw the same participant index sets
+  omega_interval_min_success: 0.80      # omega interval reported only if >= 80% of resamples succeed; otherwise omega point estimate without an interval; alpha keeps its own interval
+  omega: "psych::omega, McDonald's omega total; Cronbach's alpha as fallback"
+  cfa: "lavaan, one-factor model per scale, estimator WLSMV, ordered items"
+  # Per-scale EFAs run through the same machinery as the five item sets, so the
+  # criterion list they use is factor_analysis.factor_number_criteria.
+
+# -----------------------------------------------------------------------------
+# AP6 — Regressions (brms)
+# -----------------------------------------------------------------------------
+regression:
+  prereg: AP6
+  engine: brms                           # fixed implementation mirror: fit_primary_regressions() calls brms
+  backend: cmdstanr                       # passed to brms by fit_primary_regressions() and the other fitting verbs
+  family: gaussian                       # checked once at load (zm_config(): only gaussian is implemented; Student-t is the robustness refit)
+  # Order of outcomes and motives: the `order` column of codebook_scales.csv.
+  outcomes: [asc_agg, asc_sub, asc_conv, sdo_dom]
+  motives: [zm_security, zm_arousal, zm_power, zm_prestige, zm_achievement]   # the five ZM motive scales entering every regression
+  # The adjustment set, by key and in the order the tables report it. The order
+  # and gender's place in it are the scientific choice; zm_config() replaces
+  # each metric key by its standardised column from covariates above.
+  covariates: [age, gender, income]
+  # zm_config() builds the predictor side of every regression, identical for
+  # the four outcomes, as regression$predictors: the motives (standardised, in
+  # codebook order) followed by the covariates above.
+  chains: 4
+  cores: 4
+  ess_target: 10000                       # overridden by profile: smoke 2000, full 10000
+  rhat_max: 1.01                          # descriptive mirror; the gate reads validity_gate.rhat_max below
+  validity_gate:                          # extended computational-validity gate
+    scope: "population-level regression coefficients (b_ parameters)" # descriptive mirror of ap6_focal_b_vars()
+    ess_bulk_min: 10000                   # descriptive full-profile value; execution uses regression.ess_target after profile selection
+    ess_tail_min: 10000                   # descriptive full-profile value; execution uses regression.ess_target after profile selection
+    rhat_max: 1.01
+    divergences_max: 0
+    treedepth_hits_max: 0
+    bfmi_min: 0.2
+    on_failure:                          # descriptive mirror of apply_validity_gate()
+      - "ESS shortfall: double the iterations and refit, at most three times"
+      - "R-hat, divergences or tree-depth hits: refit once with doubled warmup, adapt_delta 0.99, max_treedepth 15"
+      - "reparameterise only for a documented cause"
+      - "otherwise report the fit as computationally not interpretable; no AP10 classification; deviation documented"
+    max_ess_doublings: 3                  # read by ap6_gate_settings() as the cap of the ESS doubling loop
+    adapt_delta_retry: 0.99
+    max_treedepth_retry: 15
+  r2:
+    definition: "model-based Bayesian R2, var(mu) / (var(mu) + residual variance), same definition for the Gaussian and the Student-t (nu = 4: residual variance = 2 * sigma^2) fits" # descriptive mirror of ap6_r2_draws()
+  point_estimate: median                  # descriptive mirror of extract_regression_coefficient_summaries()
+  fit_roles:                              # label of every fit outside the outcome x prior grid
+    student_refit: "student refit"
+    multivariate: "joint estimation (RQ2)"
+  ci_level: 0.95
+  seed: 20260905
+  prior_predictive:
+    # The descriptive summaries the registered prior-predictive report states;
+    # check_prior_predictions() reads them from here.
+    absolute_summary_percentile: 0.95     # percentile of |standardised prediction|
+    raw_scale_quantiles: [0.05, 0.50, 0.95]  # quantiles reported on the response scale
+  multivariate:
+    # AP7 "Joint Regression (RQ2)": four Gaussian outcome equations with
+    # the shared predictors, coefficient-prior settings and correlated residuals.
+    # define_joint_regression_model() reads AP3's joint sample: known-gender
+    # respondents with every required value available and constants computed on
+    # that sample. Joint posteriors can differ from separate fits even on common
+    # rows. Separate primary fits determine RQ1 Table 3 verdicts; paired joint
+    # draws supply RQ2 summaries.
+    fitted: true                         # fixed implementation mirror; _targets.R always fits it, not an on/off switch
+
+priors:
+  prereg: AP6
+  slope_sd_primary: 0.20                  # supported by the joint-plausibility criterion; the diffuse normal(0, 20) comparison is not cited
+  slope_sd_sweep: [0.10, 0.20, 0.40]      # skeptical / primary / permissive (not equally plausible; descriptive)
+  sweep_labels: { "0.1": "skeptical", "0.2": "primary", "0.4": "permissive" }
+  sweep_block: "standardised-coefficient block (motives and metric covariates); gender, intercept and residual priors fixed"
+  gender_sd: 0.40                         # raw treatment-contrast prior on the outcome-SD group difference; fixed across the sweep; with three levels the non-reference pair has induced SD 0.40*sqrt(2)
+  intercept_sd: 0.20
+  sigma_sd: 1.0                           # half-normal via brms class sigma
+  rescor: "lkj(2)"                        # AP7: prior(lkj(2), class = rescor)
+
+sensitivity:
+  prereg: AP6/AP10
+  priorsense: true                        # fixed implementation mirror; _targets.R always runs ap6_run_priorsense()
+  powerscale:
+    blocks: [metric_slopes, gender_contrasts, intercept, sigma, all_priors]
+    inspected: "all population-level coefficients of the primary fit, plus Bayesian R2" # descriptive mirror of ap6_run_priorsense()
+    component: [prior, likelihood]        # ap6_run_priorsense() validates that both supported axes are present
+    lower_alpha: 0.99
+    upper_alpha: 1.01
+    div_measure: cjs_dist
+    sensitivity_threshold: 0.05
+  prior_predictive_check: true            # fixed implementation mirror; _targets.R always runs the prior-predictive grid
+  posterior_predictive_check: true        # fixed implementation mirror; _targets.R always runs posterior-predictive checks
+  student_t:
+    role: descriptive                        # the Gaussian primary fit decides; the refit never changes an AP10 verdict
+    trigger: one_sided_tails                 # fires only when observed excess kurtosis exceeds the upper bound of its posterior-predictive band, or an observed min/max is MORE extreme than the replicated band
+    trigger_stats: [kurtosis, min, max]
+    nu_fixed: 4                              # fixed at 4; no free tail parameter
+    sigma_scale_prior_sd: 0.7071067811865476 # half-normal on the Student-t scale with SD 1/sqrt(2): induced residual-SD prior = half-normal(0, 1), matching the Gaussian model
+
+# -----------------------------------------------------------------------------
+# AP10 — Inference criteria
+# -----------------------------------------------------------------------------
+inference:
+  prereg: AP10
+  # Descriptive rule mirrors, not executable expressions. The primary verdicts
+  # are calculated by extract_regression_prediction_decisions(); the
+  # interval-exclusion rule is ap7_credible(). The prior and interval level come from priors/regression.
+  credible_rule: "95% CrI under the primary prior excludes zero"
+  confirmation_rule: "credible AND posterior median sign == predicted sign"
+  disconfirmation_rule: "credible AND sign opposite to prediction"
+  exploratory_rule: "± cell: report credibility and sign only (RQ1, AP10)"
+
+# Table 3 of the preregistration (RQ1, theoretical predictions): the predicted
+# sign of each motive's adjusted association with each facet. "+" and "-" are
+# directional predictions. "±" marks the four prestige cells, for which either
+# direction is possible: they are judged by credibility and sign only and get
+# no directional verdict (RQ1, AP10). This block is the link between the
+# prediction table and the decision code. Tests compare it cell by cell with
+# Table 3 of the preregistration and assert its count of 16 signed and 4 "±"
+# cells.
+predictions:
+  prereg: RQ1 Table 3
+  # Order of the rows (outcomes) and of the cells (motives): the `order` column
+  # of codebook_scales.csv.
+  table:
+    asc_agg:  { zm_security: "+", zm_arousal: "-", zm_power: "+", zm_prestige: "±", zm_achievement: "-" }
+    asc_sub:  { zm_security: "+", zm_arousal: "-", zm_power: "-", zm_prestige: "±", zm_achievement: "-" }
+    asc_conv: { zm_security: "+", zm_arousal: "-", zm_power: "+", zm_prestige: "±", zm_achievement: "-" }
+    sdo_dom:  { zm_security: "+", zm_arousal: "-", zm_power: "+", zm_prestige: "±", zm_achievement: "-" }
+
+# -----------------------------------------------------------------------------
+# AP8 — Bayesian network (bagged easybgm / BDgraph)
+# -----------------------------------------------------------------------------
+network:
+  prereg: AP8, AP10, RQ3a/RQ3b/RQ3c
+  # The nine nodes by key. Their order, which the network figures and tables
+  # use, is the `order` column of codebook_scales.csv; zm_config() replaces
+  # each key by its standardised column from codebook_scales.csv.
+  nodes: [zm_security, zm_arousal, zm_power, zm_prestige, zm_achievement, asc_agg, asc_sub, asc_conv, sdo_dom]
+  package: BDgraph
+  iter: 50000                             # overridden by profile
+  g_prior: 0.5
+  g_prior_sweep: [0.25, 0.5, 0.75]        # AP8 edge-prior sensitivity: the full-data network is refitted at each value and the Bayes factor and decision of every edge reported; descriptive only, g_prior above remains the preregistered value and the bagged classifications at it stand
+  df_prior: 3
+  not_cont: 0                             # all nodes continuous
+  B: 600                                  # bootstrap resamples; overridden by profile
+  seed_base: 39976                        # seed_b = seed_base + b
+  retry_seed_offset: 100000               # failed fit rerun once with seed_base + b + 100000
+  min_success_rate: 0.95                  # else 'computationally infeasible'
+  bf_include: 10
+  bf_exclude: 0.1
+  standardise_once: true                  # z-standardisation before bagging, not within resamples
+
+# -----------------------------------------------------------------------------
+# AP4/AP9 — confirmatory and exploratory factor-analytic sets. Each set names the scales analysed together.
+# `efa`/`cfa` say which analysis is run on the set. The per-scale EFA and the
+# one-factor CFA of every single scale run in addition to these sets.
+# -----------------------------------------------------------------------------
+factor_analysis:
+  seed: 1                                 # reset before every EFA fit and stochastic criterion, including VSS
+  efa_estimation_method: wls
+  cfa_settings:
+    estimator: WLSMV
+    ordered: true
+    std_lv: true
+    orthogonal: false
+  factor_number_methods:
+    parallel_analysis:
+      reference_datasets: 100
+      percentile: 95
+      correlation_type: polychoric        # correlations of the observed data (EFA.dimensions::RAWPAR corkind)
+      random_correlation_type: pearson    # correlations of the generated reference datasets (corkindRAND)
+    comparison_data:
+      population_size: 10000
+      samples: 500
+      alpha: 0.30
+      max_iterations: 50
+      correlation_type: pearson           # EFAtools::CD cor_method
+    kaiser:
+      threshold: 1                        # classical Kaiser: eigenvalues of the polychoric matrix above this count
+    vss:
+      maximum_factors: 8                  # capped at p - 1 for a set with fewer items
+      # The complexity is fixed by the criterion key vss_complexity_1 in
+      # factor_number_criteria below: the first maximum of the complexity-one
+      # fit is the suggested count.
+  # The nine factor-number criteria of the accepted SRQ1 route, in the order the
+  # route computes them. `key` is the criterion the route dispatches on, `index`
+  # the name its results carry in the reporting tables, `label` the heading the
+  # report prints. A criterion is added or removed here, not in the code; an
+  # unknown key stops the route. No criterion decides a count: they are computed
+  # and reported side by side.
+  factor_number_criteria:
+    - key: pca_parallel
+      index: parallel_analysis
+      label: "Parallel analysis (principal components)"
+    - key: common_factor_parallel
+      index: common_factor_parallel
+      label: "Parallel analysis (common factors)"
+    - key: comparison_data
+      index: comparison_data
+      label: "Comparison data"
+    - key: original_map
+      index: map
+      label: "Velicer's minimum average partial"
+    - key: classical_kaiser
+      index: kaiser
+      label: "Kaiser criterion"
+    - key: empirical_kaiser
+      index: empirical_kaiser
+      label: "Empirical Kaiser criterion"
+    - key: optimal_coordinates
+      index: optimal_coordinates
+      label: "Optimal coordinates"
+    - key: acceleration_factor
+      index: acceleration_factor
+      label: "Acceleration factor"
+    - key: vss_complexity_1
+      index: vss
+      label: "Very simple structure (complexity one)"
+  loading_display_cutoff: 0.40            # display and cross-loading threshold, not an estimation choice
+  single_scale_expected_factors: 1
+  cfa_reporting:
+    ranked_residuals_n: 3                 # largest absolute standardised pairwise residuals shown for every model (AP4)
+    residual_data_file: "data/derived/cfa_pairwise_residuals.csv" # all pairs for every CFA, including larger sets
+  # Whether to keep .40 with blanking or move to .30 with bolding is a
+  # result-display decision, not a preregistration decision, and is settled
+  # with the report layout.
+  # empirical_kaiser (EFAtools::EKC, Braeken & van Assen 2017) follows the
+  # recommendation of Goretzko, Pham & Bühner (2021) and the simulation of
+  # Goretzko & Bühner (2020), which ranks it the most accurate of the four
+  # classical criteria and the classical `kaiser` rule last. Both are reported:
+  # the classical rule is the one the field uses, and their disagreement is
+  # itself informative. No index decides; they are shown side by side.
+  # Primary oblimin rotation; single-factor solutions remain unrotated.
+  rotation_primary: oblimin
+  rotation_settings:
+    oblimin_gamma: 0                      # psych's multistart oblimin supports its GPArotation default only; the code verifies that it remains zero
+    starting_rotations: 20                # one unrotated start and 19 random starts, for EFA and VSS trial solutions
+  # The factor-analytic sets of the exploratory route. The confirmatory models
+  # are listed in `confirmatory_models` below; a set's `cfa` flag only marks it
+  # as the set the report names for a scale's confirmatory context
+  # (rh_factor_set_key()). The order of a set's scales is the `order` column of
+  # codebook_scales.csv. A set of subscales of one instrument without a `label`
+  # is labelled from codebook_scales.csv: the instrument (`scale`) and its
+  # subscales (`subscale`), e.g. "UMS-6 (intimacy and achievement)".
+  sets:
+    - key: asc
+      label: "ASC"
+      scales: [asc_agg, asc_sub, asc_conv]
+      expected_factors: 3
+      efa: true
+      cfa: false
+    - key: dopl
+      scales: [zm_power, zm_prestige]
+      expected_factors: 2
+      efa: true
+      cfa: false
+    - key: ums
+      scales: [zm_security, zm_achievement]
+      expected_factors: 2
+      efa: true
+      cfa: false
+    - key: motives
+      label: "All social motive scales"
+      scales: [zm_security, zm_arousal, zm_power, zm_prestige, zm_achievement]
+      expected_factors: 5
+      efa: true
+      cfa: true
+    - key: outcomes
+      label: "ASC and SDO-D"
+      scales: [asc_agg, asc_sub, asc_conv, sdo_dom]
+      expected_factors: 4
+      efa: true
+      cfa: true
+
+# -----------------------------------------------------------------------------
+# AP4 — the preregistered confirmatory factor structure
+#
+# Fourteen fixed models: the nine one-factor scale models and the five
+# multi-factor models. Each entry names its factors and, for every factor, the
+# registered scale whose items load on it; the items themselves are the
+# codebook's `item_codes` of that scale, and the executable data column of an
+# item is resolved through the codebook's label-to-column map at fitting time.
+# No result may add, remove, reassign, or generate an alternative model.
+# -----------------------------------------------------------------------------
+confirmatory_models:
+  prereg: AP4
+  # The estimator is `factor_analysis$cfa_settings`, unchanged for every model:
+  # WLSMV on ordered indicators, every latent variance fixed to 1, and the
+  # correlations between the factors of a multi-factor model freely estimated.
+  estimator: "WLSMV on ordered indicators; every latent variance fixed to 1; factor correlations freely estimated"
+  # The label of each of the nine one-factor models is the scale's `label` in
+  # codebook_scales.csv. The factors of a model, and the one-factor models, are
+  # in the order of the `order` column of codebook_scales.csv; a model of the
+  # subscales of one instrument is labelled like a factor-analytic set.
+  models:
+    - key: zm_security
+      question: "scale unidimensionality"
+      family: subscale
+      factors:
+        zm_security: zm_security
+    - key: zm_arousal
+      question: "scale unidimensionality"
+      family: subscale
+      factors:
+        zm_arousal: zm_arousal
+    - key: zm_power
+      question: "scale unidimensionality"
+      family: subscale
+      factors:
+        zm_power: zm_power
+    - key: zm_prestige
+      question: "scale unidimensionality"
+      family: subscale
+      factors:
+        zm_prestige: zm_prestige
+    - key: zm_achievement
+      question: "scale unidimensionality"
+      family: subscale
+      factors:
+        zm_achievement: zm_achievement
+    - key: asc_agg
+      question: "scale unidimensionality"
+      family: subscale
+      factors:
+        asc_agg: asc_agg
+    - key: asc_sub
+      question: "scale unidimensionality"
+      family: subscale
+      factors:
+        asc_sub: asc_sub
+    - key: asc_conv
+      question: "scale unidimensionality"
+      family: subscale
+      factors:
+        asc_conv: asc_conv
+    - key: sdo_dom
+      question: "scale unidimensionality"
+      family: subscale
+      factors:
+        sdo_dom: sdo_dom
+    - key: ums_achievement_intimacy
+      question: "ums"
+      family: ums_dopl
+      factors:
+        zm_security: zm_security
+        zm_achievement: zm_achievement
+    - key: dopl_dominance_prestige
+      question: "dopl"
+      family: ums_dopl
+      factors:
+        zm_power: zm_power
+        zm_prestige: zm_prestige
+    - key: social_motives_five_factor
+      label: "Five social-motive factors"
+      question: "social motives"
+      family: social_motives
+      factors:
+        zm_security: zm_security
+        zm_arousal: zm_arousal
+        zm_power: zm_power
+        zm_prestige: zm_prestige
+        zm_achievement: zm_achievement
+    - key: asc_three_factor
+      label: "ASC three-factor model"
+      question: "asc"
+      family: asc
+      factors:
+        asc_agg: asc_agg
+        asc_sub: asc_sub
+        asc_conv: asc_conv
+    - key: authoritarian_orientation_four_factor
+      label: "Three ASC factors and SDO-D"
+      question: "authoritarian orientation"
+      family: auth_orientation
+      factors:
+        asc_agg: asc_agg
+        asc_sub: asc_sub
+        asc_conv: asc_conv
+        sdo_dom: sdo_dom
+
+# -----------------------------------------------------------------------------
+# AP5 — Descriptives
+# -----------------------------------------------------------------------------
+descriptives:
+  prereg: AP5
+  demographics: [demo_age, demo_gender, demo_edu_school, east_west, income, quota_group]
+  scale_summary: [mean, sd, min, max, skew]
+  correlations: pearson
+  # The report uses the Bayesian estimates below; the Pearson values are a
+  # separate descriptive result.
+  bayesian_correlations:
+    package: BayesFactor
+    rscale: 0.3333333333333333            # standard medium: scaled Beta(3,3) on [-1,1]
+    interval_level: 0.95
+    posterior_iterations: 10000
+    seed: 20261002
+    bf_cutoff: 3                         # BF10 >= 3: dagger; BF10 <= 1/3: superscript zero
+
+# -----------------------------------------------------------------------------
+# M7, T10 — data files: intake deletion (with a manual confirmation step) and the
+# two allowlists.
+# -----------------------------------------------------------------------------
+data_files:
+  prereg: M7 (removal after download), T10 (scientific-use dataset)
+  intake:
+    # Step 1, immediately after download: the pipeline proposes the columns to
+    # delete (technical identifiers, timestamps, and any IP/geolocation column
+    # it finds), writes the proposal to intake/intake_proposal.yaml and STOPS
+    # until the reviewed decision has been copied to intake/intake_approved.yaml. Nothing
+    # downstream runs before that file exists and matches the raw columns.
+    require_manual_approval: true
+    proposal_file: "intake/intake_proposal.yaml"
+    approval_file: "intake/intake_approved.yaml"
+    delete_always: [ResponseId, StartDate, EndDate, RecordedDate, Status, Progress, Finished,
+                    DistributionChannel, UserLanguage, Q_BallotBoxStuffing, Last_Seen_Flow_Element_ID, Last_Seen_Question_IDs,
+                    survey_status, survey_status_detail, possibly_left, possibly_conservative, info_teilnahme_2_1]
+    delete_if_present: [IPAddress, LocationLatitude, LocationLongitude, LocationAccuracy, ExternalReference, RecipientEmail,
+                        RecipientFirstName, RecipientLastName, Q_RecaptchaScore, Q_RelevantIDDuplicate, Q_RelevantIDDuplicateScore,
+                        Q_RelevantIDFraudScore, Q_RelevantIDLastStartDate, Q_TotalDuration, Q_URL]
+    delete_after_billing: [bilendi_id]    # the Bilendi participation code, removed directly after the download of the export that enters the analysis (M7)
+    respondent_id: "participant number assigned in random order; not derived from any Qualtrics field"
+  comments_file:
+    path: data/private/comments.csv
+  demographics_file:
+    path: data/derived/deidentified_demographics.csv
+  filled_cells_file:
+    # One row per cell the AP3 fill wrote (ap3_filled_cells_file()).
+    path: data/derived/filled_cells.csv
+  dropped_respondents_file:
+    # One row per respondent the drop rule removed from all analyses, with the reason.
+    path: data/derived/dropped_respondents.csv
+  result_files:
+    # The complete numbers behind the supplement's compact tables (AP4, AP6, AP9):
+    # machine-readable files that accompany the analysis code and are never
+    # printed. The residual correlations of every confirmatory model are
+    # factor_analysis.cfa_reporting.residual_data_file.
+    cfa_loadings: data/derived/cfa_loadings.csv                    # every model: unstandardised with SE, standardised with SE
+    efa_loadings: data/derived/efa_loadings.csv                    # every exploratory solution and rotation: the full pattern matrix
+    efa_membership: data/derived/efa_membership.csv                # every exploratory solution: each item's assigned factor and loadings
+    prior_power_scaling: data/derived/prior_power_scaling.csv      # every power-scaling entry
+    posterior_predictive_checks: data/derived/posterior_predictive_checks.csv  # all six statistics per outcome
+  scientific_use_file:
+    path: data/derived/scientific_use.csv
+    # Filled items and scales; demographics are the bands used by the analyses.
+    keep: [respondent_id, items, scale_scores, demo_gender, age_band, age_band_midpoint, income_band,
+           income_band_value, quota_group, attentioncheck_1, attentioncheck_2, pol_symp, pol_party_vote]
+    analysis_value_columns: [age_band_midpoint, income_band_value]
+    drop: [demo_age, income, demo_edu_school, east_west, demo_bundesland, demo_income_hh_net,
+           demo_hh_members, Duration__in_seconds_, Kommentarfeld, pol_party_vote_801_TEXT,
+           pol_vote_would, pol_left_right]
+
+# -----------------------------------------------------------------------------
+# AP6, Justification of Prior Choice — outcome-blind prior-recovery simulation
+# -----------------------------------------------------------------------------
+# Its own targets project (_targets_prior_recovery.R; TAR_PROJECT=prior_recovery,
+# or prior_recovery_smoke for smoke_replicates per scenario). Every simulated
+# data set passes through the preparation, fitting and validity-gate verbs of
+# the AP6 route; only the sampling block below replaces regression's sampler
+# settings, so that 9,600 fits stay tractable.
+prior_recovery:
+  prereg: AP6 (Justification of Prior Choice)
+  n_per_replicate: 650
+  replicates: 200
+  smoke_replicates: 2
+  slope_sds: [0.10, 0.20, 0.40]          # values of priors.slope_sd_sweep, the primary width among them
+  effect_scenarios: [zero, working_range, close_anchor_0.37, opposing_signs_among_correlated_motives]
+  outcomes_recorded: [coverage_95, directional_error_rate, confirmed_rate_by_true_effect, bias]
+  sampling:                              # copied into regression by apply_recovery_sampling(); cores = chains
+    chains: 2
+    warmup: 500
+    iter_per_chain: 500
+    ess_target: 250                      # a quarter of the post-warmup draws, so the ESS doublings do not multiply the run time

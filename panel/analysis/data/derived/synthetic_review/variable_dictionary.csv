@@ -1,0 +1,10 @@
+scale_key,z_col,label,short_label
+zm_security,zm_security_z,security,security
+zm_arousal,zm_arousal_z,arousal,arousal
+zm_power,zm_power_z,power,power
+zm_prestige,zm_prestige_z,prestige,prestige
+zm_achievement,zm_achievement_z,achievement,achievement
+asc_agg,asc_agg_z,Authoritarian aggression,ASC aggression
+asc_sub,asc_sub_z,Authoritarian submission,ASC submission
+asc_conv,asc_conv_z,Conventionalism,Conventionalism
+sdo_dom,sdo_dom_z,Social dominance orientation: dominance,SDO-D

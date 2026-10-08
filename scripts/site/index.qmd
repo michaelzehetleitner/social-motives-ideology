@@ -1,0 +1,56 @@
+---
+title: "Motives and Ideology"
+subtitle: "Bischof's Zürich Model of Social Motivation, Right-wing Authoritarianism and Social Dominance Orientation"
+author: "Michael Zehetleitner"
+format:
+  html:
+    theme: cosmo
+    embed-resources: true
+    page-layout: article
+    css: start.css
+---
+
+::: {.status}
+@SITE_NOTE@
+:::
+
+::: {.grid .cards}
+
+::: {.g-col-12 .g-col-md-6 .card-tile}
+### [Preregistration](preregistration.html)
+Research questions, hypotheses, measures and the preregistered analysis plan.
+
+[Read online](preregistration.html){.btn .btn-primary .btn-sm} [PDF](preregistration.pdf){.btn .btn-outline-primary .btn-sm}
+:::
+
+::: {.g-col-12 .g-col-md-6 .card-tile}
+### [Code Browser](code-browser.html)
+The analysis code, step by step, linked section by section with the preregistration.
+
+[Open the Code Browser](code-browser.html){.btn .btn-primary .btn-sm}
+:::
+
+::: {.g-col-12 .g-col-md-6 .card-tile}
+### [Results report](results-report.html)
+The complete analysis run on a synthetic data set: every table and figure the study will report.
+
+[Open the report](results-report.html){.btn .btn-primary .btn-sm} [PDF](results-report.pdf){.btn .btn-outline-primary .btn-sm}
+:::
+
+::: {.g-col-12 .g-col-md-6 .card-tile}
+### [Code and data](@REPOSITORY@)
+Analysis pipeline, tests, synthetic data and codebooks, with a Docker setup that reproduces every page here.
+
+[View on GitHub](@REPOSITORY@){.btn .btn-outline-primary .btn-sm}
+:::
+
+:::
+
+## This version
+
+| | |
+|---|---|
+| Version | @VERSION@ |
+| Source | @SOURCE@ |
+| Preregistration | PsychArchives DOI follows on registration |
+| License | Code MIT · text, report and synthetic data CC BY 4.0 |

@@ -1,0 +1,1414 @@
+[
+  [
+    {
+      "outcome": "authoritarian_aggression",
+      "coefficient": "b_Intercept",
+      "by_width": {
+        "0.10": {
+          "median": -0.172506,
+          "interval": {
+            "2.5%": -0.267587425,
+            "97.5%": -0.0721224625
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        },
+        "0.20": {
+          "median": -0.169602,
+          "interval": {
+            "2.5%": -0.262905075,
+            "97.5%": -0.0716863
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        },
+        "0.40": {
+          "median": -0.1678895,
+          "interval": {
+            "2.5%": -0.260769125,
+            "97.5%": -0.07240081
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        }
+      },
+      "interval_exclusion_stable": true,
+      "median_direction_stable": true,
+      "indicators": ["interval_excludes_zero", "median_direction"]
+    },
+    {
+      "outcome": "authoritarian_aggression",
+      "coefficient": "b_zm_security_z",
+      "by_width": {
+        "0.10": {
+          "median": 0.0078736,
+          "interval": {
+            "2.5%": -0.0633949325,
+            "97.5%": 0.079401695
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.20": {
+          "median": 0.01327,
+          "interval": {
+            "2.5%": -0.0636182675,
+            "97.5%": 0.0882440125
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.40": {
+          "median": 0.0134931,
+          "interval": {
+            "2.5%": -0.0607137075,
+            "97.5%": 0.0917109925
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        }
+      },
+      "interval_exclusion_stable": true,
+      "median_direction_stable": true,
+      "indicators": ["interval_excludes_zero", "median_direction"]
+    },
+    {
+      "outcome": "authoritarian_aggression",
+      "coefficient": "b_zm_arousal_z",
+      "by_width": {
+        "0.10": {
+          "median": -0.0224593,
+          "interval": {
+            "2.5%": -0.088862585,
+            "97.5%": 0.0469959225
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.20": {
+          "median": -0.0257919,
+          "interval": {
+            "2.5%": -0.0985958,
+            "97.5%": 0.045841795
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.40": {
+          "median": -0.02732105,
+          "interval": {
+            "2.5%": -0.105809975,
+            "97.5%": 0.04746042
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        }
+      },
+      "interval_exclusion_stable": true,
+      "median_direction_stable": true,
+      "indicators": ["interval_excludes_zero", "median_direction"]
+    },
+    {
+      "outcome": "authoritarian_aggression",
+      "coefficient": "b_zm_power_z",
+      "by_width": {
+        "0.10": {
+          "median": 0.194578,
+          "interval": {
+            "2.5%": 0.12353215,
+            "97.5%": 0.266192975
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        },
+        "0.20": {
+          "median": 0.2167475,
+          "interval": {
+            "2.5%": 0.141211775,
+            "97.5%": 0.29300775
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        },
+        "0.40": {
+          "median": 0.2222325,
+          "interval": {
+            "2.5%": 0.14449435,
+            "97.5%": 0.30009755
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        }
+      },
+      "interval_exclusion_stable": true,
+      "median_direction_stable": true,
+      "indicators": ["interval_excludes_zero", "median_direction"]
+    },
+    {
+      "outcome": "authoritarian_aggression",
+      "coefficient": "b_zm_prestige_z",
+      "by_width": {
+        "0.10": {
+          "median": 0.0354491,
+          "interval": {
+            "2.5%": -0.03841187,
+            "97.5%": 0.1070407
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.20": {
+          "median": 0.0361678,
+          "interval": {
+            "2.5%": -0.04067388,
+            "97.5%": 0.1163093
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.40": {
+          "median": 0.0359958,
+          "interval": {
+            "2.5%": -0.04605046,
+            "97.5%": 0.1204289
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        }
+      },
+      "interval_exclusion_stable": true,
+      "median_direction_stable": true,
+      "indicators": ["interval_excludes_zero", "median_direction"]
+    },
+    {
+      "outcome": "authoritarian_aggression",
+      "coefficient": "b_zm_achievement_z",
+      "by_width": {
+        "0.10": {
+          "median": -0.08362645,
+          "interval": {
+            "2.5%": -0.15609235,
+            "97.5%": -0.00974809924999999
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        },
+        "0.20": {
+          "median": -0.0964917,
+          "interval": {
+            "2.5%": -0.170967725,
+            "97.5%": -0.0214845125
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        },
+        "0.40": {
+          "median": -0.0998255,
+          "interval": {
+            "2.5%": -0.182147775,
+            "97.5%": -0.0172262924999999
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        }
+      },
+      "interval_exclusion_stable": true,
+      "median_direction_stable": true,
+      "indicators": ["interval_excludes_zero", "median_direction"]
+    },
+    {
+      "outcome": "authoritarian_aggression",
+      "coefficient": "b_age_z",
+      "by_width": {
+        "0.10": {
+          "median": -0.000786437,
+          "interval": {
+            "2.5%": -0.068008515,
+            "97.5%": 0.0685668275
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.20": {
+          "median": 0.002415855,
+          "interval": {
+            "2.5%": -0.070393545,
+            "97.5%": 0.0736815025
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.40": {
+          "median": 0.00308259,
+          "interval": {
+            "2.5%": -0.06783807,
+            "97.5%": 0.071651695
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        }
+      },
+      "interval_exclusion_stable": true,
+      "median_direction_stable": false,
+      "indicators": ["interval_excludes_zero", "median_direction"]
+    },
+    {
+      "outcome": "authoritarian_aggression",
+      "coefficient": "b_gendermale",
+      "by_width": {
+        "0.10": {
+          "median": 0.3596545,
+          "interval": {
+            "2.5%": 0.21175415,
+            "97.5%": 0.503371275
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        },
+        "0.20": {
+          "median": 0.3531835,
+          "interval": {
+            "2.5%": 0.212906075,
+            "97.5%": 0.492025875
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        },
+        "0.40": {
+          "median": 0.349335,
+          "interval": {
+            "2.5%": 0.20647265,
+            "97.5%": 0.4937398
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        }
+      },
+      "interval_exclusion_stable": true,
+      "median_direction_stable": true,
+      "indicators": ["interval_excludes_zero", "median_direction"]
+    },
+    {
+      "outcome": "authoritarian_aggression",
+      "coefficient": "b_income_z",
+      "by_width": {
+        "0.10": {
+          "median": -0.0826483,
+          "interval": {
+            "2.5%": -0.15230875,
+            "97.5%": -0.015777585
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        },
+        "0.20": {
+          "median": -0.0893932,
+          "interval": {
+            "2.5%": -0.15799185,
+            "97.5%": -0.0220472775
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        },
+        "0.40": {
+          "median": -0.09083385,
+          "interval": {
+            "2.5%": -0.16357275,
+            "97.5%": -0.0177747275
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        }
+      },
+      "interval_exclusion_stable": true,
+      "median_direction_stable": true,
+      "indicators": ["interval_excludes_zero", "median_direction"]
+    }
+  ],
+  [
+    {
+      "outcome": "authoritarian_submission",
+      "coefficient": "b_Intercept",
+      "by_width": {
+        "0.10": {
+          "median": 0.0146229,
+          "interval": {
+            "2.5%": -0.0858003425,
+            "97.5%": 0.114466625
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.20": {
+          "median": 0.01670305,
+          "interval": {
+            "2.5%": -0.08192766,
+            "97.5%": 0.115269575
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.40": {
+          "median": 0.01650865,
+          "interval": {
+            "2.5%": -0.0848180925,
+            "97.5%": 0.11888615
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        }
+      },
+      "interval_exclusion_stable": true,
+      "median_direction_stable": true,
+      "indicators": ["interval_excludes_zero", "median_direction"]
+    },
+    {
+      "outcome": "authoritarian_submission",
+      "coefficient": "b_zm_security_z",
+      "by_width": {
+        "0.10": {
+          "median": -0.0308046,
+          "interval": {
+            "2.5%": -0.104655675,
+            "97.5%": 0.0437948275
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.20": {
+          "median": -0.02828,
+          "interval": {
+            "2.5%": -0.107176975,
+            "97.5%": 0.048148275
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.40": {
+          "median": -0.02735005,
+          "interval": {
+            "2.5%": -0.106919525,
+            "97.5%": 0.04685223
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        }
+      },
+      "interval_exclusion_stable": true,
+      "median_direction_stable": true,
+      "indicators": ["interval_excludes_zero", "median_direction"]
+    },
+    {
+      "outcome": "authoritarian_submission",
+      "coefficient": "b_zm_arousal_z",
+      "by_width": {
+        "0.10": {
+          "median": -0.1203255,
+          "interval": {
+            "2.5%": -0.191596875,
+            "97.5%": -0.0488890525
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        },
+        "0.20": {
+          "median": -0.130387,
+          "interval": {
+            "2.5%": -0.208320075,
+            "97.5%": -0.05425756
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        },
+        "0.40": {
+          "median": -0.134686,
+          "interval": {
+            "2.5%": -0.212030025,
+            "97.5%": -0.0569060775
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        }
+      },
+      "interval_exclusion_stable": true,
+      "median_direction_stable": true,
+      "indicators": ["interval_excludes_zero", "median_direction"]
+    },
+    {
+      "outcome": "authoritarian_submission",
+      "coefficient": "b_zm_power_z",
+      "by_width": {
+        "0.10": {
+          "median": -0.01763415,
+          "interval": {
+            "2.5%": -0.09066269,
+            "97.5%": 0.060414795
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.20": {
+          "median": -0.0160355,
+          "interval": {
+            "2.5%": -0.0914361425,
+            "97.5%": 0.0598807625
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.40": {
+          "median": -0.014731,
+          "interval": {
+            "2.5%": -0.09758061,
+            "97.5%": 0.063895665
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        }
+      },
+      "interval_exclusion_stable": true,
+      "median_direction_stable": true,
+      "indicators": ["interval_excludes_zero", "median_direction"]
+    },
+    {
+      "outcome": "authoritarian_submission",
+      "coefficient": "b_zm_prestige_z",
+      "by_width": {
+        "0.10": {
+          "median": -0.003264735,
+          "interval": {
+            "2.5%": -0.0788221175,
+            "97.5%": 0.070544845
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.20": {
+          "median": 0.002159245,
+          "interval": {
+            "2.5%": -0.07803753,
+            "97.5%": 0.084230955
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.40": {
+          "median": 0.00362546,
+          "interval": {
+            "2.5%": -0.0831784,
+            "97.5%": 0.0891873325
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        }
+      },
+      "interval_exclusion_stable": true,
+      "median_direction_stable": false,
+      "indicators": ["interval_excludes_zero", "median_direction"]
+    },
+    {
+      "outcome": "authoritarian_submission",
+      "coefficient": "b_zm_achievement_z",
+      "by_width": {
+        "0.10": {
+          "median": -0.107848,
+          "interval": {
+            "2.5%": -0.18225515,
+            "97.5%": -0.03481982
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        },
+        "0.20": {
+          "median": -0.1186195,
+          "interval": {
+            "2.5%": -0.194323575,
+            "97.5%": -0.0395688275
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        },
+        "0.40": {
+          "median": -0.120987,
+          "interval": {
+            "2.5%": -0.20309555,
+            "97.5%": -0.0439040575
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        }
+      },
+      "interval_exclusion_stable": true,
+      "median_direction_stable": true,
+      "indicators": ["interval_excludes_zero", "median_direction"]
+    },
+    {
+      "outcome": "authoritarian_submission",
+      "coefficient": "b_age_z",
+      "by_width": {
+        "0.10": {
+          "median": 0.0397173,
+          "interval": {
+            "2.5%": -0.031363735,
+            "97.5%": 0.1081012
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.20": {
+          "median": 0.0417447,
+          "interval": {
+            "2.5%": -0.03021871,
+            "97.5%": 0.111889875
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.40": {
+          "median": 0.04368275,
+          "interval": {
+            "2.5%": -0.0288862875,
+            "97.5%": 0.11608555
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        }
+      },
+      "interval_exclusion_stable": true,
+      "median_direction_stable": true,
+      "indicators": ["interval_excludes_zero", "median_direction"]
+    },
+    {
+      "outcome": "authoritarian_submission",
+      "coefficient": "b_gendermale",
+      "by_width": {
+        "0.10": {
+          "median": -0.03105915,
+          "interval": {
+            "2.5%": -0.17919445,
+            "97.5%": 0.1173963
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.20": {
+          "median": -0.03359485,
+          "interval": {
+            "2.5%": -0.179229275,
+            "97.5%": 0.1129163
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.40": {
+          "median": -0.03568965,
+          "interval": {
+            "2.5%": -0.183427875,
+            "97.5%": 0.108950625
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        }
+      },
+      "interval_exclusion_stable": true,
+      "median_direction_stable": true,
+      "indicators": ["interval_excludes_zero", "median_direction"]
+    },
+    {
+      "outcome": "authoritarian_submission",
+      "coefficient": "b_income_z",
+      "by_width": {
+        "0.10": {
+          "median": -0.01203945,
+          "interval": {
+            "2.5%": -0.0809761925,
+            "97.5%": 0.05667025
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.20": {
+          "median": -0.0138102,
+          "interval": {
+            "2.5%": -0.08435153,
+            "97.5%": 0.0574361375
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.40": {
+          "median": -0.01374995,
+          "interval": {
+            "2.5%": -0.0849171825,
+            "97.5%": 0.057518635
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        }
+      },
+      "interval_exclusion_stable": true,
+      "median_direction_stable": true,
+      "indicators": ["interval_excludes_zero", "median_direction"]
+    }
+  ],
+  [
+    {
+      "outcome": "conventionalism",
+      "coefficient": "b_Intercept",
+      "by_width": {
+        "0.10": {
+          "median": 0.02113915,
+          "interval": {
+            "2.5%": -0.07427934,
+            "97.5%": 0.11458
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.20": {
+          "median": 0.02078585,
+          "interval": {
+            "2.5%": -0.0770695674999999,
+            "97.5%": 0.116889025
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.40": {
+          "median": 0.0202398,
+          "interval": {
+            "2.5%": -0.07559471,
+            "97.5%": 0.11477615
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        }
+      },
+      "interval_exclusion_stable": true,
+      "median_direction_stable": true,
+      "indicators": ["interval_excludes_zero", "median_direction"]
+    },
+    {
+      "outcome": "conventionalism",
+      "coefficient": "b_zm_security_z",
+      "by_width": {
+        "0.10": {
+          "median": 0.134184,
+          "interval": {
+            "2.5%": 0.0645914125,
+            "97.5%": 0.207239475
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        },
+        "0.20": {
+          "median": 0.1560485,
+          "interval": {
+            "2.5%": 0.0798545725,
+            "97.5%": 0.229780175
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        },
+        "0.40": {
+          "median": 0.1638615,
+          "interval": {
+            "2.5%": 0.0888401725,
+            "97.5%": 0.240876575
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        }
+      },
+      "interval_exclusion_stable": true,
+      "median_direction_stable": true,
+      "indicators": ["interval_excludes_zero", "median_direction"]
+    },
+    {
+      "outcome": "conventionalism",
+      "coefficient": "b_zm_arousal_z",
+      "by_width": {
+        "0.10": {
+          "median": -0.1830305,
+          "interval": {
+            "2.5%": -0.2524193,
+            "97.5%": -0.1144971
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        },
+        "0.20": {
+          "median": -0.201728,
+          "interval": {
+            "2.5%": -0.2744384,
+            "97.5%": -0.126128175
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        },
+        "0.40": {
+          "median": -0.206271,
+          "interval": {
+            "2.5%": -0.2794077,
+            "97.5%": -0.129437475
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        }
+      },
+      "interval_exclusion_stable": true,
+      "median_direction_stable": true,
+      "indicators": ["interval_excludes_zero", "median_direction"]
+    },
+    {
+      "outcome": "conventionalism",
+      "coefficient": "b_zm_power_z",
+      "by_width": {
+        "0.10": {
+          "median": -0.03760895,
+          "interval": {
+            "2.5%": -0.109935525,
+            "97.5%": 0.0335254775
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.20": {
+          "median": -0.03235405,
+          "interval": {
+            "2.5%": -0.108747025,
+            "97.5%": 0.042337785
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.40": {
+          "median": -0.02986265,
+          "interval": {
+            "2.5%": -0.1088312,
+            "97.5%": 0.049755165
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        }
+      },
+      "interval_exclusion_stable": true,
+      "median_direction_stable": true,
+      "indicators": ["interval_excludes_zero", "median_direction"]
+    },
+    {
+      "outcome": "conventionalism",
+      "coefficient": "b_zm_prestige_z",
+      "by_width": {
+        "0.10": {
+          "median": -0.08804355,
+          "interval": {
+            "2.5%": -0.1619922,
+            "97.5%": -0.012156095
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        },
+        "0.20": {
+          "median": -0.0929305,
+          "interval": {
+            "2.5%": -0.172369475,
+            "97.5%": -0.01518979
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        },
+        "0.40": {
+          "median": -0.09688045,
+          "interval": {
+            "2.5%": -0.17628045,
+            "97.5%": -0.0145471
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        }
+      },
+      "interval_exclusion_stable": true,
+      "median_direction_stable": true,
+      "indicators": ["interval_excludes_zero", "median_direction"]
+    },
+    {
+      "outcome": "conventionalism",
+      "coefficient": "b_zm_achievement_z",
+      "by_width": {
+        "0.10": {
+          "median": -0.120873,
+          "interval": {
+            "2.5%": -0.19476225,
+            "97.5%": -0.04697067
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        },
+        "0.20": {
+          "median": -0.1343305,
+          "interval": {
+            "2.5%": -0.210323425,
+            "97.5%": -0.05904041
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        },
+        "0.40": {
+          "median": -0.137355,
+          "interval": {
+            "2.5%": -0.2140688,
+            "97.5%": -0.0602692725
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        }
+      },
+      "interval_exclusion_stable": true,
+      "median_direction_stable": true,
+      "indicators": ["interval_excludes_zero", "median_direction"]
+    },
+    {
+      "outcome": "conventionalism",
+      "coefficient": "b_age_z",
+      "by_width": {
+        "0.10": {
+          "median": 0.104482,
+          "interval": {
+            "2.5%": 0.03551691,
+            "97.5%": 0.173701025
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        },
+        "0.20": {
+          "median": 0.112692,
+          "interval": {
+            "2.5%": 0.043281035,
+            "97.5%": 0.1849411
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        },
+        "0.40": {
+          "median": 0.116162,
+          "interval": {
+            "2.5%": 0.0437128075,
+            "97.5%": 0.186727425
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        }
+      },
+      "interval_exclusion_stable": true,
+      "median_direction_stable": true,
+      "indicators": ["interval_excludes_zero", "median_direction"]
+    },
+    {
+      "outcome": "conventionalism",
+      "coefficient": "b_gendermale",
+      "by_width": {
+        "0.10": {
+          "median": -0.0437095,
+          "interval": {
+            "2.5%": -0.18053025,
+            "97.5%": 0.097890025
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.20": {
+          "median": -0.04162445,
+          "interval": {
+            "2.5%": -0.18150435,
+            "97.5%": 0.101112
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.40": {
+          "median": -0.03870555,
+          "interval": {
+            "2.5%": -0.17990735,
+            "97.5%": 0.102216325
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        }
+      },
+      "interval_exclusion_stable": true,
+      "median_direction_stable": true,
+      "indicators": ["interval_excludes_zero", "median_direction"]
+    },
+    {
+      "outcome": "conventionalism",
+      "coefficient": "b_income_z",
+      "by_width": {
+        "0.10": {
+          "median": -0.03939295,
+          "interval": {
+            "2.5%": -0.106466475,
+            "97.5%": 0.0275950975
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.20": {
+          "median": -0.04424675,
+          "interval": {
+            "2.5%": -0.115018575,
+            "97.5%": 0.0244662325
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.40": {
+          "median": -0.0459177,
+          "interval": {
+            "2.5%": -0.11480385,
+            "97.5%": 0.023624375
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        }
+      },
+      "interval_exclusion_stable": true,
+      "median_direction_stable": true,
+      "indicators": ["interval_excludes_zero", "median_direction"]
+    }
+  ],
+  [
+    {
+      "outcome": "sdo_d_dominance",
+      "coefficient": "b_Intercept",
+      "by_width": {
+        "0.10": {
+          "median": -0.321801,
+          "interval": {
+            "2.5%": -0.4101165,
+            "97.5%": -0.2333895
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        },
+        "0.20": {
+          "median": -0.31948,
+          "interval": {
+            "2.5%": -0.4074572,
+            "97.5%": -0.22868805
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        },
+        "0.40": {
+          "median": -0.318495,
+          "interval": {
+            "2.5%": -0.40820855,
+            "97.5%": -0.2308182
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        }
+      },
+      "interval_exclusion_stable": true,
+      "median_direction_stable": true,
+      "indicators": ["interval_excludes_zero", "median_direction"]
+    },
+    {
+      "outcome": "sdo_d_dominance",
+      "coefficient": "b_zm_security_z",
+      "by_width": {
+        "0.10": {
+          "median": -0.005655335,
+          "interval": {
+            "2.5%": -0.0707419875,
+            "97.5%": 0.06132807
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.20": {
+          "median": -0.005603965,
+          "interval": {
+            "2.5%": -0.07558862,
+            "97.5%": 0.06660708
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.40": {
+          "median": -0.006004995,
+          "interval": {
+            "2.5%": -0.0754140625,
+            "97.5%": 0.0644871075
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        }
+      },
+      "interval_exclusion_stable": true,
+      "median_direction_stable": true,
+      "indicators": ["interval_excludes_zero", "median_direction"]
+    },
+    {
+      "outcome": "sdo_d_dominance",
+      "coefficient": "b_zm_arousal_z",
+      "by_width": {
+        "0.10": {
+          "median": -0.004816375,
+          "interval": {
+            "2.5%": -0.07033961,
+            "97.5%": 0.0629587975
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.20": {
+          "median": -0.008804395,
+          "interval": {
+            "2.5%": -0.07824765,
+            "97.5%": 0.0625054275
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.40": {
+          "median": -0.00921261,
+          "interval": {
+            "2.5%": -0.07742853,
+            "97.5%": 0.05907572
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        }
+      },
+      "interval_exclusion_stable": true,
+      "median_direction_stable": true,
+      "indicators": ["interval_excludes_zero", "median_direction"]
+    },
+    {
+      "outcome": "sdo_d_dominance",
+      "coefficient": "b_zm_power_z",
+      "by_width": {
+        "0.10": {
+          "median": 0.1965105,
+          "interval": {
+            "2.5%": 0.128489725,
+            "97.5%": 0.26622245
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        },
+        "0.20": {
+          "median": 0.212423,
+          "interval": {
+            "2.5%": 0.137618475,
+            "97.5%": 0.28552545
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        },
+        "0.40": {
+          "median": 0.2161795,
+          "interval": {
+            "2.5%": 0.14350965,
+            "97.5%": 0.290372125
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        }
+      },
+      "interval_exclusion_stable": true,
+      "median_direction_stable": true,
+      "indicators": ["interval_excludes_zero", "median_direction"]
+    },
+    {
+      "outcome": "sdo_d_dominance",
+      "coefficient": "b_zm_prestige_z",
+      "by_width": {
+        "0.10": {
+          "median": 0.1136125,
+          "interval": {
+            "2.5%": 0.0442002,
+            "97.5%": 0.183660175
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        },
+        "0.20": {
+          "median": 0.1195005,
+          "interval": {
+            "2.5%": 0.046803255,
+            "97.5%": 0.1916367
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        },
+        "0.40": {
+          "median": 0.120998,
+          "interval": {
+            "2.5%": 0.044362935,
+            "97.5%": 0.196381625
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        }
+      },
+      "interval_exclusion_stable": true,
+      "median_direction_stable": true,
+      "indicators": ["interval_excludes_zero", "median_direction"]
+    },
+    {
+      "outcome": "sdo_d_dominance",
+      "coefficient": "b_zm_achievement_z",
+      "by_width": {
+        "0.10": {
+          "median": 0.02975585,
+          "interval": {
+            "2.5%": -0.03855761,
+            "97.5%": 0.09617874
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.20": {
+          "median": 0.02768165,
+          "interval": {
+            "2.5%": -0.04523279,
+            "97.5%": 0.100647625
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.40": {
+          "median": 0.0285513,
+          "interval": {
+            "2.5%": -0.04654029,
+            "97.5%": 0.102393175
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        }
+      },
+      "interval_exclusion_stable": true,
+      "median_direction_stable": true,
+      "indicators": ["interval_excludes_zero", "median_direction"]
+    },
+    {
+      "outcome": "sdo_d_dominance",
+      "coefficient": "b_age_z",
+      "by_width": {
+        "0.10": {
+          "median": -0.0280759,
+          "interval": {
+            "2.5%": -0.0923909875,
+            "97.5%": 0.0350977
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.20": {
+          "median": -0.029736,
+          "interval": {
+            "2.5%": -0.0960657125,
+            "97.5%": 0.0381685275
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.40": {
+          "median": -0.03095455,
+          "interval": {
+            "2.5%": -0.0948885825,
+            "97.5%": 0.0338554275
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        }
+      },
+      "interval_exclusion_stable": true,
+      "median_direction_stable": true,
+      "indicators": ["interval_excludes_zero", "median_direction"]
+    },
+    {
+      "outcome": "sdo_d_dominance",
+      "coefficient": "b_gendermale",
+      "by_width": {
+        "0.10": {
+          "median": 0.6720815,
+          "interval": {
+            "2.5%": 0.54356335,
+            "97.5%": 0.79921055
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        },
+        "0.20": {
+          "median": 0.6660655,
+          "interval": {
+            "2.5%": 0.5325091,
+            "97.5%": 0.79959815
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        },
+        "0.40": {
+          "median": 0.6657235,
+          "interval": {
+            "2.5%": 0.5367847,
+            "97.5%": 0.7961248
+          },
+          "interval_excludes_zero": true,
+          "status": "available",
+          "note": null
+        }
+      },
+      "interval_exclusion_stable": true,
+      "median_direction_stable": true,
+      "indicators": ["interval_excludes_zero", "median_direction"]
+    },
+    {
+      "outcome": "sdo_d_dominance",
+      "coefficient": "b_income_z",
+      "by_width": {
+        "0.10": {
+          "median": -0.02555205,
+          "interval": {
+            "2.5%": -0.087737575,
+            "97.5%": 0.0355175325
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.20": {
+          "median": -0.02753075,
+          "interval": {
+            "2.5%": -0.093427935,
+            "97.5%": 0.0363517825
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        },
+        "0.40": {
+          "median": -0.0283164,
+          "interval": {
+            "2.5%": -0.0909891675,
+            "97.5%": 0.034884325
+          },
+          "interval_excludes_zero": false,
+          "status": "available",
+          "note": null
+        }
+      },
+      "interval_exclusion_stable": true,
+      "median_direction_stable": true,
+      "indicators": ["interval_excludes_zero", "median_direction"]
+    }
+  ]
+]

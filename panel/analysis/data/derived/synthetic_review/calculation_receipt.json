@@ -1,0 +1,997 @@
+{
+  "cfg": {
+    "meta": {
+      "study": "The Zürcher Model of Social Motivation, Right-wing Authoritarianism and Social Dominance Orientation",
+      "wave": "panel",
+      "snapshot_date": "2026-09-05",
+      "preregistration": "../preregistration/preregistration.qmd",
+      "codebook_dir": "../preregistration"
+    },
+    "recruitment": {
+      "prereg": "M4",
+      "fieldwork_start": "2026-06-19",
+      "fieldwork_end": "2026-06-24"
+    },
+    "report": {
+      "published": false
+    },
+    "profiles": {
+      "full": {
+        "reliability_bootstrap_n": 1000,
+        "regression_iter_per_chain": 6000,
+        "regression_warmup": 2000,
+        "regression_ess_target": 10000,
+        "network_B": 600,
+        "network_iter": 50000
+      },
+      "smoke": {
+        "reliability_bootstrap_n": 60,
+        "regression_iter_per_chain": 1000,
+        "regression_warmup": 500,
+        "regression_ess_target": 2000,
+        "network_B": 60,
+        "network_iter": 3000
+      },
+      "presentation": {
+        "reliability_bootstrap_n": 20,
+        "regression_iter_per_chain": 300,
+        "regression_warmup": 300,
+        "regression_ess_target": 200,
+        "network_B": 12,
+        "network_iter": 1000
+      }
+    },
+    "exclusions": {
+      "prereg": "AP1",
+      "consent_required_value": 1,
+      "min_age": 18,
+      "max_age": 69,
+      "attention_check_1_correct": 3,
+      "attention_check_2_correct": 5,
+      "survey_status_complete": "complete",
+      "survey_status_quota_full": "quota_full",
+      "gender_divers_min_n": 30,
+      "test_rows_removed_upstream": true
+    },
+    "scales": {
+      "prereg": "AP3",
+      "score": "row mean after reverse-scoring (7 - x on the 1..6 scale)",
+      "response_min": 1,
+      "response_max": 6
+    },
+    "covariates": {
+      "age": {
+        "z_col": "age_z",
+        "label": "Age band",
+        "z_col_all": "age_z_all",
+        "z_col_known_gender": "age_z_known_gender"
+      },
+      "income": {
+        "z_col": "income_z",
+        "label": "Income band per household member",
+        "z_col_all": "income_z_all",
+        "z_col_known_gender": "income_z_known_gender"
+      }
+    },
+    "standardisation": {
+      "prereg": "AP3/AP6",
+      "z_reference": "each model's own analysis sample: the four regressions and the joint model on the respondents with known gender, the network on every retained respondent",
+      "covariates_z": ["age", "income"]
+    },
+    "income": {
+      "prereg": "AP3",
+      "definition": "income (net household income per household member; AP3) = band_representative(demo_income_hh_net) / hh_size",
+      "band_representative": {
+        "1": 250,
+        "2": 625,
+        "3": 875,
+        "4": 1125,
+        "5": 1375,
+        "6": 1750,
+        "7": 2250,
+        "8": 2750,
+        "9": 3500,
+        "10": 4500,
+        "11": 6250,
+        "12": 8750,
+        "13": 12500
+      },
+      "hh_size_top_value": 8
+    },
+    "age_bands": {
+      "prereg": "AP3",
+      "first_years": [18, 25, 30, 35, 40, 45, 50, 55, 60, 65],
+      "last_year": 69,
+      "labels": ["18–24", "25–29", "30–34", "35–39", "40–44", "45–49", "50–54", "55–59", "60–64", "65–69"],
+      "representative": "midpoint"
+    },
+    "income_bands_per_member": {
+      "prereg": "AP3",
+      "limits": [357, 500, 630, 800, 1050, 1400, 2000, 2800, 12500],
+      "labels": ["<500", "500–<630", "630–<800", "800–<1050", "1050–<1400", "1400–<2000", "2000–<2800", "2800+"],
+      "representative": "geometric_mean"
+    },
+    "gender": {
+      "prereg": "AP3/AP6",
+      "coding": "factor",
+      "contrasts": "treatment",
+      "levels_after_ap1": "the levels present in the analysis sample; divers only when the group reaches exclusions$gender_divers_min_n",
+      "rationale": "Gender relates to the dominance motive and to SDO-D, i.e. it is a confounder for the power -> SDO-D prediction; dropping it is not justified."
+    },
+    "east_west": {
+      "prereg": "AP3",
+      "east": [11, 12, 13, 14, 15, 16],
+      "west": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      "rationale": "Destatis convention 'neue Länder einschließlich Berlin'"
+    },
+    "free_text_comment": {
+      "prereg": "AP3",
+      "handling": "retained in the internal analysis file; excluded from the scientific-use file; manual de-anonymisation review (names, places, employers) before any other release"
+    },
+    "missing_data": {
+      "prereg": "AP3 (Missing-Data Processing)",
+      "standardise_within_model": true,
+      "fill": {
+        "rule": "one fill before the scale scores; one value per empty cell, the same table for every model",
+        "stage": "before_scale_scores",
+        "items": {
+          "formula": "answer ~ 1 + (1 | item) + (1 | respondent_id)",
+          "family": "cumulative(logit)",
+          "per": "scale",
+          "value": "posterior median of the expected answer (fractional allowed)",
+          "priors": {
+            "intercept_sd": 1.5,
+            "sd_sd": 1
+          }
+        },
+        "demographics": {
+          "order": ["demo_age", "demo_hh_members", "demo_income_hh_net"],
+          "predictors": "the nine scale scores, gender (only when observed for every retained participant), and the demographics filled earlier",
+          "demo_age": {
+            "formula": "demo_age ~ zm_security + zm_arousal + zm_power + zm_prestige + zm_achievement + asc_agg + asc_sub + asc_conv + sdo_dom + gender (only when observed for every retained participant)",
+            "family": "gaussian",
+            "value": "posterior median of the expected value",
+            "priors": {
+              "intercept_mean": 45,
+              "intercept_sd": 20,
+              "b_sd": 5,
+              "sigma_sd": 15
+            }
+          },
+          "demo_hh_members": {
+            "formula": "demo_hh_members ~ zm_security + zm_arousal + zm_power + zm_prestige + zm_achievement + asc_agg + asc_sub + asc_conv + sdo_dom + gender (only when observed for every retained participant) + demo_age",
+            "family": "poisson",
+            "range": [1, 8],
+            "value": "posterior median of the expected count, rounded, kept within 1..8",
+            "priors": {
+              "intercept_sd": 1.5,
+              "b_sd": 0.5
+            }
+          },
+          "demo_income_hh_net": {
+            "formula": "demo_income_hh_net ~ zm_security + zm_arousal + zm_power + zm_prestige + zm_achievement + asc_agg + asc_sub + asc_conv + sdo_dom + gender (only when observed for every retained participant) + demo_age + demo_hh_members",
+            "family": "cumulative(logit)",
+            "bands": 13,
+            "value": "median band of the posterior predictive draws",
+            "priors": {
+              "intercept_sd": 1.5,
+              "b_sd": 0.5
+            }
+          }
+        },
+        "interval": 0.95,
+        "gender": "never filled; rows without gender are omitted from the four regressions and the joint model only",
+        "shared_file": "keeps the gaps",
+        "drop": {
+          "items_per_scale_more_than": 2,
+          "demographics_missing_at_least": 2
+        }
+      }
+    },
+    "reliability": {
+      "interval_level": 0.95,
+      "prereg": "AP4",
+      "bootstrap_n": 60,
+      "bootstrap_seed": 1,
+      "omega_interval_min_success": 0.8,
+      "omega": "psych::omega, McDonald's omega total; Cronbach's alpha as fallback",
+      "cfa": "lavaan, one-factor model per scale, estimator WLSMV, ordered items"
+    },
+    "regression": {
+      "prereg": "AP6",
+      "engine": "brms",
+      "backend": "cmdstanr",
+      "family": "gaussian",
+      "outcomes": ["asc_agg", "asc_sub", "asc_conv", "sdo_dom"],
+      "motives": ["zm_security", "zm_arousal", "zm_power", "zm_prestige", "zm_achievement"],
+      "covariates": ["age_z", "gender", "income_z"],
+      "chains": 4,
+      "cores": 4,
+      "ess_target": 2000,
+      "rhat_max": 1.01,
+      "validity_gate": {
+        "scope": "population-level regression coefficients (b_ parameters)",
+        "ess_bulk_min": 10000,
+        "ess_tail_min": 10000,
+        "rhat_max": 1.01,
+        "divergences_max": 0,
+        "treedepth_hits_max": 0,
+        "bfmi_min": 0.2,
+        "on_failure": ["ESS shortfall: double the iterations and refit, at most three times", "R-hat, divergences or tree-depth hits: refit once with doubled warmup, adapt_delta 0.99, max_treedepth 15", "reparameterise only for a documented cause", "otherwise report the fit as computationally not interpretable; no AP10 classification; deviation documented"],
+        "max_ess_doublings": 3,
+        "adapt_delta_retry": 0.99,
+        "max_treedepth_retry": 15
+      },
+      "r2": {
+        "definition": "model-based Bayesian R2, var(mu) / (var(mu) + residual variance), same definition for the Gaussian and the Student-t (nu = 4: residual variance = 2 * sigma^2) fits"
+      },
+      "point_estimate": "median",
+      "fit_roles": {
+        "student_refit": "student refit",
+        "multivariate": "joint estimation (RQ2)"
+      },
+      "ci_level": 0.95,
+      "seed": 20260905,
+      "prior_predictive": {
+        "absolute_summary_percentile": 0.95,
+        "raw_scale_quantiles": [0.05, 0.5, 0.95]
+      },
+      "multivariate": {
+        "fitted": true
+      },
+      "iter_per_chain": 1000,
+      "warmup": 500,
+      "covariate_keys": ["age", "gender", "income"],
+      "predictors": "zm_security_z + zm_arousal_z + zm_power_z + zm_prestige_z + zm_achievement_z + age_z + gender + income_z",
+      "term_keys": {
+        "zm_security_z": "zm_security",
+        "zm_arousal_z": "zm_arousal",
+        "zm_power_z": "zm_power",
+        "zm_prestige_z": "zm_prestige",
+        "zm_achievement_z": "zm_achievement",
+        "asc_agg_z": "asc_agg",
+        "asc_sub_z": "asc_sub",
+        "asc_conv_z": "asc_conv",
+        "sdo_dom_z": "sdo_dom",
+        "age_z": "age",
+        "income_z": "income"
+      }
+    },
+    "priors": {
+      "prereg": "AP6",
+      "slope_sd_primary": 0.2,
+      "slope_sd_sweep": [0.1, 0.2, 0.4],
+      "sweep_labels": {
+        "0.1": "skeptical",
+        "0.2": "primary",
+        "0.4": "permissive"
+      },
+      "sweep_block": "standardised-coefficient block (motives and metric covariates); gender, intercept and residual priors fixed",
+      "gender_sd": 0.4,
+      "intercept_sd": 0.2,
+      "sigma_sd": 1,
+      "rescor": "lkj(2)"
+    },
+    "sensitivity": {
+      "prereg": "AP6/AP10",
+      "priorsense": true,
+      "powerscale": {
+        "blocks": ["metric_slopes", "gender_contrasts", "intercept", "sigma", "all_priors"],
+        "inspected": "all population-level coefficients of the primary fit, plus Bayesian R2",
+        "component": ["prior", "likelihood"],
+        "lower_alpha": 0.99,
+        "upper_alpha": 1.01,
+        "div_measure": "cjs_dist",
+        "sensitivity_threshold": 0.05
+      },
+      "prior_predictive_check": true,
+      "posterior_predictive_check": true,
+      "student_t": {
+        "role": "descriptive",
+        "trigger": "one_sided_tails",
+        "trigger_stats": ["kurtosis", "min", "max"],
+        "nu_fixed": 4,
+        "sigma_scale_prior_sd": 0.707106781186548
+      }
+    },
+    "inference": {
+      "prereg": "AP10",
+      "credible_rule": "95% CrI under the primary prior excludes zero",
+      "confirmation_rule": "credible AND posterior median sign == predicted sign",
+      "disconfirmation_rule": "credible AND sign opposite to prediction",
+      "exploratory_rule": "± cell: report credibility and sign only (RQ1, AP10)"
+    },
+    "predictions": {
+      "prereg": "RQ1 Table 3",
+      "table": {
+        "asc_agg": {
+          "zm_security": "+",
+          "zm_arousal": "-",
+          "zm_power": "+",
+          "zm_prestige": "±",
+          "zm_achievement": "-"
+        },
+        "asc_sub": {
+          "zm_security": "+",
+          "zm_arousal": "-",
+          "zm_power": "-",
+          "zm_prestige": "±",
+          "zm_achievement": "-"
+        },
+        "asc_conv": {
+          "zm_security": "+",
+          "zm_arousal": "-",
+          "zm_power": "+",
+          "zm_prestige": "±",
+          "zm_achievement": "-"
+        },
+        "sdo_dom": {
+          "zm_security": "+",
+          "zm_arousal": "-",
+          "zm_power": "+",
+          "zm_prestige": "±",
+          "zm_achievement": "-"
+        }
+      }
+    },
+    "network": {
+      "prereg": "AP8, AP10, RQ3a/RQ3b/RQ3c",
+      "nodes": ["zm_security_z", "zm_arousal_z", "zm_power_z", "zm_prestige_z", "zm_achievement_z", "asc_agg_z", "asc_sub_z", "asc_conv_z", "sdo_dom_z"],
+      "package": "BDgraph",
+      "iter": 3000,
+      "g_prior": 0.5,
+      "g_prior_sweep": [0.25, 0.5, 0.75],
+      "df_prior": 3,
+      "not_cont": 0,
+      "B": 60,
+      "seed_base": 39976,
+      "retry_seed_offset": 100000,
+      "min_success_rate": 0.95,
+      "bf_include": 10,
+      "bf_exclude": 0.1,
+      "standardise_once": true,
+      "node_keys": ["zm_security", "zm_arousal", "zm_power", "zm_prestige", "zm_achievement", "asc_agg", "asc_sub", "asc_conv", "sdo_dom"]
+    },
+    "factor_analysis": {
+      "seed": 1,
+      "efa_estimation_method": "wls",
+      "cfa_settings": {
+        "estimator": "WLSMV",
+        "ordered": true,
+        "std_lv": true,
+        "orthogonal": false
+      },
+      "factor_number_methods": {
+        "parallel_analysis": {
+          "reference_datasets": 100,
+          "percentile": 95,
+          "correlation_type": "polychoric",
+          "random_correlation_type": "pearson"
+        },
+        "comparison_data": {
+          "population_size": 10000,
+          "samples": 500,
+          "alpha": 0.3,
+          "max_iterations": 50,
+          "correlation_type": "pearson"
+        },
+        "kaiser": {
+          "threshold": 1
+        },
+        "vss": {
+          "maximum_factors": 8
+        }
+      },
+      "factor_number_criteria": [
+        {
+          "key": "pca_parallel",
+          "index": "parallel_analysis",
+          "label": "Parallel analysis (principal components)"
+        },
+        {
+          "key": "common_factor_parallel",
+          "index": "common_factor_parallel",
+          "label": "Parallel analysis (common factors)"
+        },
+        {
+          "key": "comparison_data",
+          "index": "comparison_data",
+          "label": "Comparison data"
+        },
+        {
+          "key": "original_map",
+          "index": "map",
+          "label": "Velicer's minimum average partial"
+        },
+        {
+          "key": "classical_kaiser",
+          "index": "kaiser",
+          "label": "Kaiser criterion"
+        },
+        {
+          "key": "empirical_kaiser",
+          "index": "empirical_kaiser",
+          "label": "Empirical Kaiser criterion"
+        },
+        {
+          "key": "optimal_coordinates",
+          "index": "optimal_coordinates",
+          "label": "Optimal coordinates"
+        },
+        {
+          "key": "acceleration_factor",
+          "index": "acceleration_factor",
+          "label": "Acceleration factor"
+        },
+        {
+          "key": "vss_complexity_1",
+          "index": "vss",
+          "label": "Very simple structure (complexity one)"
+        }
+      ],
+      "loading_display_cutoff": 0.4,
+      "single_scale_expected_factors": 1,
+      "cfa_reporting": {
+        "ranked_residuals_n": 3,
+        "residual_data_file": "data/derived/cfa_pairwise_residuals.csv"
+      },
+      "rotation_primary": "oblimin",
+      "rotation_settings": {
+        "oblimin_gamma": 0,
+        "starting_rotations": 20
+      },
+      "sets": [
+        {
+          "key": "asc",
+          "label": "ASC",
+          "scales": ["asc_agg", "asc_sub", "asc_conv"],
+          "expected_factors": 3,
+          "efa": true,
+          "cfa": false
+        },
+        {
+          "key": "dopl",
+          "scales": ["zm_power", "zm_prestige"],
+          "expected_factors": 2,
+          "efa": true,
+          "cfa": false,
+          "label": "DoPL-6 (dominance and prestige)"
+        },
+        {
+          "key": "ums",
+          "scales": ["zm_security", "zm_achievement"],
+          "expected_factors": 2,
+          "efa": true,
+          "cfa": false,
+          "label": "UMS-6 (intimacy and achievement)"
+        },
+        {
+          "key": "motives",
+          "label": "All social motive scales",
+          "scales": ["zm_security", "zm_arousal", "zm_power", "zm_prestige", "zm_achievement"],
+          "expected_factors": 5,
+          "efa": true,
+          "cfa": true
+        },
+        {
+          "key": "outcomes",
+          "label": "ASC and SDO-D",
+          "scales": ["asc_agg", "asc_sub", "asc_conv", "sdo_dom"],
+          "expected_factors": 4,
+          "efa": true,
+          "cfa": true
+        }
+      ]
+    },
+    "confirmatory_models": {
+      "prereg": "AP4",
+      "estimator": "WLSMV on ordered indicators; every latent variance fixed to 1; factor correlations freely estimated",
+      "models": [
+        {
+          "key": "zm_security",
+          "question": "scale unidimensionality",
+          "family": "subscale",
+          "factors": {
+            "zm_security": "zm_security"
+          },
+          "label": "security"
+        },
+        {
+          "key": "zm_arousal",
+          "question": "scale unidimensionality",
+          "family": "subscale",
+          "factors": {
+            "zm_arousal": "zm_arousal"
+          },
+          "label": "arousal"
+        },
+        {
+          "key": "zm_power",
+          "question": "scale unidimensionality",
+          "family": "subscale",
+          "factors": {
+            "zm_power": "zm_power"
+          },
+          "label": "power"
+        },
+        {
+          "key": "zm_prestige",
+          "question": "scale unidimensionality",
+          "family": "subscale",
+          "factors": {
+            "zm_prestige": "zm_prestige"
+          },
+          "label": "prestige"
+        },
+        {
+          "key": "zm_achievement",
+          "question": "scale unidimensionality",
+          "family": "subscale",
+          "factors": {
+            "zm_achievement": "zm_achievement"
+          },
+          "label": "achievement"
+        },
+        {
+          "key": "asc_agg",
+          "question": "scale unidimensionality",
+          "family": "subscale",
+          "factors": {
+            "asc_agg": "asc_agg"
+          },
+          "label": "Authoritarian aggression"
+        },
+        {
+          "key": "asc_sub",
+          "question": "scale unidimensionality",
+          "family": "subscale",
+          "factors": {
+            "asc_sub": "asc_sub"
+          },
+          "label": "Authoritarian submission"
+        },
+        {
+          "key": "asc_conv",
+          "question": "scale unidimensionality",
+          "family": "subscale",
+          "factors": {
+            "asc_conv": "asc_conv"
+          },
+          "label": "Conventionalism"
+        },
+        {
+          "key": "sdo_dom",
+          "question": "scale unidimensionality",
+          "family": "subscale",
+          "factors": {
+            "sdo_dom": "sdo_dom"
+          },
+          "label": "Social dominance orientation: dominance"
+        },
+        {
+          "key": "ums_achievement_intimacy",
+          "question": "ums",
+          "family": "ums_dopl",
+          "factors": {
+            "zm_security": "zm_security",
+            "zm_achievement": "zm_achievement"
+          },
+          "label": "UMS-6 (intimacy and achievement)"
+        },
+        {
+          "key": "dopl_dominance_prestige",
+          "question": "dopl",
+          "family": "ums_dopl",
+          "factors": {
+            "zm_power": "zm_power",
+            "zm_prestige": "zm_prestige"
+          },
+          "label": "DoPL-6 (dominance and prestige)"
+        },
+        {
+          "key": "social_motives_five_factor",
+          "label": "Five social-motive factors",
+          "question": "social motives",
+          "family": "social_motives",
+          "factors": {
+            "zm_security": "zm_security",
+            "zm_arousal": "zm_arousal",
+            "zm_power": "zm_power",
+            "zm_prestige": "zm_prestige",
+            "zm_achievement": "zm_achievement"
+          }
+        },
+        {
+          "key": "asc_three_factor",
+          "label": "ASC three-factor model",
+          "question": "asc",
+          "family": "asc",
+          "factors": {
+            "asc_agg": "asc_agg",
+            "asc_sub": "asc_sub",
+            "asc_conv": "asc_conv"
+          }
+        },
+        {
+          "key": "authoritarian_orientation_four_factor",
+          "label": "Three ASC factors and SDO-D",
+          "question": "authoritarian orientation",
+          "family": "auth_orientation",
+          "factors": {
+            "asc_agg": "asc_agg",
+            "asc_sub": "asc_sub",
+            "asc_conv": "asc_conv",
+            "sdo_dom": "sdo_dom"
+          }
+        }
+      ]
+    },
+    "descriptives": {
+      "prereg": "AP5",
+      "demographics": ["demo_age", "demo_gender", "demo_edu_school", "east_west", "income", "quota_group"],
+      "scale_summary": ["mean", "sd", "min", "max", "skew"],
+      "correlations": "pearson",
+      "bayesian_correlations": {
+        "package": "BayesFactor",
+        "rscale": 0.333333333333333,
+        "interval_level": 0.95,
+        "posterior_iterations": 10000,
+        "seed": 20261002,
+        "bf_cutoff": 3
+      }
+    },
+    "data_files": {
+      "prereg": "M7 (removal after download), T10 (scientific-use dataset)",
+      "intake": {
+        "require_manual_approval": true,
+        "proposal_file": "intake/intake_proposal.yaml",
+        "approval_file": "intake/intake_approved.yaml",
+        "delete_always": ["ResponseId", "StartDate", "EndDate", "RecordedDate", "Status", "Progress", "Finished", "DistributionChannel", "UserLanguage", "Q_BallotBoxStuffing", "Last_Seen_Flow_Element_ID", "Last_Seen_Question_IDs", "survey_status", "survey_status_detail", "possibly_left", "possibly_conservative", "info_teilnahme_2_1"],
+        "delete_if_present": ["IPAddress", "LocationLatitude", "LocationLongitude", "LocationAccuracy", "ExternalReference", "RecipientEmail", "RecipientFirstName", "RecipientLastName", "Q_RecaptchaScore", "Q_RelevantIDDuplicate", "Q_RelevantIDDuplicateScore", "Q_RelevantIDFraudScore", "Q_RelevantIDLastStartDate", "Q_TotalDuration", "Q_URL"],
+        "delete_after_billing": "bilendi_id",
+        "respondent_id": "participant number assigned in random order; not derived from any Qualtrics field"
+      },
+      "comments_file": {
+        "path": "data/private/comments.csv"
+      },
+      "demographics_file": {
+        "path": "data/derived/deidentified_demographics.csv"
+      },
+      "filled_cells_file": {
+        "path": "data/derived/filled_cells.csv"
+      },
+      "dropped_respondents_file": {
+        "path": "data/derived/dropped_respondents.csv"
+      },
+      "result_files": {
+        "cfa_loadings": "data/derived/cfa_loadings.csv",
+        "efa_loadings": "data/derived/efa_loadings.csv",
+        "efa_membership": "data/derived/efa_membership.csv",
+        "prior_power_scaling": "data/derived/prior_power_scaling.csv",
+        "posterior_predictive_checks": "data/derived/posterior_predictive_checks.csv"
+      },
+      "scientific_use_file": {
+        "path": "data/derived/scientific_use.csv",
+        "keep": ["respondent_id", "items", "scale_scores", "demo_gender", "age_band", "age_band_midpoint", "income_band", "income_band_value", "quota_group", "attentioncheck_1", "attentioncheck_2", "pol_symp", "pol_party_vote"],
+        "analysis_value_columns": ["age_band_midpoint", "income_band_value"],
+        "drop": ["demo_age", "income", "demo_edu_school", "east_west", "demo_bundesland", "demo_income_hh_net", "demo_hh_members", "Duration__in_seconds_", "Kommentarfeld", "pol_party_vote_801_TEXT", "pol_vote_would", "pol_left_right"]
+      }
+    },
+    "prior_recovery": {
+      "prereg": "AP6 (Justification of Prior Choice)",
+      "n_per_replicate": 650,
+      "replicates": 200,
+      "smoke_replicates": 2,
+      "slope_sds": [0.1, 0.2, 0.4],
+      "effect_scenarios": ["zero", "working_range", "close_anchor_0.37", "opposing_signs_among_correlated_motives"],
+      "outcomes_recorded": ["coverage_95", "directional_error_rate", "confirmed_rate_by_true_effect", "bias"],
+      "sampling": {
+        "chains": 2,
+        "warmup": 500,
+        "iter_per_chain": 500,
+        "ess_target": 250
+      }
+    },
+    "profile_name": "smoke",
+    "root": "."
+  },
+  "input_files": [
+    {
+      "path": "data/intake/synthetic.csv",
+      "sha256": "fca1016909e70f6b87f71eab335c1cd787ec17b986661b6e404762eb390fd20b"
+    },
+    {
+      "path": "data/intake/synthetic_demographics.csv",
+      "sha256": "d0f2d209e82de8a3a086a8fc4f2f1e9e336530dbffe6873e872b562d94957d6d"
+    },
+    {
+      "path": "data/intake/synthetic_preparation.rds",
+      "sha256": "1652fe0a078cee9d196d21a8cf62b4405212c5ffbcad34539727b09c59be8ee8"
+    },
+    {
+      "path": "data/intake/synthetic.yaml",
+      "sha256": "3603c8930c533eb307b4a61810767661b67d05ec3550dc75b33dc9267b6dd2b0"
+    },
+    {
+      "path": "../preregistration/codebook_items.csv",
+      "sha256": "ea5a199759d024c2d098be918070913717929ae3f242f3073ace5ac043a3145c"
+    },
+    {
+      "path": "../preregistration/codebook_scales.csv",
+      "sha256": "002ff7f930100dd1360686fca74dde31c422f74158d659ad2642baea967e2765"
+    },
+    {
+      "path": "../preregistration/codebook_factors.csv",
+      "sha256": "a06a436f59c7cd3c390b29f8cabbad7870eace5fc6e0b0eba0789c88a8030791"
+    }
+  ],
+  "source_files": [
+    {
+      "path": "_targets.R",
+      "sha256": "8e964822abd6e7d6d15d2eabd725ae2110aa400e1b6bbb5154a65484ff8a70b7"
+    },
+    {
+      "path": "R/ap1_exclusions.R",
+      "sha256": "ea61a57ffcdd7daeff4039808cb0e016cc84f9e1856700388052413c02519811"
+    },
+    {
+      "path": "R/ap10_inference.R",
+      "sha256": "c5f7d8b2ec8057aad7ce42585c19a2d2c054822374ad5c98166e1388563b773c"
+    },
+    {
+      "path": "R/ap3_data_files.R",
+      "sha256": "6eb2a7fc58e47f4c986795c764842d875a5c95b0eb7ab7d567ce455eb477b9f9"
+    },
+    {
+      "path": "R/ap3_fill.R",
+      "sha256": "a173be035757dc094fd5d204734345fea958c9012ba74653d7520cddf3480f04"
+    },
+    {
+      "path": "R/ap3_imputation_validity.R",
+      "sha256": "e96f6d5495e0516eca5baf3ee0292b01a3b6c03dda93fc142f6c337b9277c281"
+    },
+    {
+      "path": "R/ap3_pipeline.R",
+      "sha256": "f61f92378e47e88496e192e3637443548c56428ce3b64f561f7cc8f7a222025c"
+    },
+    {
+      "path": "R/ap3_preparation.R",
+      "sha256": "bc4635143bd685dedb0f07ca9f1227a41ba7a7204ff51a74b6f11afc4dce73e1"
+    },
+    {
+      "path": "R/ap3_preprocessing.R",
+      "sha256": "7100d38b356df94bb29938de7c4e0c40146dbffeb68daa8233bebfcfacf9aa67"
+    },
+    {
+      "path": "R/ap4_cfa_input.R",
+      "sha256": "4c830af2be229c5fd5f4ed0e0e2de9b24e3546d1b01f04bf50ccdcbf5122ab21"
+    },
+    {
+      "path": "R/ap4_cfa_reporting.R",
+      "sha256": "ec8b396c0de57a01ab17111a1c3374dbd74e774883e31251b9a87d4b35de0877"
+    },
+    {
+      "path": "R/ap4_factor_structure.R",
+      "sha256": "e127d64296f1f2bff8af2a5771779a7703224ffd3bacfbc5f3f353a18465eb79"
+    },
+    {
+      "path": "R/ap4_reliability.R",
+      "sha256": "d11cb01693106a8b9dd75b551f499d5edf9db126c3ef6ab1673d69b122aeeca9"
+    },
+    {
+      "path": "R/ap4_summary_files.R",
+      "sha256": "673215f9ae9c1867cb79b74ec4b3d6c30e60e513e395edb760727369c36df98d"
+    },
+    {
+      "path": "R/ap5_descriptives.R",
+      "sha256": "8fe94e0187260a1fbc6b0e7b45dfda0cf752e42d08a165a070fac1d21b992542"
+    },
+    {
+      "path": "R/ap6_interval_comparison.R",
+      "sha256": "b06fb9324e8f5d72eeedc55fc98ef2cea586e78bb44fd3faba691f3de70272dd"
+    },
+    {
+      "path": "R/ap6_pipeline.R",
+      "sha256": "699653eb4bef95448a7249804d21f552d6e6472ad2bad3f77bec7f30c8e1d9df"
+    },
+    {
+      "path": "R/ap6_regressions.R",
+      "sha256": "5e654f6156ebe979bfa7c14be25a23ac0bd7298fb92edd122979be4b88673b65"
+    },
+    {
+      "path": "R/ap6_rq1_differences_partials.R",
+      "sha256": "59f4adcf9772054b7b5ec7e935dba41339bc6ca6898989b4b8cb961712e7570e"
+    },
+    {
+      "path": "R/ap7_joint_comparisons.R",
+      "sha256": "c56caf01f44d71b6ef72880ce49237d4073a7e32300a66158cf7ba47a5f17459"
+    },
+    {
+      "path": "R/ap8_network_helpers.R",
+      "sha256": "b3cdc0b1973f4ca9e63ff32f25276c8b3a832dc41c96c42155c64667399b4b37"
+    },
+    {
+      "path": "R/ap8_network.R",
+      "sha256": "4413e13018e41a34c4ec7983834595d0ffd221b590f0aa37a7c3297dcc301ecb"
+    },
+    {
+      "path": "R/ap9_efa.R",
+      "sha256": "89f6cb6ef69d7ee36e6ee12c5fd38e20751646c9efc0ad9668303c99307d076f"
+    },
+    {
+      "path": "R/ap9_pipeline.R",
+      "sha256": "53c3e1aadb2402925ad31fbfbb615b54a4bcb2012015f43d4b39bc17ea7c9baa"
+    },
+    {
+      "path": "R/calculate_bayesian_correlations.R",
+      "sha256": "50a0fb3f03597ebe74802f3121d8e08db14ba0d80419c9ee742d09cf4a6d933c"
+    },
+    {
+      "path": "R/calculate_joint_asc_aggregation.R",
+      "sha256": "3fd10fb7947564514c1753d30ebbfcf5543155f42d195009a4f3d019182cc273"
+    },
+    {
+      "path": "R/calculate_joint_correlation_changes.R",
+      "sha256": "ae08f8798c2bca9ee1759c225f5d5ca140afcc6ca967a3d50fa64913533977a8"
+    },
+    {
+      "path": "R/calculation_receipt.R",
+      "sha256": "742a755d826c25c279399399d58d7d2ca9667a8fb6400bce90914820f1a392e3"
+    },
+    {
+      "path": "R/classify_importance_sampling.R",
+      "sha256": "362de061ee075dee565e4424086b5e1a0ffb69e819c35bd2deaf94a9ad3990ca"
+    },
+    {
+      "path": "R/config.R",
+      "sha256": "900c3e3ed7c1d6cd80d2cf41d1c551c6d82d0e93e7351c0997653b414ba73900"
+    },
+    {
+      "path": "R/io_clean_intake.R",
+      "sha256": "4ab54148ea6682c117ab97a87cc3574337893f18ea923533eb25e2cf3a1ca149"
+    },
+    {
+      "path": "R/io_qualtrics.R",
+      "sha256": "4d2372a4722a8546503ae5f0dfcd004feacecc62a6e835f76fcdeaf12cfb9cfb"
+    },
+    {
+      "path": "R/parameter_cards.R",
+      "sha256": "ea660a62063fd1b3850847b306c16ba3ce36f237d75ede2499bf9a5618444ab8"
+    },
+    {
+      "path": "R/pipeline_inputs.R",
+      "sha256": "fc0cc5ee0cfab038fc47264b3389cce302c53b8bed4395acd7009d0c8d94ecdc"
+    },
+    {
+      "path": "R/prior_recovery.R",
+      "sha256": "fd5a21665a172b4ce578c4a291f7e542c73a6d189a54ae79b2825fdd7c79ec3c"
+    },
+    {
+      "path": "R/report_bayesian_correlations.R",
+      "sha256": "fde1319ec0692057c08b965bade814b29e9968688a087422be49feb1a5c05ed3"
+    },
+    {
+      "path": "R/report_helpers.R",
+      "sha256": "f3d1e731f89b6cf7257f11ebe3941fb38a8f90d954166da49aef374a9e4eb00e"
+    },
+    {
+      "path": "R/report_imputation.R",
+      "sha256": "89565ecb3de3d993b99ae7b911555eeed1c9427af8863d880ed61462305bd6b8"
+    },
+    {
+      "path": "R/report_item_distributions.R",
+      "sha256": "7cb49cfa7d8da40990e1df183b06082fe929b96d48115279a2142ad807c46339"
+    },
+    {
+      "path": "R/report_joint_additions.R",
+      "sha256": "58307f6444adbf58c29991e84423bf7179470427547d54957a0c15a42be4e6d7"
+    },
+    {
+      "path": "R/report_measurement_alternatives.R",
+      "sha256": "ffbadfc82f880d9090d25b6a5d47cc3d0ba6e11eb12f2625dab49b991eab0671"
+    },
+    {
+      "path": "R/report_participant_flow.R",
+      "sha256": "5aafe86878907f2b41b7c8643da1faa5ec59a0ee1af593c61ad15c4d3812fd8e"
+    },
+    {
+      "path": "R/report_participation.R",
+      "sha256": "47881145ed3791432b95be720800325f2b861c8329bb655ffdb21ccc31cec992"
+    },
+    {
+      "path": "R/report_preregistration.R",
+      "sha256": "719c76a0c2837ff14b40c0475a3d2d5ddb19cc76029c29e815e8616f57efeae1"
+    },
+    {
+      "path": "R/report_results_associations.R",
+      "sha256": "0cbf3485f65f13ba9788c9f91c3e1e72b0abe3e8977e4b6965f886d296b7006b"
+    },
+    {
+      "path": "R/report_results_joint.R",
+      "sha256": "2c5438bc9378ef94c9b9dc07393226e12b961bc5eb9bf82bb2c5623af4e21aa1"
+    },
+    {
+      "path": "R/report_results_measurement.R",
+      "sha256": "891b6f2e6743b249cb9f15736742d46d63c9804f859b7558cf7b01ad87dc6728"
+    },
+    {
+      "path": "R/report_results_network.R",
+      "sha256": "d689dbcddf69d6078abc7151c6554eaeef4e9f79d02d9a7c78e78a3b727171b5"
+    },
+    {
+      "path": "R/report_results_sample.R",
+      "sha256": "bdc6e46d824de97fe5f8071fe62b734637dfe2350648f5abb7569333dbff3bab"
+    },
+    {
+      "path": "R/report_saved_inputs.R",
+      "sha256": "0a713d3a1e4e9bbb7e3d89e0551cc32d0f76ef63e359048dd0856dde75e283b4"
+    },
+    {
+      "path": "R/report_supplement_completeness.R",
+      "sha256": "49a6bb5f011326a4daf4b2af161abde962deb936d5a3036ae6f6464ce0d7f041"
+    },
+    {
+      "path": "R/report_supplement_explained_variance.R",
+      "sha256": "90eb142c8862af3f70ac31837dcb382eaf753598f4c0a2cfba66d22be57514f4"
+    },
+    {
+      "path": "R/report_supplement_measurement.R",
+      "sha256": "a921611cf17998df45c7496a38131cbf6b576cd1969a00e557412ea71245878d"
+    },
+    {
+      "path": "R/report_supplement_model_checks.R",
+      "sha256": "ecef893cfa8fb60d6472a720f6205907af3d9ee99c8fb8da8897632a2a0686bf"
+    },
+    {
+      "path": "R/report_supplement_network_detail.R",
+      "sha256": "8ce534690ae6d4c03000b8732143239d9bc4066f80986c458570d54c4d3b8c7a"
+    },
+    {
+      "path": "R/report_supplement_prior_sensitivity.R",
+      "sha256": "f1a38b6e58d908c21f298ea60feee3efe005dc1d2d3dac5086802764ad7820b7"
+    },
+    {
+      "path": "R/report_supplement_sampling_diagnostics.R",
+      "sha256": "bfcb46a927eb004c38e950b9df644d0b4c0367b945a93a1f3b01404642174b05"
+    },
+    {
+      "path": "R/report_supplement_software.R",
+      "sha256": "7b55e9ec0213fc355e48e6fc429125f5d907121e4f9975d6c4d066379d71a595"
+    },
+    {
+      "path": "R/report_synthetic_data.R",
+      "sha256": "404a1bf483dce45d90b261c3de30149ebca5cbd506b3f6c69cba6930bdb05e91"
+    },
+    {
+      "path": "R/reproduction.R",
+      "sha256": "f84ae8e35b5721574a445263e4ea6862ace6b238f70604d154281aceb0f4cff6"
+    },
+    {
+      "path": "R/result_outputs.R",
+      "sha256": "98da3853d42c63126c58bfb5edf24bff37eaacfe073a7fe09d7a58cddbb25c01"
+    },
+    {
+      "path": "R/result_review_exports.R",
+      "sha256": "fbd1cba0242733dc75295f2fbd412f3e0aa36fb118d28e779db32404af6d34ca"
+    },
+    {
+      "path": "R/simulate_testdata.R",
+      "sha256": "81711506bb6b63cddfbe10aa76dc1497279f86ed229af1fc575f9c86733a38d0"
+    },
+    {
+      "path": "config/analysis_plan.yaml",
+      "sha256": "b30107366c4d5213aa767fcc38e8067a0ab7d4762eb358b55b0e8e45f59e8fa2"
+    },
+    {
+      "path": "renv.lock",
+      "sha256": "3b8dbce9a43f0b52b8a1871054ce793a9be733c2f7131271fc5cbd8dbfbc98ed"
+    }
+  ],
+  "hash_algorithm": "sha256",
+  "git_head": "aab2195d5402c23b93bbabf07ba8fab6ba3def62",
+  "git_dirty": true,
+  "built_at": "2026-10-08T17:37:21Z",
+  "r_version": "R version 4.5.2 (2025-10-31)",
+  "reproduction_mode": "full",
+  "reused_resampling": {}
+}

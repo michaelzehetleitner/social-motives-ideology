@@ -1,0 +1,46 @@
+# targets data stores (regenerate with targets::tar_make())
+_targets/
+_targets_prior_recovery/
+_targets_prior_recovery_smoke/
+
+# rendered results report and Quarto build products (regenerate via the
+# results_draft target or `quarto render report/results_draft.qmd`)
+report/_build/
+report/*_files/
+report/*.html
+# the report's caption script include is source, not a render
+!report/apa-captions.html
+report/*.docx
+report/.quarto/
+
+# R session litter
+*.log
+.Rhistory
+.Rproj.user/
+
+# derived data files (internal analysis file, scientific-use file; regenerate
+# via the internal_file / scientific_use_file targets). The three files of the
+# prior-recovery simulation (TAR_PROJECT=prior_recovery) are committed, because
+# AP6 of the preregistration (Justification of Prior Choice) reports its results;
+# the prior_recovery_smoke_* files of a smoke run stay out.
+data/derived/*
+!data/derived/prior_recovery_summary.csv
+!data/derived/prior_recovery_summary.png
+!data/derived/prior_recovery_coefficients.csv
+!data/derived/simulation_network_study.csv
+
+# Real cleaned intake remains local; the synthetic fixture is reviewable.
+data/intake/real.csv
+data/intake/real.yaml
+data/intake/real_demographics.csv
+_targets_smoke/
+tests/testthat/_problems/
+tests/testthat/testthat-problems.rds
+
+# Compact results of the synthetic demonstration; the writer rejects real data.
+!data/derived/synthetic_review/
+!data/derived/synthetic_review/*
+
+# Reduced inputs for report rendering and reuse of expensive resampling.
+!data/derived/report_inputs.rds
+!data/derived/resampling_results.rds

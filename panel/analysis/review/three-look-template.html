@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>@@PAGE_TITLE@@</title>
+  <style>
+    :root{--column-width:900px;--column-gap:20px;--canvas-width:2740px;--bg:#17191c;--side:#121417;--editor:#1c1f23;--head:#22262b;--line:#3a3f46;--text:#e3e6e8;--muted:#969da6;--click:#62d7ff;--string:#c6d98b;--object:#d9b87c;--function:#8ebeff;--mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;--sans:Inter,ui-sans-serif,system-ui,sans-serif}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans)}
+    .shell{height:100vh;display:grid;grid-template-columns:154px minmax(0,1fr);overflow:hidden}
+    .side{position:sticky;top:0;height:100vh;padding:20px 10px;border-right:1px solid var(--line);background:var(--side);overflow-y:auto}
+    .brand{padding:0 5px 14px;border-bottom:1px solid var(--line)}.brand .eyebrow{font-size:10px;letter-spacing:.8px}.brand h1{margin:6px 0 3px;font-size:18px}.brand .subtle{margin:0;color:var(--muted);font-size:12px;line-height:1.4}
+    .width-control{margin:14px 4px 0}.width-control label{display:block;margin-bottom:6px;color:#aeb5bd;font:700 10px/1.2 var(--mono);letter-spacing:.35px}.width-row{display:grid;grid-template-columns:30px 1fr 30px;gap:3px;align-items:center}.width-row button{height:29px;padding:0;border:1px solid var(--line);border-radius:4px;background:#1b1e22;color:#edf0f2;font:700 16px/1 var(--mono);cursor:pointer}.width-row button:hover,.width-row button:focus-visible{border-color:var(--click);outline:2px solid #62d7ff55;outline-offset:1px}.width-row button:disabled{cursor:default;opacity:.35}.width-value{color:#d5d9dd;text-align:center;font:700 11px/1 var(--mono);white-space:nowrap}
+    .section-nav{display:grid;gap:5px;margin-top:12px}.section-nav-group{margin:7px 4px 0;color:#858d96;font:700 9px/1.25 var(--mono);letter-spacing:.55px}.section-nav-group:first-child{margin-top:0}.section-nav button{width:100%;padding:10px 8px;border:1px solid var(--line);border-radius:4px;background:#1b1e22;color:#d5d9dd;text-align:left;font:700 13px/1.2 var(--mono);cursor:pointer}.section-nav button:hover,.section-nav button:focus-visible,.section-nav button.active{border-color:var(--click);color:#f4fbff;outline:2px solid #62d7ff55;outline-offset:1px}
+    .side-note{margin:16px 5px;color:#777e87;font-size:9px;overflow-wrap:anywhere}.side-note a{color:var(--click)}.side-note a:focus-visible{outline:2px solid var(--click);outline-offset:2px}
+    main{min-width:0;height:100vh;overflow:auto;padding:22px 24px 48px}
+    .bar,.note,.review{width:var(--canvas-width)}.bar{display:flex;justify-content:space-between;gap:16px;align-items:baseline;margin-bottom:12px}.bar h2{margin:4px 0 0;font-size:26px}.eyebrow,.file-kind{color:#b9c0c7;font:700 11px/1.4 var(--mono);letter-spacing:1px;text-transform:uppercase}.page-badge{padding:7px 9px;border:1px solid #665431;border-radius:4px;background:#25221c;color:#d8b36a;font:700 11px/1 var(--mono);white-space:nowrap}.note{margin:0 0 14px;padding:9px 11px;border-left:3px solid #60666e;background:#1b1e22;color:#b8bec5;font-size:13px;line-height:1.5}
+    .review{display:grid;grid-template-columns:repeat(3,var(--column-width));gap:var(--column-gap);align-items:start}.look{width:var(--column-width);min-width:var(--column-width)}
+    .look-head{position:sticky;top:0;z-index:3;margin-bottom:8px;padding:10px 12px;border:1px solid var(--line);border-radius:5px;background:#22262b}.look-head b{display:block;font:700 14px/1.35 var(--mono)}.look-head span{color:var(--muted);font-size:13px}.legend{display:inline-block!important;margin-top:5px;color:#b9c0c7!important;font:12px/1.3 var(--mono)!important}.legend u{color:var(--click);text-decoration-thickness:2px;text-underline-offset:3px}
+    .editor{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--editor);box-shadow:none}.file-tab{position:sticky;left:0;display:flex;justify-content:space-between;gap:10px;padding:10px 12px;border-bottom:1px solid var(--line);background:var(--head)}.file-tab h3{margin:0;color:#edf0f2;font:600 14px/1.4 var(--mono)}.file-tab small{color:var(--muted);font:12px/1.4 var(--mono);text-align:right}
+    .target-file+.target-file{margin-top:24px}.empty-detail{min-height:96px}
+    #focused-file,.contract{position:relative;top:auto}.contract{border-color:var(--line)}
+    .code{min-width:max-content;margin:0;padding:11px 0 14px;list-style-position:outside;counter-reset:line}.code li{position:relative;min-height:24px;padding:0 14px 0 68px;color:var(--text);white-space:pre;font:13px/1.8 var(--mono);counter-increment:line}.code li::before{content:counter(line);position:absolute;left:0;width:42px;padding-right:9px;color:#68707a;text-align:right;user-select:none}.code li.blank{min-height:10px;line-height:.8}
+    .target-ref,.call{padding:0 3px;border:0;border-bottom:2px solid var(--click);border-radius:2px;background:#17313a;color:var(--click);font:inherit;font-weight:700;cursor:pointer;text-decoration:none}.target-ref:hover,.target-ref:focus-visible,.target-ref.active,.call:hover,.call:focus-visible,.call.active{background:#225267;color:#effbff;outline:2px solid var(--click);outline-offset:1px;text-decoration:none}.target-ref[aria-current="step"]::after{content:" · SELECTED";padding-left:4px;color:#f4fbff;font-size:9px;letter-spacing:.3px}
+    .comment,.syn-comment{color:#858d96}.syn-string,.card code{color:var(--string)}.syn-number,.syn-constant{color:#d6a2d8}.syn-keyword,.syn-fn{color:var(--function)}.syn-object,.syn-arg{color:var(--object)}.syn-op{color:#c3c8ce}
+    .card{position:sticky;left:9px;width:calc(100% - 18px);margin:10px 9px 0;padding:10px 11px;border:1px solid #555b63;border-radius:4px;background:#23262a;color:#d6dade;font:13px/1.6 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere}.card-source{display:block;margin-bottom:5px;color:#e0ad5a;font-size:11px;letter-spacing:.25px}.card b{color:#e4e7ea}
+    .contract-body{padding:12px;color:#d2d6da;font-size:13px;line-height:1.6}.contract-body code{font-family:var(--mono)}.badge{display:inline-block;margin-bottom:9px;padding:4px 6px;border:1px solid #555b63;border-radius:999px;background:#26292d;color:#c3c8ce;font:700 10px/1 var(--mono)}.contract-code{max-width:100%;margin:0 0 10px;padding:10px;border:1px solid #3a3f46;border-radius:4px;background:#181a1d;color:var(--text);white-space:pre;overflow-x:auto;font:13px/1.6 var(--mono)}
+    @media(min-width:801px){.look3{grid-column:auto}.contract{position:relative;top:auto}}
+    @media(max-width:800px){.shell{display:block;height:auto;overflow:visible}.side{position:relative;height:auto}.section-nav{grid-template-columns:1fr 1fr}.section-nav-group{grid-column:1/-1}main{height:auto;overflow:auto}.bar,.note,.review{width:var(--canvas-width)}.review{display:grid;grid-template-columns:repeat(3,var(--column-width))}.look{width:var(--column-width);min-width:var(--column-width)}.code li{font-size:13px}#focused-file,.contract{position:relative;top:auto}}
+  </style>
+</head>
+<body>
+<div class="shell">
+  <aside class="side"><div class="brand"><div class="eyebrow">Social motives and ideology</div><h1>Code Browser</h1><p class="subtle">Three looks</p></div><div class="width-control"><label for="column-width-value">Column width</label><div class="width-row"><button id="column-width-minus" type="button" aria-label="Decrease all column widths">−</button><output id="column-width-value" class="width-value">900 px</output><button id="column-width-plus" type="button" aria-label="Increase all column widths">+</button></div></div><nav class="section-nav" aria-label="Pipeline sections">@@NAVIGATION@@</nav><p class="side-note">@@SIDE_NOTE@@</p></aside>
+  <main id="main-scroll">
+    <header class="bar"><div><div class="eyebrow">Code Browser</div><h2>Data → Description → Analyses → Results → Report</h2></div>@@PAGE_BADGE@@</header>
+    <p class="note">@@ROUTE_NOTE@@</p>
+    <section class="review">
+      <section class="look look1"><header class="look-head">@@LOOK1_HEAD@@</header>
+        <article class="editor target-file" id="targets"><header class="file-tab"><div><div class="file-kind">@@TARGET_FILE_KIND@@</div><h3>_targets.R</h3></div><small>@@TARGET_FILE_META@@</small></header><ol class="code" id="target-lines"></ol></article>
+      </section>
+      <section class="look look2"><header class="look-head">@@LOOK2_HEAD@@</header><div id="focused-file"></div></section>
+      <section class="look look3"><header class="look-head">@@LOOK3_HEAD@@</header><article class="editor contract" id="contract"><header class="file-tab"><div><div class="file-kind">@@LOOK3_FILE_KIND@@</div><h3 id="contract-name"></h3></div><small id="contract-owner"></small></header><div class="contract-body"><span class="badge" id="contract-badge"></span><pre class="contract-code" id="contract-code"></pre><div id="contract-text"></div></div></article></section>
+    </section>
+  </main>
+</div>
+<script>
+const esc = x => String(x).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+const targetLines = @@TARGET_LINES@@;
+let activeTargetLines = document.getElementById('target-lines');
+targetLines.forEach((line, index) => {
+  if (line.boxTitle) {
+    const box = document.createElement('article');
+    box.className = 'editor target-file';
+    box.id = `${line.boxId}-file`;
+    box.innerHTML = `<header class="file-tab"><div><div class="file-kind">@@BOX_FILE_KIND@@</div><h3>_targets.R · ${esc(line.boxTitle)}</h3></div></header><ol class="code"></ol>`;
+    document.querySelector('.look1').append(box);
+    activeTargetLines = box.querySelector('.code');
+    activeTargetLines.style.counterReset = `line ${index}`;
+  }
+  const item = document.createElement('li');
+  if (line.blank) item.className = 'blank';
+  item.innerHTML = line.html;
+  activeTargetLines.append(item);
+});
+
+const panes = @@PANES@@;
+const contracts = @@HELPERS@@;
+const look3Empty = @@LOOK3_EMPTY@@;
+
+function tokenClass(token, tail) {
+  if (token.startsWith('#')) return 'syn-comment';
+  if (/^["']/.test(token)) return 'syn-string';
+  if (/^-?\d/.test(token)) return 'syn-number';
+  if (/^(function|if|else|for|in|return|TRUE|FALSE|NULL|NA|NA_real_)$/.test(token)) return 'syn-keyword';
+  if (/^\s*\(/.test(tail)) return 'syn-fn';
+  return 'syn-object';
+}
+function colourTextNode(node) {
+  const text = node.nodeValue;
+  const pattern = /(#[^\n]*|"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|-?\b\d+(?:\.\d+)?\b|\b(?:function|if|else|for|in|return|TRUE|FALSE|NULL|NA|NA_real_)\b|\b[A-Za-z_.][A-Za-z0-9_.]*\b)/g;
+  const fragment = document.createDocumentFragment(); let at = 0;
+  for (const match of text.matchAll(pattern)) {
+    if (match.index > at) fragment.append(document.createTextNode(text.slice(at, match.index)));
+    const span = document.createElement('span'); span.className = tokenClass(match[0], text.slice(match.index + match[0].length)); span.textContent = match[0]; fragment.append(span); at = match.index + match[0].length;
+  }
+  if (at < text.length) fragment.append(document.createTextNode(text.slice(at)));
+  node.replaceWith(fragment);
+}
+function highlight(root) {
+  root.querySelectorAll('.code li,.contract-code').forEach(line => {
+    const walker = document.createTreeWalker(line, NodeFilter.SHOW_TEXT); const nodes = [];
+    while (walker.nextNode()) {
+      const parent = walker.currentNode.parentElement;
+      if (!parent.closest('button,.comment,[class^="syn-"]')) nodes.push(walker.currentNode);
+    }
+    nodes.forEach(colourTextNode);
+  });
+}
+
+function paneHtml(p) {
+  const body = p.body.map(x => typeof x === 'string' ? {html:x} : x);
+  const authority = p.cardItems
+    ? `${esc(p.cardItems.intro)}<ul>${p.cardItems.items.map(item => `<li>${esc(item.label)}: <b>${esc(item.value)}</b></li>`).join('')}</ul>`
+    : esc(p.authority);
+  return `<article class="editor"><header class="file-tab"><div><div class="file-kind">@@PANE_FILE_KIND@@</div><h3>${esc(p.owner)}</h3></div><small>${esc(p.title)}</small></header><div class="card"><span class="card-source">@@AUTHORITY_LABEL@@</span>${authority}</div>${p.comment?`<div class="card">${esc(p.comment)}</div>`:''}<ol class="code">${body.map(x=>`<li>${x.html}</li>`).join('')}</ol></article>`;
+}
+function emptyLook3(p) {
+  const state = document.querySelector('#focused-file .call') ? look3Empty.calls : look3Empty.none;
+  return {name:p.title, owner:p.owner, badge:state.badge, text:p.comment || state.text, code:[]};
+}
+function showContract(key) {
+  const c = contracts[key] || emptyLook3(panes[currentPane]);
+  document.getElementById('contract-name').textContent = c.name;
+  document.getElementById('contract-owner').textContent = c.owner;
+  document.getElementById('contract-badge').textContent = c.badge;
+  const code = document.getElementById('contract-code');
+  code.innerHTML = c.code.join('\n');
+  code.style.display = c.code.length ? 'block' : 'none';
+  code.querySelectorAll('.call').forEach(b => b.addEventListener('click', e => showContract(e.currentTarget.dataset.contract)));
+  document.getElementById('contract-text').textContent = c.text;
+  document.querySelectorAll('.call').forEach(b => b.classList.toggle('active', b.dataset.contract === key));
+  highlight(document.getElementById('contract'));
+}
+let currentPane = 'source';
+function alignMiddle(panel, anchor, column) {
+  requestAnimationFrame(() => {
+    panel.style.top = '0px';
+    const a = anchor.getBoundingClientRect(); const c = column.getBoundingClientRect();
+    panel.style.top = `${Math.max(0, a.top + a.height/2 - c.top - panel.offsetHeight/2)}px`;
+  });
+}
+function showPane(key, anchor=null) {
+  const p = panes[key]; if (!p) return; currentPane = key;
+  const pending = Boolean(p.placeholder);
+  const focus = document.getElementById('focused-file');
+  focus.innerHTML = pending
+    ? `<article class="editor"><header class="file-tab"><div><div class="file-kind">LOOK 2 · NOT DRAFTED</div><h3>${esc(p.title)}</h3></div></header><div class="empty-detail" aria-label="Empty Look 2"></div></article>`
+    : paneHtml(p);
+  document.querySelectorAll('.target-ref').forEach(b => { b.classList.toggle('active', b.dataset.pane === key); b.removeAttribute('aria-current'); });
+  if (anchor) anchor.setAttribute('aria-current','step');
+  focus.querySelectorAll('.call').forEach(b => b.addEventListener('click', e => { showContract(e.currentTarget.dataset.contract); alignMiddle(document.getElementById('contract'), e.currentTarget, document.querySelector('.look3')); }));
+  if (pending) {
+    document.getElementById('contract-name').textContent = 'Look 3 · not drafted';
+    document.getElementById('contract-owner').textContent = '';
+    document.getElementById('contract-badge').textContent = '';
+    document.getElementById('contract-code').textContent = '';
+    document.getElementById('contract-code').style.display = 'none';
+    document.getElementById('contract-text').textContent = '';
+  } else {
+    showContract(p.initial);
+  }
+  highlight(focus);
+  if (anchor) { alignMiddle(focus, anchor, document.querySelector('.look2')); alignMiddle(document.getElementById('contract'), anchor, document.querySelector('.look3')); }
+  history.replaceState(null,'',`#${key}`);
+}
+document.querySelectorAll('.target-ref').forEach(b => b.addEventListener('click', e => showPane(e.currentTarget.dataset.pane, e.currentTarget)));
+function goSection(id) {
+  document.querySelectorAll('.section-nav button').forEach(b => b.classList.toggle('active', b.id === `nav-${id}`));
+  const section = document.getElementById(`${id}-section`);
+  if (section) { section.scrollIntoView({block:'start'}); history.replaceState(null,'',`#${id}`); }
+}
+document.querySelectorAll('.section-nav button[data-section]').forEach(button => {
+  button.addEventListener('click', () => goSection(button.dataset.section));
+});
+let width = 900;
+function setWidth(value) { width = Math.max(660, Math.min(1220, value)); document.documentElement.style.setProperty('--column-width', `${width}px`); document.documentElement.style.setProperty('--canvas-width', `${3*width+40}px`); document.getElementById('column-width-value').textContent = `${width} px`; }
+document.getElementById('column-width-minus').addEventListener('click', () => setWidth(width-80));
+document.getElementById('column-width-plus').addEventListener('click', () => setWidth(width+80));
+highlight(document.querySelector('.look1'));
+function openLocation() {
+  const key = decodeURIComponent(location.hash.slice(1));
+  if (key in panes) showPane(key);
+  else {
+    if (!document.getElementById('focused-file').children.length) showPane(Object.keys(panes)[0]);
+    if (document.getElementById(`${key}-section`)) goSection(key);
+  }
+}
+const initialLocation = location.hash;
+showPane(Object.keys(panes)[0]);
+history.replaceState(null, '', initialLocation || location.pathname);
+openLocation();
+window.addEventListener('hashchange', openLocation);
+</script>
+</body>
+</html>

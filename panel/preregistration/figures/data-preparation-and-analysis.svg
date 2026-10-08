@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1840" height="1450" viewBox="0 0 1840 1450" role="img" aria-labelledby="title description">
+<title id="title">Data preparation and analysis</title>
+<desc id="description">The labeled boxes and arrows reproduce the accompanying Mermaid source. Orange denotes data files and saved preparation results; red denotes deletion or survey exits.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 1 1 L 9 5 L 1 9" fill="none" stroke="#60666D" stroke-width="1.5"/></marker></defs>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<g font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="400">
+<rect x="40" y="580" width="700" height="175" rx="14" fill="#F4F5F6"/>
+<text x="390" y="609" text-anchor="middle" fill="#252525">Published data files</text>
+<path data-from="A" data-to="B" data-label="" d="M 370 110 L 370 160" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path data-from="B" data-to="C" data-label="" d="M 265 280 L 265 337 Q 265 345 257 345 L 248 345 Q 240 345 240 353 L 240 390" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path data-from="B" data-to="D" data-label="" d="M 335 280 L 335 342 Q 335 350 343 350 L 902 350 Q 910 350 910 358 L 910 400" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path data-from="B" data-to="H" data-label="" d="M 410 280 L 410 322 Q 410 330 418 330 L 1262 330 Q 1270 330 1270 338 L 1270 645" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path data-from="B" data-to="O" data-label="" d="M 480 280 L 480 302 Q 480 310 488 310 L 1642 310 Q 1650 310 1650 318 L 1650 410" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path data-from="C" data-to="E" data-label="" d="M 240 520 L 240 640" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path data-from="D" data-to="F" data-label="" d="M 835 500 L 835 542 Q 835 550 827 550 L 598 550 Q 590 550 590 558 L 590 650" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path data-from="D" data-to="I" data-label="" d="M 975 500 L 975 592 Q 975 600 967 600 L 928 600 Q 920 600 920 608 L 920 645" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path data-from="O" data-to="K" data-label="" d="M 1650 495 L 1650 625" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path data-from="E" data-to="P" data-label="" d="M 145 725 L 145 942 Q 145 950 153 950 L 182 950 Q 190 950 190 958 L 190 985" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path data-from="E" data-to="L" data-label="" d="M 300 725 L 300 802 Q 300 810 308 810 L 842 810 Q 850 810 850 818 L 850 985" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path data-from="F" data-to="P" data-label="" d="M 490 725 L 490 777 Q 490 785 482 785 L 243 785 Q 235 785 235 793 L 235 985" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path data-from="F" data-to="L" data-label="" d="M 650 725 L 650 827 Q 650 835 658 835 L 892 835 Q 900 835 900 843 L 900 985" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path data-from="I" data-to="P" data-label="" d="M 795 730 L 795 852 Q 795 860 787 860 L 288 860 Q 280 860 280 868 L 280 985" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path data-from="I" data-to="L" data-label="" d="M 985 730 L 985 897 Q 985 905 977 905 L 958 905 Q 950 905 950 913 L 950 985" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path data-from="H" data-to="P" data-label="" d="M 1140 730 L 1140 877 Q 1140 885 1132 885 L 333 885 Q 325 885 325 893 L 325 985" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path data-from="H" data-to="L" data-label="" d="M 1320 730 L 1320 922 Q 1320 930 1312 930 L 1008 930 Q 1000 930 1000 938 L 1000 985" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path data-from="K" data-to="L" data-label="" d="M 1650 720 L 1650 947 Q 1650 955 1642 955 L 1058 955 Q 1050 955 1050 963 L 1050 985" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path data-from="L" data-to="M" data-label="" d="M 980 1095 L 980 1170" fill="none" stroke="#60666D" stroke-width="1.8" stroke-dasharray="5 5" marker-end="url(#arrow)"/>
+<path data-from="M" data-to="N" data-label="" d="M 980 1280 L 980 1330" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<g id="node-A" data-node="A">
+<rect x="200" y="30" width="340" height="80" rx="14" fill="#FFD39A" stroke="#B96B00" stroke-width="1.8"/>
+<text text-anchor="middle" fill="#352000" data-label="Downloaded Qualtrics export">
+<tspan x="370" y="77.48">Downloaded Qualtrics export</tspan>
+</text>
+</g>
+<g id="node-B" data-node="B">
+<rect x="200" y="160" width="340" height="120" rx="14" fill="#EAF2FB" stroke="#7796B8" stroke-width="1.8"/>
+<text text-anchor="middle" fill="#16395E" data-label="Apply exclusions and remove Qualtrics columns Randomise participant numbers">
+<tspan x="370" y="200.48">Apply exclusions and</tspan>
+<tspan x="370" y="227.48">remove Qualtrics columns</tspan>
+<tspan x="370" y="254.48">Randomise participant numbers</tspan>
+</text>
+</g>
+<g id="node-C" data-node="C">
+<rect x="80" y="390" width="320" height="130" rx="14" fill="#EAF2FB" stroke="#7796B8" stroke-width="1.8"/>
+<text text-anchor="middle" fill="#16395E" data-label="Derive per-person income and East/West Shuffle each observed column independently">
+<tspan x="240" y="421.98">Derive per-person income</tspan>
+<tspan x="240" y="448.98">and East/West</tspan>
+<tspan x="240" y="475.98">Shuffle each observed</tspan>
+<tspan x="240" y="502.98">column independently</tspan>
+</text>
+</g>
+<g id="node-D" data-node="D">
+<rect x="745" y="400" width="330" height="100" rx="14" fill="#EAF2FB" stroke="#7796B8" stroke-width="1.8"/>
+<text text-anchor="middle" fill="#16395E" data-label="Impute scales and demographics Derive bands">
+<tspan x="910" y="430.48">Impute scales and</tspan>
+<tspan x="910" y="457.48">demographics</tspan>
+<tspan x="910" y="484.48">Derive bands</tspan>
+</text>
+</g>
+<g id="node-O" data-node="O">
+<rect x="1490" y="410" width="320" height="85" rx="14" fill="#EAF2FB" stroke="#7796B8" stroke-width="1.8"/>
+<text text-anchor="middle" fill="#16395E" data-label="Mask identifying text in comments">
+<tspan x="1650" y="446.48">Mask identifying text</tspan>
+<tspan x="1650" y="473.48">in comments</tspan>
+</text>
+</g>
+<g id="node-E" data-node="E">
+<rect x="70" y="640" width="330" height="85" rx="14" fill="#FFD39A" stroke="#B96B00" stroke-width="1.8"/>
+<text text-anchor="middle" fill="#352000" data-label="Deidentified demographics">
+<tspan x="235" y="689.98">Deidentified demographics</tspan>
+</text>
+</g>
+<g id="node-F" data-node="F">
+<rect x="460" y="650" width="260" height="75" rx="14" fill="#FFD39A" stroke="#B96B00" stroke-width="1.8"/>
+<text text-anchor="middle" fill="#352000" data-label="Scientific-use file">
+<tspan x="590" y="694.98">Scientific-use file</tspan>
+</text>
+</g>
+<g id="node-I" data-node="I">
+<rect x="770" y="645" width="300" height="85" rx="14" fill="#FFD39A" stroke="#B96B00" stroke-width="1.8"/>
+<text text-anchor="middle" fill="#352000" data-label="Imputation records and checks">
+<tspan x="920" y="681.48">Imputation records and</tspan>
+<tspan x="920" y="708.48">checks</tspan>
+</text>
+</g>
+<g id="node-H" data-node="H">
+<rect x="1120" y="645" width="300" height="85" rx="14" fill="#FFD39A" stroke="#B96B00" stroke-width="1.8"/>
+<text text-anchor="middle" fill="#352000" data-label="Exclusion counts and log">
+<tspan x="1270" y="694.98">Exclusion counts and log</tspan>
+</text>
+</g>
+<g id="node-K" data-node="K">
+<rect x="1470" y="625" width="310" height="95" rx="14" fill="#FFD39A" stroke="#B96B00" stroke-width="1.8"/>
+<text text-anchor="middle" fill="#352000" data-label="Unpublished data file Includes masked comments">
+<tspan x="1625" y="666.48">Unpublished data file</tspan>
+<tspan x="1625" y="693.48">Includes masked comments</tspan>
+</text>
+</g>
+<g id="node-P" data-node="P">
+<rect x="150" y="985" width="280" height="85" rx="14" fill="#EAF2FB" stroke="#7796B8" stroke-width="1.8"/>
+<text text-anchor="middle" fill="#16395E" data-label="Analysis pipeline">
+<tspan x="290" y="1034.98">Analysis pipeline</tspan>
+</text>
+</g>
+<g id="node-L" data-node="L">
+<rect x="800" y="985" width="360" height="110" rx="14" fill="#EAF2FB" stroke="#7796B8" stroke-width="1.8"/>
+<text text-anchor="middle" fill="#16395E" data-label="Verify data files Double-check and commit preparation results">
+<tspan x="980" y="1020.48">Verify data files</tspan>
+<tspan x="980" y="1047.48">Double-check and commit</tspan>
+<tspan x="980" y="1074.48">preparation results</tspan>
+</text>
+</g>
+<g id="node-M" data-node="M">
+<rect x="830" y="1170" width="300" height="110" rx="14" fill="#FFE5E5" stroke="#B42318" stroke-width="1.8"/>
+<text text-anchor="middle" fill="#7A1610" data-label="Delete raw columns, excluded records and original export">
+<tspan x="980" y="1205.48">Delete raw columns,</tspan>
+<tspan x="980" y="1232.48">excluded records</tspan>
+<tspan x="980" y="1259.48">and original export</tspan>
+</text>
+</g>
+<g id="node-N" data-node="N">
+<rect x="830" y="1330" width="300" height="80" rx="14" fill="#FFE5E5" stroke="#B42318" stroke-width="1.8"/>
+<text text-anchor="middle" fill="#7A1610" data-label="Delete survey data on Qualtrics">
+<tspan x="980" y="1363.98">Delete survey data</tspan>
+<tspan x="980" y="1390.98">on Qualtrics</tspan>
+</text>
+</g>
+</g>
+</svg>

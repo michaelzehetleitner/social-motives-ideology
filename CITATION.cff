@@ -1,0 +1,44 @@
+cff-version: 1.2.0
+message: "If you use these materials, please cite them as below."
+type: software
+version: "preregistration-v1"
+date-released: "2026-10-08"
+title: "Motives and Ideology: Bischof's Zürich Model of Social Motivation, Right-wing Authoritarianism and Social Dominance Orientation. Preregistration materials and analysis code"
+authors:
+  - family-names: Zehetleitner
+    given-names: Michael
+    orcid: "https://orcid.org/0000-0003-3363-2680"
+    affiliation: "General Psychology, Catholic University Eichstätt-Ingolstadt, Germany"
+  - family-names: Castiglione
+    given-names: Chiara
+    orcid: "https://orcid.org/0009-0009-5005-5054"
+    affiliation: "General Psychology, Catholic University Eichstätt-Ingolstadt, Germany"
+  - family-names: Drastik
+    given-names: Jana
+    orcid: "https://orcid.org/0009-0001-3055-4384"
+    affiliation: "General Psychology, Catholic University Eichstätt-Ingolstadt, Germany"
+  - family-names: Matterstock
+    given-names: Delilah
+    orcid: "https://orcid.org/0009-0004-0627-1802"
+    affiliation: "General Psychology, Catholic University Eichstätt-Ingolstadt, Germany"
+  - family-names: Prell
+    given-names: Nicolas
+    orcid: "https://orcid.org/0009-0006-3569-979X"
+    affiliation: "General Psychology, Catholic University Eichstätt-Ingolstadt, Germany"
+# Add the PsychArchives DOI of the preregistration after registration:
+# identifiers:
+#   - type: doi
+#     value: "10.23668/psycharchives.XXXXX"
+#     description: "Preregistration (PsychArchives)"
+repository-code: "https://github.com/michaelzehetleitner/social-motives-ideology"
+url: "https://michaelzehetleitner.github.io/social-motives-ideology/"
+license:
+  - MIT
+  - CC-BY-4.0
+keywords:
+  - social motivation
+  - Zürich model
+  - right-wing authoritarianism
+  - social dominance orientation
+  - preregistration
+  - Bayesian analysis

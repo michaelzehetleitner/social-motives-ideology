@@ -1,0 +1,262 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1620" height="910" viewBox="0 0 1620 910" role="img" aria-labelledby="title description">
+<title id="title">Survey flow</title>
+<desc id="description">The labeled boxes and arrows reproduce the accompanying Mermaid source. Orange denotes data files and saved preparation results; red denotes deletion or survey exits.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 1 1 L 9 5 L 1 9" fill="none" stroke="#60666D" stroke-width="1.5"/></marker></defs>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<g font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400">
+<path data-from="welcome" data-to="info" data-label="" d="M 360 120 L 360 136" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path data-from="info" data-to="details" data-label="" d="M 360 194 L 360 210" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path data-from="details" data-to="privacy" data-label="Yes" d="M 210 250 L 170 250" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<rect x="166" y="222" width="48" height="25" fill="#FFFFFF"/>
+<text x="190" y="240" text-anchor="middle" font-size="20" fill="#252525">Yes</text>
+<path data-from="details" data-to="consent" data-label="No" d="M 360 290 L 360 376" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<rect x="370" y="317" width="36" height="25" fill="#FFFFFF"/>
+<text x="388" y="335" text-anchor="middle" font-size="20" fill="#252525">No</text>
+<path data-from="privacy" data-to="consent" data-label="" d="M 97.5 337 L 97.5 344.5 Q 97.5 352 105 352 L 322 352 Q 330 352 330 360 L 330 376" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path data-from="consent" data-to="screenout" data-label="No" d="M 210 416 L 170 416" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<rect x="172" y="388" width="36" height="25" fill="#FFFFFF"/>
+<text x="190" y="406" text-anchor="middle" font-size="20" fill="#252525">No</text>
+<path data-from="consent" data-to="age" data-label="Yes" d="M 360 456 L 360 494" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<rect x="364" y="464" width="48" height="25" fill="#FFFFFF"/>
+<text x="388" y="482" text-anchor="middle" font-size="20" fill="#252525">Yes</text>
+<path data-from="age" data-to="agecheck" data-label="" d="M 360 544 L 360 570" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path data-from="agecheck" data-to="ageout" data-label="Yes" d="M 210 610 L 170 610" fill="none" stroke="#60666D" stroke-width="1.8" stroke-dasharray="5 5" marker-end="url(#arrow)"/>
+<rect x="166" y="582" width="48" height="25" fill="#FFFFFF"/>
+<text x="190" y="600" text-anchor="middle" font-size="20" fill="#252525">Yes</text>
+<path data-from="agecheck" data-to="parties" data-label="No" d="M 360 650 L 360 797 Q 360 805 368 805 L 532 805 Q 540 805 540 797 L 540 58 Q 540 50 548 50 L 892 50 Q 900 50 900 58 L 900 70" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<rect x="370" y="663" width="36" height="25" fill="#FFFFFF"/>
+<text x="388" y="681" text-anchor="middle" font-size="20" fill="#252525">No</text>
+<path data-from="parties" data-to="allocation" data-label="" d="M 900 145 L 900 165" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path data-from="allocation" data-to="quota" data-label="" d="M 900 280 L 900 300" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path data-from="quota" data-to="quotafull" data-label="Yes" d="M 750 340 L 710 340" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<rect x="706" y="312" width="48" height="25" fill="#FFFFFF"/>
+<text x="730" y="330" text-anchor="middle" font-size="20" fill="#252525">Yes</text>
+<path data-from="quota" data-to="goals1" data-label="No" d="M 900 380 L 900 418" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<rect x="912" y="387" width="36" height="25" fill="#FFFFFF"/>
+<text x="930" y="405" text-anchor="middle" font-size="20" fill="#252525">No</text>
+<path data-from="goals1" data-to="check1" data-label="" d="M 900 508 L 900 528" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path data-from="check1" data-to="quality1" data-label="No" d="M 750 573 L 710 573" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<rect x="712" y="545" width="36" height="25" fill="#FFFFFF"/>
+<text x="730" y="563" text-anchor="middle" font-size="20" fill="#252525">No</text>
+<path data-from="check1" data-to="goals2" data-label="Yes" d="M 900 618 L 900 654" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<rect x="906" y="624" width="48" height="25" fill="#FFFFFF"/>
+<text x="930" y="642" text-anchor="middle" font-size="20" fill="#252525">Yes</text>
+<path data-from="goals2" data-to="statements" data-label="" d="M 900 729 L 900 749" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path data-from="statements" data-to="asc" data-label="" d="M 900 824 L 900 872 Q 900 880 908 880 L 1072 880 Q 1080 880 1080 872 L 1080 58 Q 1080 50 1088 50 L 1432 50 Q 1440 50 1440 58 L 1440 70" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path data-from="asc" data-to="sdo" data-label="" d="M 1440 160 L 1440 170" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path data-from="sdo" data-to="check2" data-label="" d="M 1440 285 L 1440 295" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path data-from="check2" data-to="quality2" data-label="No" d="M 1290 340 L 1250 340" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<rect x="1252" y="312" width="36" height="25" fill="#FFFFFF"/>
+<text x="1270" y="330" text-anchor="middle" font-size="20" fill="#252525">No</text>
+<path data-from="check2" data-to="politics" data-label="Yes" d="M 1440 385 L 1440 415" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<rect x="1446" y="387" width="48" height="25" fill="#FFFFFF"/>
+<text x="1470" y="405" text-anchor="middle" font-size="20" fill="#252525">Yes</text>
+<path data-from="politics" data-to="demographics" data-label="" d="M 1440 550 L 1440 560" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path data-from="demographics" data-to="comment" data-label="" d="M 1440 675 L 1440 685" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path data-from="comment" data-to="submission" data-label="" d="M 1440 735 L 1440 745" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path data-from="submission" data-to="complete" data-label="" d="M 1440 795 L 1440 805" fill="none" stroke="#60666D" stroke-width="1.8" marker-end="url(#arrow)"/>
+<text x="310" y="25" text-anchor="middle" font-size="20" fill="#252525">Consent and age</text>
+<text x="850" y="25" text-anchor="middle" font-size="20" fill="#252525">Quotas and motives</text>
+<text x="1390" y="25" text-anchor="middle" font-size="20" fill="#252525">Questionnaire and completion</text>
+<g id="node-welcome" data-node="welcome">
+<rect x="210" y="70" width="300" height="50" rx="14" fill="#EAF2FB" stroke="#7796B8" stroke-width="1.8"/>
+<text text-anchor="middle" font-size="20" fill="#16395E" data-label="Welcome">
+<tspan x="360" y="101.8">Welcome</tspan>
+</text>
+</g>
+<g id="node-info" data-node="info">
+<rect x="210" y="136" width="300" height="58" rx="14" fill="#EAF2FB" stroke="#7796B8" stroke-width="1.8"/>
+<text text-anchor="middle" font-size="20" fill="#16395E" data-label="Participation information">
+<tspan x="360" y="171.8">Participation information</tspan>
+</text>
+</g>
+<g id="node-details" data-node="details">
+<rect x="210" y="210" width="300" height="80" rx="14" fill="#EAF2FB" stroke="#7796B8" stroke-width="1.8"/>
+<text text-anchor="middle" font-size="20" fill="#16395E" data-label="Detailed information requested?">
+<tspan x="360" y="244.8">Detailed information</tspan>
+<tspan x="360" y="268.8">requested?</tspan>
+</text>
+</g>
+<g id="node-privacy" data-node="privacy">
+<rect x="25" y="212" width="145" height="125" rx="14" fill="#EAF2FB" stroke="#7796B8" stroke-width="1.8"/>
+<text text-anchor="middle" font-size="18" fill="#16395E" data-label="Detailed data-protection information">
+<tspan x="97.5" y="258.62">Detailed</tspan>
+<tspan x="97.5" y="280.62">data-protection</tspan>
+<tspan x="97.5" y="302.62">information</tspan>
+</text>
+</g>
+<g id="node-consent" data-node="consent">
+<rect x="210" y="376" width="300" height="80" rx="14" fill="#EAF2FB" stroke="#7796B8" stroke-width="1.8"/>
+<text text-anchor="middle" font-size="20" fill="#16395E" data-label="Consent declaration and confirmation">
+<tspan x="360" y="410.8">Consent declaration</tspan>
+<tspan x="360" y="434.8">and confirmation</tspan>
+</text>
+</g>
+<g id="node-screenout" data-node="screenout">
+<rect x="25" y="376" width="145" height="80" rx="14" fill="#FFE5E5" stroke="#B42318" stroke-width="1.8"/>
+<text text-anchor="middle" font-size="18" fill="#7A1610" data-label="Survey ends: screen-out">
+<tspan x="97.5" y="411.12">Survey ends:</tspan>
+<tspan x="97.5" y="433.12">screen-out</tspan>
+</text>
+</g>
+<g id="node-age" data-node="age">
+<rect x="210" y="494" width="300" height="50" rx="14" fill="#EAF2FB" stroke="#7796B8" stroke-width="1.8"/>
+<text text-anchor="middle" font-size="20" fill="#16395E" data-label="Age">
+<tspan x="360" y="525.8">Age</tspan>
+</text>
+</g>
+<g id="node-agecheck" data-node="agecheck">
+<rect x="210" y="570" width="300" height="80" rx="14" fill="#EAF2FB" stroke="#7796B8" stroke-width="1.8"/>
+<text text-anchor="middle" font-size="20" fill="#16395E" data-label="Age below 18 AND above 69?">
+<tspan x="360" y="604.8">Age below 18</tspan>
+<tspan x="360" y="628.8">AND above 69?</tspan>
+</text>
+</g>
+<g id="node-ageout" data-node="ageout">
+<rect x="25" y="570" width="145" height="80" rx="14" fill="#FFE5E5" stroke="#B42318" stroke-width="1.8"/>
+<text text-anchor="middle" font-size="18" fill="#7A1610" data-label="Survey ends: screen-out">
+<tspan x="97.5" y="605.12">Survey ends:</tspan>
+<tspan x="97.5" y="627.12">screen-out</tspan>
+</text>
+</g>
+<g id="node-parties" data-node="parties">
+<rect x="750" y="70" width="300" height="75" rx="14" fill="#EAF2FB" stroke="#7796B8" stroke-width="1.8"/>
+<text text-anchor="middle" font-size="20" fill="#16395E" data-label="Six party-sympathy ratings">
+<tspan x="900" y="102.3">Six party-sympathy</tspan>
+<tspan x="900" y="126.3">ratings</tspan>
+</text>
+</g>
+<g id="node-allocation" data-node="allocation">
+<rect x="750" y="165" width="300" height="115" rx="14" fill="#EAF2FB" stroke="#7796B8" stroke-width="1.8"/>
+<text text-anchor="middle" font-size="20" fill="#16395E" data-label="Assign quota group: left-leaning, conservative-leaning or mixed">
+<tspan x="900" y="193.3">Assign quota group:</tspan>
+<tspan x="900" y="217.3">left-leaning,</tspan>
+<tspan x="900" y="241.3">conservative-leaning</tspan>
+<tspan x="900" y="265.3">or mixed</tspan>
+</text>
+</g>
+<g id="node-quota" data-node="quota">
+<rect x="750" y="300" width="300" height="80" rx="14" fill="#EAF2FB" stroke="#7796B8" stroke-width="1.8"/>
+<text text-anchor="middle" font-size="20" fill="#16395E" data-label="Assigned quota full?">
+<tspan x="900" y="346.8">Assigned quota full?</tspan>
+</text>
+</g>
+<g id="node-quotafull" data-node="quotafull">
+<rect x="565" y="300" width="145" height="80" rx="14" fill="#FFE5E5" stroke="#B42318" stroke-width="1.8"/>
+<text text-anchor="middle" font-size="18" fill="#7A1610" data-label="Survey ends: quota full">
+<tspan x="637.5" y="335.12">Survey ends:</tspan>
+<tspan x="637.5" y="357.12">quota full</tspan>
+</text>
+</g>
+<g id="node-goals1" data-node="goals1">
+<rect x="750" y="418" width="300" height="90" rx="14" fill="#EAF2FB" stroke="#7796B8" stroke-width="1.8"/>
+<text text-anchor="middle" font-size="20" fill="#16395E" data-label="Motive goals: first block 5 items and attention check 1">
+<tspan x="900" y="445.8">Motive goals: first block</tspan>
+<tspan x="900" y="469.8">5 items</tspan>
+<tspan x="900" y="493.8">and attention check 1</tspan>
+</text>
+</g>
+<g id="node-check1" data-node="check1">
+<rect x="750" y="528" width="300" height="90" rx="14" fill="#EAF2FB" stroke="#7796B8" stroke-width="1.8"/>
+<text text-anchor="middle" font-size="20" fill="#16395E" data-label="Selected the correct instructed response option?">
+<tspan x="900" y="555.8">Selected the correct</tspan>
+<tspan x="900" y="579.8">instructed response</tspan>
+<tspan x="900" y="603.8">option?</tspan>
+</text>
+</g>
+<g id="node-quality1" data-node="quality1">
+<rect x="565" y="518" width="145" height="110" rx="14" fill="#FFE5E5" stroke="#B42318" stroke-width="1.8"/>
+<text text-anchor="middle" font-size="18" fill="#7A1610" data-label="Survey ends: attention check failed">
+<tspan x="637.5" y="546.12">Survey ends:</tspan>
+<tspan x="637.5" y="568.12">attention</tspan>
+<tspan x="637.5" y="590.12">check</tspan>
+<tspan x="637.5" y="612.12">failed</tspan>
+</text>
+</g>
+<g id="node-goals2" data-node="goals2">
+<rect x="750" y="654" width="300" height="75" rx="14" fill="#EAF2FB" stroke="#7796B8" stroke-width="1.8"/>
+<text text-anchor="middle" font-size="20" fill="#16395E" data-label="Motive goals: second block 6 items">
+<tspan x="900" y="686.3">Motive goals: second block</tspan>
+<tspan x="900" y="710.3">6 items</tspan>
+</text>
+</g>
+<g id="node-statements" data-node="statements">
+<rect x="750" y="749" width="300" height="75" rx="14" fill="#EAF2FB" stroke="#7796B8" stroke-width="1.8"/>
+<text text-anchor="middle" font-size="20" fill="#16395E" data-label="Motive statements 19 items">
+<tspan x="900" y="781.3">Motive statements</tspan>
+<tspan x="900" y="805.3">19 items</tspan>
+</text>
+</g>
+<g id="node-asc" data-node="asc">
+<rect x="1290" y="70" width="300" height="90" rx="14" fill="#EAF2FB" stroke="#7796B8" stroke-width="1.8"/>
+<text text-anchor="middle" font-size="20" fill="#16395E" data-label="Aggression–Submission– Conventionalism 19 items">
+<tspan x="1440" y="97.8">Aggression–Submission–</tspan>
+<tspan x="1440" y="121.8">Conventionalism</tspan>
+<tspan x="1440" y="145.8">19 items</tspan>
+</text>
+</g>
+<g id="node-sdo" data-node="sdo">
+<rect x="1290" y="170" width="300" height="115" rx="14" fill="#EAF2FB" stroke="#7796B8" stroke-width="1.8"/>
+<text text-anchor="middle" font-size="20" fill="#16395E" data-label="Social dominance orientation: dominance 8 items and attention check 2">
+<tspan x="1440" y="210.3">Social dominance orientation:</tspan>
+<tspan x="1440" y="234.3">dominance</tspan>
+<tspan x="1440" y="258.3">8 items and attention check 2</tspan>
+</text>
+</g>
+<g id="node-check2" data-node="check2">
+<rect x="1290" y="295" width="300" height="90" rx="14" fill="#EAF2FB" stroke="#7796B8" stroke-width="1.8"/>
+<text text-anchor="middle" font-size="20" fill="#16395E" data-label="Selected the correct instructed response option?">
+<tspan x="1440" y="322.8">Selected the correct</tspan>
+<tspan x="1440" y="346.8">instructed response</tspan>
+<tspan x="1440" y="370.8">option?</tspan>
+</text>
+</g>
+<g id="node-quality2" data-node="quality2">
+<rect x="1105" y="285" width="145" height="110" rx="14" fill="#FFE5E5" stroke="#B42318" stroke-width="1.8"/>
+<text text-anchor="middle" font-size="18" fill="#7A1610" data-label="Survey ends: attention check failed">
+<tspan x="1177.5" y="313.12">Survey ends:</tspan>
+<tspan x="1177.5" y="335.12">attention</tspan>
+<tspan x="1177.5" y="357.12">check</tspan>
+<tspan x="1177.5" y="379.12">failed</tspan>
+</text>
+</g>
+<g id="node-politics" data-node="politics">
+<rect x="1290" y="415" width="300" height="135" rx="14" fill="#EAF2FB" stroke="#7796B8" stroke-width="1.8"/>
+<text text-anchor="middle" font-size="20" fill="#16395E" data-label="Voting intention, intended party and left/right placement Intended party shown only to those intending to vote">
+<tspan x="1440" y="441.3">Voting intention, intended</tspan>
+<tspan x="1440" y="465.3">party</tspan>
+<tspan x="1440" y="489.3">and left/right placement</tspan>
+<tspan x="1440" y="513.3">Intended party shown only to</tspan>
+<tspan x="1440" y="537.3">those intending to vote</tspan>
+</text>
+</g>
+<g id="node-demographics" data-node="demographics">
+<rect x="1290" y="560" width="300" height="115" rx="14" fill="#EAF2FB" stroke="#7796B8" stroke-width="1.8"/>
+<text text-anchor="middle" font-size="20" fill="#16395E" data-label="Gender, school qualification, federal state, household income and household size">
+<tspan x="1440" y="588.3">Gender, school qualification,</tspan>
+<tspan x="1440" y="612.3">federal state, household</tspan>
+<tspan x="1440" y="636.3">income</tspan>
+<tspan x="1440" y="660.3">and household size</tspan>
+</text>
+</g>
+<g id="node-comment" data-node="comment">
+<rect x="1290" y="685" width="300" height="50" rx="14" fill="#EAF2FB" stroke="#7796B8" stroke-width="1.8"/>
+<text text-anchor="middle" font-size="20" fill="#16395E" data-label="Optional final comment">
+<tspan x="1440" y="716.8">Optional final comment</tspan>
+</text>
+</g>
+<g id="node-submission" data-node="submission">
+<rect x="1290" y="745" width="300" height="50" rx="14" fill="#EAF2FB" stroke="#7796B8" stroke-width="1.8"/>
+<text text-anchor="middle" font-size="20" fill="#16395E" data-label="Final submission">
+<tspan x="1440" y="776.8">Final submission</tspan>
+</text>
+</g>
+<g id="node-complete" data-node="complete">
+<rect x="1290" y="805" width="300" height="70" rx="14" fill="#EAF2FB" stroke="#7796B8" stroke-width="1.8"/>
+<text text-anchor="middle" font-size="20" fill="#16395E" data-label="Marked complete and redirected to Bilendi">
+<tspan x="1440" y="834.8">Marked complete</tspan>
+<tspan x="1440" y="858.8">and redirected to Bilendi</tspan>
+</text>
+</g>
+</g>
+</svg>

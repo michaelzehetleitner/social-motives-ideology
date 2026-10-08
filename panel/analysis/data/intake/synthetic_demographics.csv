@@ -1,0 +1,701 @@
+age,income,education,east_west,duration
+44,1166.6666666666667,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,718
+38,208.33333333333334,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,683
+60,3500,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,429
+51,1375,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,533
+45,1375,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,451
+50,1375,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,389
+54,225,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,1430
+27,1500,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,806
+47,1500,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",east,1121
+28,3500,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,827
+37,1125,Fachhochschulreife,west,786
+37,1125,Schule beendet ohne Abschluss,west,623
+63,1750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,833
+36,1750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,575
+45,875,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,1068
+68,1375,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,805
+41,1750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,733
+69,1125,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,894
+55,1375,Fachhochschulreife,west,731
+60,875,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,622
+22,281.25,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,1099
+57,1500,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,954
+49,2750,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,544
+29,125,Fachhochschulreife,west,500
+57,458.3333333333333,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,560
+54,3500,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,540
+51,1125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,1681
+62,700,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,335
+52,875,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,699
+24,4500,Fachhochschulreife,east,744
+50,250,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,1068
+24,3500,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,982
+44,2250,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",east,1134
+37,2750,Schule beendet ohne Abschluss,west,398
+69,1375,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,614
+39,875,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,604
+32,156.25,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,734
+48,196.42857142857142,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,641
+38,1125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,716
+47,875,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",east,1161
+47,6250,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,924
+48,312.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,1210
+35,229.16666666666666,Fachhochschulreife,west,628
+20,550,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,675
+64,1750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,408
+57,583.3333333333334,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,718
+43,4500,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,763
+67,208.33333333333334,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,699
+36,1750,Bin noch Schüler/in,east,918
+65,343.75,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,964
+69,2750,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,1239
+69,4375,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,765
+37,208.33333333333334,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,977
+39,343.75,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,1030
+29,2083.3333333333335,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,648
+63,218.75,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,820
+34,1750,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,585
+34,1166.6666666666667,Fachhochschulreife,east,592
+62,1125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,1246
+37,687.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,708
+62,1125,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,857
+44,1750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,724
+47,3500,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,746
+43,1750,Fachhochschulreife,west,973
+21,1750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,867
+41,4500,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,1115
+47,750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),east,782
+30,250,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,489
+40,291.6666666666667,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,619
+54,2750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,709
+33,1500,Fachhochschulreife,west,1603
+21,218.75,Fachhochschulreife,west,1810
+40,6250,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,446
+51,875,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),east,421
+61,3125,Schule beendet ohne Abschluss,west,968
+44,,Schule beendet ohne Abschluss,west,660
+43,875,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,678
+40,1750,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,523
+34,2083.3333333333335,Fachhochschulreife,west,1346
+51,6250,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,1084
+45,2750,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,991
+61,437.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,1240
+69,916.6666666666666,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,931
+46,2750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,617
+65,1125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,768
+49,4375,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,357
+36,1250,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,695
+69,1166.6666666666667,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,556
+54,1125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,758
+69,2250,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,575
+53,1750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,571
+42,875,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,391
+32,1166.6666666666667,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),east,632
+42,562.5,Fachhochschulreife,west,671
+68,4500,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,882
+69,2250,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,932
+44,1750,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,839
+28,6250,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,464
+59,1375,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,784
+55,4375,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,485
+37,2250,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,823
+69,1500,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,752
+35,437.5,Fachhochschulreife,east,536
+31,1125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,1174
+18,1750,Bin noch Schüler/in,east,727
+69,2250,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",east,352
+64,196.42857142857142,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,862
+22,1375,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,333
+64,2750,Bin noch Schüler/in,west,949
+69,1750,Fachhochschulreife,west,812
+29,687.5,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,406
+36,2750,Fachhochschulreife,west,436
+67,3125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,1094
+61,4500,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,741
+45,312.5,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),east,711
+48,1375,Fachhochschulreife,west,1283
+59,1750,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",east,1492
+60,1125,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,656
+30,583.3333333333334,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,357
+62,1750,Fachhochschulreife,west,749
+36,1125,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,1075
+55,3125,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,852
+48,437.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,909
+50,3125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,452
+44,562.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,693
+22,250,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,469
+45,3500,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,384
+35,2750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,862
+69,175,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,911
+69,916.6666666666666,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,956
+30,1500,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,810
+67,437.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,1076
+20,4500,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,573
+56,225,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",east,663
+61,4500,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,601
+35,6250,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,724
+69,2750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,808
+48,1125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,920
+69,562.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,977
+31,2250,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,898
+42,1125,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),east,712
+44,3125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,484
+34,900,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,1490
+65,3500,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,826
+56,2250,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,864
+38,875,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,598
+36,875,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,1143
+34,281.25,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,479
+53,1125,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,1014
+58,916.6666666666666,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,238
+18,1375,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,623
+37,1750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,461
+46,1125,Fachhochschulreife,west,512
+52,1375,Fachhochschulreife,west,773
+29,291.6666666666667,Fachhochschulreife,east,658
+26,458.3333333333333,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,487
+44,6250,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,1712
+41,12500,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,1117
+55,875,Fachhochschulreife,west,448
+46,1562.5,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,561
+37,875,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,941
+55,6250,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,833
+57,875,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,1250
+18,6250,Schule beendet ohne Abschluss,east,661
+35,1375,Fachhochschulreife,west,990
+59,281.25,Fachhochschulreife,west,796
+37,1750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,488
+52,281.25,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,770
+58,687.5,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,1063
+64,1750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,345
+69,687.5,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,1035
+52,1500,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,689
+69,2500,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,1383
+44,437.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,747
+69,1750,Fachhochschulreife,west,896
+45,1750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,820
+50,3500,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,468
+56,6250,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",east,847
+50,1125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,811
+51,1375,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,638
+69,1375,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,589
+26,1125,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,513
+43,1166.6666666666667,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,893
+36,562.5,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,1112
+47,750,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,370
+31,2083.3333333333335,Fachhochschulreife,west,822
+49,875,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),east,1212
+47,2250,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,1224
+50,291.6666666666667,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,634
+30,1750,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",east,954
+55,4375,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,517
+27,3500,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,784
+18,3500,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,1273
+40,2250,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,966
+64,4375,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,554
+68,687.5,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,739
+20,875,Bin noch Schüler/in,west,831
+65,1750,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",east,1055
+42,1250,Fachhochschulreife,west,1023
+35,1750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),east,762
+34,875,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,1378
+42,1125,Schule beendet ohne Abschluss,west,909
+52,1750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,710
+45,375,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,1043
+69,550,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,909
+39,1125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,437
+69,1375,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,651
+19,1750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,577
+64,2916.6666666666665,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,1037
+34,2250,Fachhochschulreife,west,1097
+21,1500,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,627
+18,1125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,513
+48,321.42857142857144,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,436
+51,1166.6666666666667,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,508
+65,1750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,826
+49,6250,Schule beendet ohne Abschluss,west,1216
+32,2750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,351
+57,1750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,768
+44,750,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,483
+54,3500,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,1102
+42,1750,Fachhochschulreife,west,484
+34,1750,Fachhochschulreife,west,747
+47,1375,Fachhochschulreife,west,423
+40,1375,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,474
+31,875,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,950
+32,687.5,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,455
+33,750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,1011
+35,1750,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,440
+50,3500,Fachhochschulreife,west,1029
+33,3500,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,1022
+46,1750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,975
+69,2250,Fachhochschulreife,east,559
+39,1125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,535
+49,291.6666666666667,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,898
+34,2750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),east,818
+38,562.5,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",east,710
+35,437.5,Bin noch Schüler/in,west,572
+58,1125,Fachhochschulreife,west,649
+60,2250,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,644
+69,562.5,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,432
+34,1375,Fachhochschulreife,west,446
+37,437.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,497
+58,156.25,Fachhochschulreife,west,581
+69,687.5,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,640
+19,1750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,737
+41,437.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,831
+48,1375,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,777
+56,875,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,488
+55,312.5,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,377
+69,562.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,419
+52,900,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,654
+68,3125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,436
+42,2500,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,1218
+56,312.5,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,808
+47,1375,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,1090
+52,6250,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,746
+56,1375,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,832
+47,1750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,957
+49,4375,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,818
+31,687.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,700
+52,2250,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",east,618
+64,,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,711
+69,1375,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),east,1232
+48,218.75,Schule beendet ohne Abschluss,east,1596
+31,3500,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,839
+38,2187.5,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,1502
+42,312.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,945
+23,1750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,835
+46,225,Fachhochschulreife,west,919
+44,1375,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",east,526
+41,700,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,742
+26,4375,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,1102
+69,3125,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,766
+57,1750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,992
+25,2250,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,591
+51,3500,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,478
+18,875,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,924
+44,62.5,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,522
+45,1166.6666666666667,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,682
+39,1375,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,539
+69,750,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,439
+47,1375,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,984
+23,3125,Schule beendet ohne Abschluss,west,1212
+29,3500,Bin noch Schüler/in,west,505
+33,1500,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,772
+52,1750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,637
+69,83.33333333333333,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,676
+43,3500,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,1113
+42,583.3333333333334,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,204
+68,1125,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,575
+55,2750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,797
+35,562.5,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),east,1118
+44,218.75,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,549
+60,83.33333333333333,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,653
+69,1750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,332
+18,3500,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,663
+41,687.5,Fachhochschulreife,west,914
+50,1750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,848
+57,2750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,708
+56,1750,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,717
+35,1750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,554
+24,583.3333333333334,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),east,1151
+61,4500,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",east,685
+44,437.5,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,881
+57,1500,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,1060
+51,1750,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,884
+46,1750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),east,1510
+48,875,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,645
+61,1500,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,636
+35,3500,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,854
+63,125,Fachhochschulreife,west,1230
+69,2250,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,835
+65,1750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,637
+30,458.3333333333333,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,988
+49,1166.6666666666667,Fachhochschulreife,west,489
+30,2250,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,622
+60,562.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,772
+51,1375,Fachhochschulreife,west,792
+49,1750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,524
+30,125,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,600
+43,1750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,468
+33,1750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,595
+52,1166.6666666666667,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,1121
+23,687.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,917
+48,281.25,Fachhochschulreife,west,459
+58,1125,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,1125
+54,1750,Fachhochschulreife,west,1425
+48,562.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,692
+40,4375,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,822
+51,687.5,Fachhochschulreife,west,631
+49,2250,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,481
+54,125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,548
+69,3125,Fachhochschulreife,west,817
+50,875,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,764
+46,1375,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,637
+47,1562.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,547
+38,750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,579
+42,1562.5,Fachhochschulreife,west,626
+45,6250,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",east,693
+47,4500,Schule beendet ohne Abschluss,east,1499
+18,1125,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,693
+33,1125,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,920
+67,1125,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,786
+20,2250,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,498
+34,916.6666666666666,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,617
+49,6250,Bin noch Schüler/in,east,427
+63,2750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,604
+49,687.5,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,637
+18,687.5,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,1126
+44,2250,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,517
+50,3500,Fachhochschulreife,west,424
+61,875,Fachhochschulreife,west,888
+69,2750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,629
+69,2250,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,653
+37,4375,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,1366
+43,350,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,453
+36,156.25,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,726
+68,343.75,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,1243
+69,50,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,642
+50,875,Schule beendet ohne Abschluss,west,386
+33,3500,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,1069
+38,6250,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,564
+45,1750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,799
+40,562.5,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,369
+49,2250,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,1409
+28,2250,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,723
+41,875,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,602
+55,562.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,621
+68,187.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,725
+66,1125,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,1014
+40,687.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,719
+27,125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,403
+39,3500,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,605
+42,291.6666666666667,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,699
+28,583.3333333333334,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,786
+45,2187.5,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,629
+69,875,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,961
+34,343.75,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,351
+67,4500,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,571
+60,1375,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,830
+38,1125,Fachhochschulreife,west,901
+35,145.83333333333334,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,513
+37,1375,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,973
+69,6250,Fachhochschulreife,west,659
+60,583.3333333333334,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,698
+50,750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,781
+58,562.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,758
+47,750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),east,970
+67,2250,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,788
+32,1125,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),east,780
+46,6250,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,641
+55,875,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,776
+35,2250,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,794
+22,2750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,848
+,2750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,461
+34,875,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,466
+35,450,Fachhochschulreife,east,1105
+54,916.6666666666666,Fachhochschulreife,east,628
+51,2250,Fachhochschulreife,west,894
+69,1375,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,842
+63,1750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,1108
+53,437.5,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,785
+63,2250,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,741
+37,312.5,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",east,542
+64,4500,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,647
+20,437.5,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,797
+31,4500,Fachhochschulreife,west,1163
+52,1125,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,821
+42,437.5,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),east,1453
+67,2250,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,887
+18,1562.5,Fachhochschulreife,west,1164
+34,437.5,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,734
+30,4500,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,1081
+44,1750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,1477
+50,1375,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,912
+66,562.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,429
+61,583.3333333333334,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,428
+35,3500,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,931
+37,2250,Fachhochschulreife,west,663
+55,437.5,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),east,557
+21,750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,670
+69,2250,Fachhochschulreife,west,768
+46,343.75,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,1324
+69,3125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,551
+46,1166.6666666666667,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,739
+69,1750,Fachhochschulreife,west,990
+69,1375,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,574
+29,687.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,342
+51,1750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),east,736
+60,875,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,353
+41,687.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,1074
+50,1125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,883
+54,1125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,493
+56,583.3333333333334,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,748
+43,1562.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,521
+40,1125,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,517
+18,250,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,671
+44,3125,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,547
+27,1125,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",east,563
+55,687.5,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,653
+40,1562.5,Fachhochschulreife,west,1050
+47,12500,Schule beendet ohne Abschluss,west,727
+30,3125,Bin noch Schüler/in,east,706
+37,583.3333333333334,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,608
+69,875,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,587
+54,1125,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",east,435
+60,687.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,852
+52,1375,Fachhochschulreife,west,518
+60,1750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,973
+55,875,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,781
+61,312.5,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,497
+46,3125,Fachhochschulreife,west,809
+69,875,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,937
+52,1375,Fachhochschulreife,west,391
+30,875,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,876
+45,125,Fachhochschulreife,west,341
+32,8750,Schule beendet ohne Abschluss,west,810
+45,1125,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,909
+51,1375,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,875
+29,2750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,587
+32,450,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,1084
+43,750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,763
+50,437.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,571
+61,2250,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,620
+69,2750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,544
+34,1125,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,762
+21,458.3333333333333,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,476
+43,3500,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),east,637
+43,458.3333333333333,Fachhochschulreife,west,836
+64,1125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,333
+49,1125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,437
+38,625,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,500
+27,6250,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,1342
+47,2250,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",east,529
+34,1375,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,428
+40,291.6666666666667,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,901
+69,625,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),east,825
+21,125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,757
+51,3125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,597
+48,875,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),east,905
+18,875,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,1155
+52,3125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,1116
+69,1375,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,609
+60,6250,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,673
+67,2250,Fachhochschulreife,west,689
+53,1375,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,522
+33,875,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,741
+41,2750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,783
+43,1750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,613
+68,218.75,Fachhochschulreife,west,696
+53,1750,Fachhochschulreife,west,746
+35,3500,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,526
+69,437.5,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,445
+27,687.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,665
+47,1125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,855
+20,1125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,686
+47,875,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,2555
+69,1750,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,672
+49,875,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,1257
+45,1750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,598
+48,6250,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,385
+31,687.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,420
+34,687.5,Fachhochschulreife,west,551
+40,3500,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,332
+56,2250,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,497
+65,1750,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,555
+18,312.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,1121
+49,1125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,842
+62,2750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),east,754
+29,1375,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,648
+29,6250,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),east,363
+37,583.3333333333334,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,833
+18,2750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,392
+41,583.3333333333334,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",east,1237
+69,1125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,483
+36,916.6666666666666,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,1035
+36,2250,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,1352
+43,1166.6666666666667,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,856
+64,4166.666666666667,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,750
+52,875,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,1172
+68,250,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,585
+35,125,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,879
+31,1125,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,568
+40,458.3333333333333,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,803
+61,1125,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,708
+54,1125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,394
+31,1750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,697
+47,3500,Fachhochschulreife,east,700
+35,875,Fachhochschulreife,west,672
+53,1375,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,412
+53,2250,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,698
+69,687.5,Fachhochschulreife,west,845
+33,8750,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,429
+38,6250,Fachhochschulreife,east,1597
+33,1750,Fachhochschulreife,west,774
+39,875,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,947
+60,625,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,1072
+33,1500,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,1077
+38,2250,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",east,572
+19,875,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,1003
+24,1125,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,820
+43,109.375,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,474
+59,2750,Fachhochschulreife,east,639
+18,312.5,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,666
+47,1166.6666666666667,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,615
+38,4375,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,515
+29,1750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,525
+62,6250,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,1166
+46,437.5,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,1426
+54,3125,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),east,435
+42,3500,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,761
+67,583.3333333333334,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,805
+18,450,Fachhochschulreife,west,706
+52,2750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,1233
+19,1750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,911
+42,2187.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,1044
+27,2916.6666666666665,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,924
+39,1125,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,543
+52,875,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,867
+55,2250,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),east,978
+69,1375,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,509
+69,3125,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,706
+53,4500,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,870
+67,1375,Schule beendet ohne Abschluss,west,450
+30,875,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,783
+69,437.5,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,525
+40,1562.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,605
+59,875,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),east,589
+45,875,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,1300
+69,1125,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,945
+46,1500,Bin noch Schüler/in,west,948
+62,312.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,776
+58,875,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,1069
+34,2750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,342
+38,1750,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",east,497
+60,2250,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,568
+34,250,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",east,845
+49,2750,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,1519
+23,562.5,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,894
+38,700,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,461
+,6250,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,579
+18,1750,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,596
+43,1125,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,1256
+28,550,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,425
+65,4500,Fachhochschulreife,west,969
+43,437.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,696
+53,562.5,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,518
+49,3125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,901
+69,2250,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,893
+24,1125,Fachhochschulreife,east,1111
+56,875,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",east,1193
+50,2250,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,873
+69,1750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,655
+52,1375,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,512
+50,2750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,846
+53,6250,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,608
+38,8750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,819
+45,4500,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,917
+53,2250,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,581
+68,3125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,519
+36,1125,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",east,717
+26,1375,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,783
+49,1500,Fachhochschulreife,west,494
+39,2250,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,522
+58,2750,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,822
+48,875,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,672
+57,875,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,1279
+69,687.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,551
+64,437.5,Bin noch Schüler/in,west,736
+21,2250,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),east,642
+42,2083.3333333333335,Fachhochschulreife,west,1079
+69,458.3333333333333,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",east,549
+30,875,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,720
+48,875,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,836
+68,2750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,585
+44,1375,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,517
+52,125,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,410
+20,916.6666666666666,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,878
+50,900,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,463
+54,50,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),east,812
+52,1750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,607
+45,312.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,467
+18,1125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,533
+65,1166.6666666666667,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,622
+45,4500,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,873
+39,750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,366
+59,875,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,1339
+40,1375,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,1008
+33,562.5,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,490
+51,4375,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,696
+48,343.75,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,655
+40,875,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,535
+22,1375,Fachhochschulreife,west,799
+57,1375,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,703
+34,125,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,1921
+20,3500,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,600
+60,2750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),east,667
+47,4500,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,936
+36,281.25,Schule beendet ohne Abschluss,west,2068
+69,1750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,754
+18,3500,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,721
+69,1375,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,728
+33,1125,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),east,1069
+52,2250,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,693
+69,1750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,524
+50,3500,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,779
+45,8750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,869
+37,1125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,914
+18,2750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,498
+48,1125,Fachhochschulreife,east,343
+39,1750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,516
+61,1166.6666666666667,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",east,645
+23,1375,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,417
+60,4375,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,1000
+65,2250,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,680
+35,450,Fachhochschulreife,west,603
+62,562.5,Fachhochschulreife,west,1062
+38,3125,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,618
+49,218.75,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,1212
+30,1750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,1249
+69,1750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,949
+49,1125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,339
+69,1125,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,670
+54,437.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,484
+26,458.3333333333333,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,814
+38,1375,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),east,1258
+66,1166.6666666666667,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,797
+52,550,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,722
+66,458.3333333333333,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,734
+29,562.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,506
+18,875,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,378
+47,1375,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,660
+36,8750,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,784
+33,6250,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,391
+61,458.3333333333333,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),east,616
+52,6250,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,476
+39,343.75,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,653
+41,1041.6666666666667,Fachhochschulreife,west,683
+25,2250,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,721
+63,562.5,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,527
+31,291.6666666666667,Bin noch Schüler/in,east,1474
+26,1375,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,1345
+41,2750,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,795
+39,1125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,775
+58,312.5,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,415
+18,6250,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,616
+24,3125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,518
+64,687.5,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",east,1077
+41,2250,Schule beendet ohne Abschluss,west,621
+61,250,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,777
+40,1750,Fachhochschulreife,west,532
+52,2250,Fachhochschulreife,west,1113
+27,1375,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,782
+44,208.33333333333334,Abitur bzw. erweiterte Oberschule mit Abschluss 12. Klasse (Hochschulreife),west,794
+60,1375,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,869
+69,281.25,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,823
+49,875,Fachhochschulreife,east,627
+50,916.6666666666666,"Hauptschulabschluss, Volksschulabschluss, Abschluss der polytechnischen Oberschule 8. oder 9. Klasse",west,1218
+50,1125,"Realschulabschluss, Mittlere Reife, Fachschulreife oder Abschluss der polytechnischen Oberschule 10. Klasse",west,453
+49,1166.6666666666667,Fachhochschulreife,west,641

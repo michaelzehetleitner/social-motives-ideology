@@ -1,0 +1,320 @@
+{
+  "scenario": "trouble",
+  "design": {
+    "n_records": 776,
+    "n_coefficients": 32,
+    "n_zero": 19,
+    "share_zero": 0.59375,
+    "n_motive_coefficients": 20,
+    "motive_nonzero_range": [0.12, 0.25],
+    "covariates_nonzero": [
+      {
+        "outcome": "asc_conv",
+        "predictor": "age",
+        "generating": 0.15
+      },
+      {
+        "outcome": "asc_agg",
+        "predictor": "male",
+        "generating": 0.2
+      },
+      {
+        "outcome": "sdo_dom",
+        "predictor": "male",
+        "generating": 0.35
+      }
+    ],
+    "motive_correlation_range": [-0.05, 0.45],
+    "residual_correlation_range": [0.15, 0.45],
+    "loading": 0.65,
+    "response_range": [1, 6],
+    "prediction_cells": {
+      "n_directional": 16,
+      "n_directional_effect": 8,
+      "n_directional_opposite": 0,
+      "n_directional_zero": 8,
+      "n_open": 4,
+      "n_open_effect": 2,
+      "n_open_zero": 2
+    }
+  },
+  "calibration": {
+    "n_observations": 1334,
+    "n_outcomes": 2,
+    "n_predictors": 17,
+    "n_coefficients": 34,
+    "interval_level": 0.95,
+    "n_including_zero": 20,
+    "n_excluding_zero": 14,
+    "share_including_zero": 0.588235294117647,
+    "excluding_zero_range": [0.082, 0.291]
+  },
+  "exclusions": {
+    "rules": [
+      {
+        "rule": "quota_full",
+        "planted": 26,
+        "removed": 26
+      },
+      {
+        "rule": "consent_refused",
+        "planted": 6,
+        "removed": 6
+      },
+      {
+        "rule": "incomplete",
+        "planted": 14,
+        "removed": 14
+      },
+      {
+        "rule": "age_under_18",
+        "planted": 4,
+        "removed": 4
+      },
+      {
+        "rule": "attention_1_failed",
+        "planted": 12,
+        "removed": 12
+      },
+      {
+        "rule": "attention_2_failed",
+        "planted": 8,
+        "removed": 8
+      },
+      {
+        "rule": "gender_divers",
+        "planted": 6,
+        "removed": 6
+      }
+    ],
+    "n_generated": 776,
+    "n_started": 776,
+    "n_analysis": 700
+  },
+  "gaps": {
+    "cells": [
+      {
+        "column": "UMS_int_1",
+        "scale_key": "zm_security",
+        "position": 1,
+        "planted": 2,
+        "filled": 2,
+        "fillable": true
+      },
+      {
+        "column": "ASC_aag_1",
+        "scale_key": "asc_agg",
+        "position": 1,
+        "planted": 3,
+        "filled": 3,
+        "fillable": true
+      },
+      {
+        "column": "demo_age",
+        "scale_key": null,
+        "position": null,
+        "planted": 2,
+        "filled": 2,
+        "fillable": true
+      },
+      {
+        "column": "demo_income_hh_net",
+        "scale_key": null,
+        "position": null,
+        "planted": 2,
+        "filled": 2,
+        "fillable": true
+      },
+      {
+        "column": "demo_gender",
+        "scale_key": null,
+        "position": null,
+        "planted": 1,
+        "filled": 0,
+        "fillable": false
+      }
+    ],
+    "n_analysis": 700,
+    "n_regressions": 699,
+    "n_network": 700,
+    "n_omitted_for_missing_gender": 1
+  },
+  "cross_loadings": [
+    {
+      "item": "ASC_con_3",
+      "scale_key": "asc_conv",
+      "position": 3,
+      "other_key": "asc_sub",
+      "loading": 0.65,
+      "cross_loading": 0.65,
+      "latent_correlation": 0.47875806410127,
+      "expected_loading": 0.480881504012857,
+      "expected_cross_loading": 0.480881504012857,
+      "cutoff": 0.4,
+      "exploratory": [
+        {
+          "set_name": "asc",
+          "factors": 3,
+          "own_factor": "WLS2",
+          "other_factor": "WLS3",
+          "loading_own_factor": 0.498169936416661,
+          "loading_other_factor": 0.443108054984086,
+          "n_loadings_at_cutoff": 2
+        },
+        {
+          "set_name": "outcomes",
+          "factors": 4,
+          "own_factor": "WLS2",
+          "other_factor": "WLS1",
+          "loading_own_factor": 0.497426425426603,
+          "loading_other_factor": 0.444574693131453,
+          "n_loadings_at_cutoff": 2
+        }
+      ],
+      "confirmatory": {
+        "models": ["asc_three_factor", "authoritarian_orientation_four_factor"],
+        "leading": [
+          {
+            "model": "asc_three_factor",
+            "rank": 1,
+            "partner": "ASC_asu_1",
+            "partner_scale": "asc_sub",
+            "partner_position": 1,
+            "residual_correlation": 0.141946204489994,
+            "standardised_residual": 5.97635055486947
+          },
+          {
+            "model": "asc_three_factor",
+            "rank": 2,
+            "partner": "ASC_asu_6_r",
+            "partner_scale": "asc_sub",
+            "partner_position": 6,
+            "residual_correlation": 0.102476132376665,
+            "standardised_residual": 4.7524577753337
+          },
+          {
+            "model": "asc_three_factor",
+            "rank": 3,
+            "partner": "ASC_asu_2",
+            "partner_scale": "asc_sub",
+            "partner_position": 2,
+            "residual_correlation": 0.111864825782286,
+            "standardised_residual": 4.74578395334935
+          },
+          {
+            "model": "authoritarian_orientation_four_factor",
+            "rank": 1,
+            "partner": "ASC_asu_1",
+            "partner_scale": "asc_sub",
+            "partner_position": 1,
+            "residual_correlation": 0.142604251167795,
+            "standardised_residual": 5.97616765884032
+          },
+          {
+            "model": "authoritarian_orientation_four_factor",
+            "rank": 2,
+            "partner": "ASC_asu_6_r",
+            "partner_scale": "asc_sub",
+            "partner_position": 6,
+            "residual_correlation": 0.102026204966588,
+            "standardised_residual": 4.71659766393225
+          },
+          {
+            "model": "authoritarian_orientation_four_factor",
+            "rank": 3,
+            "partner": "ASC_asu_2",
+            "partner_scale": "asc_sub",
+            "partner_position": 2,
+            "residual_correlation": 0.111111542919544,
+            "standardised_residual": 4.69271483934879
+          }
+        ]
+      }
+    }
+  ],
+  "heavy_tail": {
+    "outcome": "asc_agg",
+    "share": 0.05,
+    "multiplier": 4,
+    "statistics": [
+      {
+        "stat": "kurtosis",
+        "observed": 0.80197185049837,
+        "lower": -0.332191750563046,
+        "upper": 0.387781931464213,
+        "beyond": true
+      },
+      {
+        "stat": "min",
+        "observed": -2.80508786750222,
+        "lower": -4.01762626868181,
+        "upper": -2.55501816711699,
+        "beyond": false
+      },
+      {
+        "stat": "max",
+        "observed": 4.23976514722948,
+        "lower": 2.54984438878306,
+        "upper": 4.06378235055556,
+        "beyond": true
+      }
+    ],
+    "triggered": "asc_agg",
+    "refitted": "asc_agg"
+  },
+  "sign_contrasts": [
+    {
+      "outcome": "asc_conv",
+      "predictor": "zm_prestige",
+      "generating": -0.15,
+      "predicted_sign": "±"
+    },
+    {
+      "outcome": "sdo_dom",
+      "predictor": "zm_prestige",
+      "generating": 0.15,
+      "predicted_sign": "±"
+    }
+  ],
+  "contingencies": {
+    "rows": [
+      {
+        "contingency": "excessive_missingness",
+        "n_cases": 0,
+        "n_checked": 700
+      },
+      {
+        "contingency": "reliability_fallback",
+        "n_cases": 0,
+        "n_checked": 9
+      },
+      {
+        "contingency": "failed_confirmatory_model",
+        "n_cases": 0,
+        "n_checked": 14
+      },
+      {
+        "contingency": "regression_retry_or_failure",
+        "n_cases": 0,
+        "n_checked": 14
+      },
+      {
+        "contingency": "network_retry_or_failure",
+        "n_cases": 0,
+        "n_checked": 60
+      },
+      {
+        "contingency": "cross_loading",
+        "n_cases": 2,
+        "n_checked": 19
+      }
+    ],
+    "attributes": {
+      "fits": {
+        "primary": 4,
+        "sweep": 8,
+        "student_refit": 1
+      }
+    }
+  }
+}

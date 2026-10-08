@@ -1,0 +1,36 @@
+# Local computations and personal data
+**/_targets*/
+**/renv/library/
+**/renv/staging/
+**/renv/sandbox/
+**/.quarto/
+**/.Rhistory
+**/.RData
+**/Rplots.pdf
+**/__pycache__/
+.DS_Store
+panel/input/raw/
+panel/analysis/data/private/
+panel/analysis/data/intake/real.*
+panel/analysis/data/intake/real_*
+panel/analysis/data/derived/*
+!panel/analysis/data/derived/prior_recovery_summary.csv
+!panel/analysis/data/derived/prior_recovery_summary.png
+!panel/analysis/data/derived/prior_recovery_coefficients.csv
+!panel/analysis/data/derived/synthetic_review/
+!panel/analysis/data/derived/synthetic_review/**
+panel/analysis/report/*.html
+panel/analysis/report/*.pdf
+panel/analysis/report/.gitignore
+!panel/analysis/report/apa-captions.html
+panel/analysis/report/*.sections.json
+panel/analysis/report/*_files/
+panel/preregistration/renders/
+/site/
+
+# Preregistration renders written by the Docker command of the README
+/renders/
+
+# Reduced inputs for report rendering and reuse of expensive resampling.
+!panel/analysis/data/derived/report_inputs.rds
+!panel/analysis/data/derived/resampling_results.rds

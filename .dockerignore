@@ -1,0 +1,8 @@
+*
+!Dockerfile
+!panel/
+panel/**/_targets
+panel/**/_targets_smoke
+panel/**/renv/library
+panel/**/renv/staging
+panel/input/raw
