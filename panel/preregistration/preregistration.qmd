@@ -179,7 +179,7 @@ This CRediT matrix (@tbl-credit) describes the contributions to this preregistra
 
 ## T3 — Date of Preregistration {.unnumbered .unlisted}
 
-[exact submission date], 2026
+8 October 2026
 
 ## T4 — Versioning Information {.unnumbered .unlisted}
 
@@ -187,7 +187,7 @@ Version 1.0. This is the first published version of the preregistration.
 
 ## T5 — Identifier {.unnumbered .unlisted}
 
-N.A. at submission; a persistent identifier will be assigned by PsychArchives.
+https://doi.org/10.23668/psycharchives.22601
 
 ## T6 — Estimated Duration of Project {.unnumbered .unlisted}
 
