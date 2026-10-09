@@ -121,8 +121,8 @@ chunk_strings <- function(body) {
 
 test_that("the results draft exists, is wired into the project and is a Results section", {
   expect_true(file.exists(draft_path))
-  expect_match(draft_text, 'title: "Preregistration Analysis Pipeline"', fixed = TRUE)
-  expect_match(draft_text, "Methods, Synthetic-Data Results and Reporting Checks", fixed = TRUE)
+  expect_match(draft_text, 'title: "Motives and Ideology:', fixed = TRUE)
+  expect_match(draft_text, "Preregistration Analysis Pipeline: Methods and Results on Synthetic Data", fixed = TRUE)
   targets_text <- paste(readLines(file.path(root, "_targets.R"), warn = FALSE), collapse = "\n")
   expect_match(targets_text, 'tar_quarto(results_draft, "report/results_draft.qmd"', fixed = TRUE)
 })
@@ -1189,6 +1189,7 @@ test_that("the only italics are N and p and the Results hold the three network t
   # reference list sets its titles in italics as APA asks
   prose <- gsub("\\s+", " ", paste(draft_prose(draft_lines), collapse = " "))
   plain <- sub("# References .*?(?=# Appendix)", "", gsub("`[^`]*`", "", prose), perl = TRUE)
+  plain <- gsub("\\*", "", plain, fixed = TRUE) # escaped affiliation stars are not italics
   italics <- regmatches(plain, gregexpr("(?<![*\\w])[*](?![*\\s])[^*]+?[*](?![*\\w])", plain, perl = TRUE))[[1]]
   expect_setequal(unique(italics), c("*N*", "*p*"))
   # the three network tables present the bridge comparisons
