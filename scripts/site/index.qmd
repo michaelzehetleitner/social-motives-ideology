@@ -52,5 +52,6 @@ Analysis pipeline, tests, synthetic data and codebooks, with a Docker setup that
 |---|---|
 | Version | @VERSION@ |
 | Source | @SOURCE@ |
-| Preregistration | PsychArchives DOI follows on registration |
+| Preregistration | [https://doi.org/10.23668/psycharchives.22601](https://doi.org/10.23668/psycharchives.22601) |
+| Tagged code | [Source](@REPOSITORY@/tree/@VERSION@) · [Download ZIP](@REPOSITORY@/archive/refs/tags/@VERSION@.zip) |
 | License | Code MIT · text, report and synthetic data CC BY 4.0 |

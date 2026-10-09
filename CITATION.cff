@@ -1,8 +1,8 @@
 cff-version: 1.2.0
 message: "If you use these materials, please cite them as below."
 type: software
-version: "preregistration-v1"
-date-released: "2026-10-08"
+version: "preregistration-v1-doi"
+date-released: "2026-10-09"
 title: "Motives and Ideology: Bischof's Zürich Model of Social Motivation, Right-wing Authoritarianism and Social Dominance Orientation. Preregistration materials and analysis code"
 authors:
   - family-names: Zehetleitner
@@ -25,11 +25,10 @@ authors:
     given-names: Nicolas
     orcid: "https://orcid.org/0009-0006-3569-979X"
     affiliation: "General Psychology, Catholic University Eichstätt-Ingolstadt, Germany"
-# Add the PsychArchives DOI of the preregistration after registration:
-# identifiers:
-#   - type: doi
-#     value: "10.23668/psycharchives.XXXXX"
-#     description: "Preregistration (PsychArchives)"
+identifiers:
+  - type: doi
+    value: "10.23668/psycharchives.22601"
+    description: "Preregistration (PsychArchives)"
 repository-code: "https://github.com/michaelzehetleitner/social-motives-ideology"
 url: "https://michaelzehetleitner.github.io/social-motives-ideology/"
 license:

@@ -6,8 +6,10 @@ Motivation, Right-wing Authoritarianism and Social Dominance Orientation*.
 This repository contains the preregistration, study materials, analysis code
 and synthetic demonstration results. The preregistration was submitted to
 PsychArchives, the service of the Leibniz Institute for Psychology (ZPID), on
-8 October 2026. Its DOI will be added here when assigned. The website shows each version at
+8 October 2026. Its DOI is <https://doi.org/10.23668/psycharchives.22601>.
+The website shows each version at
 <https://michaelzehetleitner.github.io/social-motives-ideology/>.
+The DOI-bearing snapshot is tagged [preregistration-v1-doi](https://github.com/michaelzehetleitner/social-motives-ideology/tree/preregistration-v1-doi); [download its source](https://github.com/michaelzehetleitner/social-motives-ideology/archive/refs/tags/preregistration-v1-doi.zip).
 
 ## Contents
 

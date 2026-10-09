@@ -85,8 +85,8 @@ table.gt_table .gt_footnote p {
   text-align: left !important;
 }
 
-/* Reserve enough room for n (%) and M (SD); long education labels wrap in the
-   group column instead of squeezing the quantitative summary onto two lines. */
+/* Reserve space for the summaries and 90px histograms, including cell padding.
+   Long education labels wrap in the group column. */
 #tbl-sample table.gt_table {
   width: 100% !important;
   table-layout: fixed;
@@ -97,11 +97,15 @@ table.gt_table .gt_footnote p {
 }
 
 #tbl-sample table.gt_table > thead > tr > th:nth-child(2) {
-  width: 58%;
+  width: calc(58% - 100px);
 }
 
 #tbl-sample table.gt_table > thead > tr > th:nth-child(3) {
   width: 20%;
+}
+
+#tbl-sample table.gt_table > thead > tr > th:nth-child(4) {
+  width: 100px;
 }
 
 /* The distribution column of the descriptive table: small dark-grey

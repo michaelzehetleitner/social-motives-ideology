@@ -44,9 +44,7 @@ crossref:
 
 [Preregistration (HTML)](../../preregistration/renders/preregistration.html) · [Analysis code and materials](https://github.com/michaelzehetleitner/social-motives-ideology)
 
-<!-- Add the assigned PsychArchives DOI and direct deposited PDF link here after registration. -->
-
-Preregistration (PsychArchives): DOI pending registration.
+Preregistration (PsychArchives): <https://doi.org/10.23668/psycharchives.22601>.
 
 ```{r}
 #| label: load-imputation-processing
@@ -1871,7 +1869,7 @@ The analysis is organised as a pipeline with the targets package (version
 in a lockfile, so the same package library can be restored. A Docker image
 fixes the operating system and the versions of R, CmdStan and Quarto and
 installs the locked packages, so the whole analysis runs from a fresh copy of
-the repository. The [Code Browser](https://michaelzehetleitner.github.io/social-motives-ideology/preregistration-v1/code-browser.html), generated from the code
+the repository. The [Code Browser](https://michaelzehetleitner.github.io/social-motives-ideology/preregistration-v1-doi/code-browser.html), generated from the code
 itself, shows the pipeline in three
 looks: every step in the order in which it runs; the documented settings and
 the code of each function a step calls; and the functions those call in turn.
@@ -2519,7 +2517,7 @@ structure, which does not validate it.
 Zehetleitner, M., Castiglione, C., Drastik, J., Matterstock, D., & Prell, N.
 (2026). *Motives and ideology: Bischof's Zürich model of social motivation,
 right-wing authoritarianism and social dominance orientation*
-[Preregistration]. PsychArchives.
+[Preregistration]. PsychArchives. https://doi.org/10.23668/psycharchives.22601
 
 # Appendix {.unnumbered}
 
