@@ -187,7 +187,7 @@ Version 1.0. This is the first published version of the preregistration.
 
 ## T5 — Identifier {.unnumbered .unlisted}
 
-https://doi.org/10.23668/psycharchives.22601
+<https://doi.org/10.23668/psycharchives.22601>
 
 ## T6 — Estimated Duration of Project {.unnumbered .unlisted}
 
