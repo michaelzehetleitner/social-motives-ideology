@@ -74,6 +74,7 @@ RUN R -q -e 'renv::restore(prompt = FALSE)'
 # The binaries share one PATH folder regardless of the architecture.
 RUN quarto install tinytex --no-prompt \
     && ln -s "$(ls -d /root/.TinyTeX/bin/*)" /opt/tinytex-bin \
+    && /opt/tinytex-bin/tlmgr update --self \
     && /opt/tinytex-bin/tlmgr install luatexbase standalone \
     && test -x /opt/tinytex-bin/xelatex \
     && /opt/tinytex-bin/kpsewhich amsmath.sty \
